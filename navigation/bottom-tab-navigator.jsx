@@ -4,11 +4,17 @@ import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator, HeaderStyleInterpolators, TransitionSpecs, useHeaderHeight } from '@react-navigation/stack';
 
-import Colors from '../constants/Colors';
-import useColorScheme from '../hooks/useColorScheme';
-import ExampleScreen from '../screens';
-import MainSettingScreen from '../screens/settings/main-screen';
-import MainChatScreen from '../screens/main-chat-screen';
+import Colors from '@app/constants/Colors';
+import useColorScheme from '@app/hooks/useColorScheme';
+import ExampleScreen from '@app/screens';
+// contacts
+import MainContactScreen from '@app/screens/contacts/main-contact';
+// import NewContactScreen from '@app/screens/contacts/new-contact-screen';
+
+// chats
+import ListChatScreen from '@app/screens/chats/list-chat-screen';
+// settings
+import MainSettingScreen from '@app/screens/settings/main-setting-screen';
 
 const BottomTab = createBottomTabNavigator();
 
@@ -65,7 +71,7 @@ const TabContactsStack = createStackNavigator();
 function TabContactNavigator() {
   return (
     <TabContactsStack.Navigator>
-      <TabContactsStack.Screen name="TabContactsScreen" component={ExampleScreen} options={{ headerTitle: 'Contacts' }} />
+      <TabContactsStack.Screen name="TabContactsScreen" component={MainContactScreen} options={{ headerTitle: 'Contacts' }} />
     </TabContactsStack.Navigator>
   );
 }
@@ -76,7 +82,7 @@ const TabChatsStack = createStackNavigator();
 function TabChatsNavigator() {
   return (
     <TabChatsStack.Navigator>
-      <TabChatsStack.Screen name="TabChatsScreen" component={MainChatScreen} options={{ headerTitle: 'Chats' }} />
+      <TabChatsStack.Screen name="TabChatsScreen" component={ListChatScreen} options={{ headerTitle: 'Chats' }} />
     </TabChatsStack.Navigator>
   );
 }
@@ -102,7 +108,7 @@ function TabSettingsNavigator() {
         name="TabSettingsScreen"
         component={MainSettingScreen}
         options={{
-          headerTitle: "Settings",
+          headerTitle: 'Settings',
           // header: (props) => {
           //   console.log({ props });
           //   return <LogoTitle {...props} />;

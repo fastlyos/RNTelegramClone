@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavigationContainer, DefaultTheme, DarkTheme, useScrollToTop } from '@react-navigation/native';
-import {} from '@react-navigation/core';
+// import {} from '@react-navigation/core';
 import {
   createStackNavigator,
   useCardAnimation,
@@ -11,10 +11,10 @@ import {
 } from '@react-navigation/stack';
 import { ColorSchemeName } from 'react-native';
 
-import NotFoundScreen from '../screens/not-found-screen';
 import BottomTabNavigator from './bottom-tab-navigator';
 import LinkingConfiguration from './linking-configuration';
-import OtherScreen from '../screens/other-screen';
+import NotFoundScreen from '@app/screens/not-found-screen';
+import OtherScreen from '@app/screens/other-screen';
 
 export default function AppNavigation({ colorScheme }) {
   return (

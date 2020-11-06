@@ -3,10 +3,10 @@ import { StyleSheet, Text, View } from 'react-native';
 import randomString from 'random-string';
 import PropTypes from 'prop-types';
 
-export default function ExampleScreen(props) {
+export default function ExampleScreen({ title }) {
   return (
     <View>
-      <Text>Example Screen</Text>
+      <Text>{title ? title : 'Example Screen'}</Text>
       <Text>{randomString({ length: 20 })}</Text>
     </View>
   );
