@@ -1,12 +1,14 @@
 import React from 'react';
+import { Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator, HeaderStyleInterpolators, TransitionSpecs } from '@react-navigation/stack';
+import { createStackNavigator, HeaderStyleInterpolators, TransitionSpecs, useHeaderHeight } from '@react-navigation/stack';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import ExampleScreen from '../screens';
 import MainSettingScreen from '../screens/settings/main-screen';
+import MainChatScreen from '../screens/main-chat-screen';
 
 const BottomTab = createBottomTabNavigator();
 
@@ -74,13 +76,24 @@ const TabChatsStack = createStackNavigator();
 function TabChatsNavigator() {
   return (
     <TabChatsStack.Navigator>
-      <TabChatsStack.Screen name="TabChatsScreen" component={ExampleScreen} options={{ headerTitle: 'Chats' }} />
+      <TabChatsStack.Screen name="TabChatsScreen" component={MainChatScreen} options={{ headerTitle: 'Chats' }} />
     </TabChatsStack.Navigator>
   );
 }
 
 // Settings
 const TabSettingsStack = createStackNavigator();
+
+function LogoTitle() {
+  return (
+    <Image
+      style={{ width: 50, height: 50 }}
+      source={{
+        uri: 'https://reactnative.dev/img/tiny_logo.png',
+      }}
+    />
+  );
+}
 
 function TabSettingsNavigator() {
   return (
@@ -89,12 +102,13 @@ function TabSettingsNavigator() {
         name="TabSettingsScreen"
         component={MainSettingScreen}
         options={{
-          headerTitle: 'Settings',
+          headerTitle: "Settings",
+          // header: (props) => {
+          //   console.log({ props });
+          //   return <LogoTitle {...props} />;
+          // },
           gestureDirection: 'horizontal',
-          transitionSpec: {
-            close: TransitionSpecs.TransitionIOSSpec,
-          },
-          headerStyleInterpolator: HeaderStyleInterpolators.forNoAnimation,
+          headerStyleInterpolator: HeaderStyleInterpolators.forSlideLeft,
           headerBackTitle: 'Back',
         }}
       />

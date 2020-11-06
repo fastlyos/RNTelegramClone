@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 import { iOSColors } from 'react-native-typography';
 
-export default function MainSettingScreen({ navigation }) {
+export default function MainChatScreen({ navigation }) {
   const gotoOther = () => navigation && navigation.navigate('OtherScreen');
 
   return (
@@ -18,7 +18,7 @@ export default function MainSettingScreen({ navigation }) {
   );
 }
 
-MainSettingScreen.propTypes = {};
+MainChatScreen.propTypes = {};
 
 const styles = StyleSheet.create({
   container: {

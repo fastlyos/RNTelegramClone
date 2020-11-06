@@ -13,7 +13,6 @@ import { ColorSchemeName } from 'react-native';
 
 import NotFoundScreen from '../screens/not-found-screen';
 import BottomTabNavigator from './bottom-tab-navigator';
-import StackNavigator from './stack-navigator';
 import LinkingConfiguration from './linking-configuration';
 import OtherScreen from '../screens/other-screen';
 
@@ -33,20 +32,19 @@ function RootNavigator() {
         headerShown: true,
         gestureDirection: 'horizontal',
         headerStyleInterpolator: HeaderStyleInterpolators.forUIKit,
+        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
         headerBackTitle: 'Back',
       }}>
-      <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
-      <Stack.Screen name="OtherScreen" component={OtherScreen} />
       <Stack.Screen
-        name="OtherScreen2"
-        component={OtherScreen}
-        // options={{
-        //   headerShown: true,
-        //   gestureDirection: 'horizontal',
-        //   headerStyleInterpolator: HeaderStyleInterpolators.forUIKit,
-        //   headerBackTitle: 'Back',
-        // }}
+        name="Root"
+        component={BottomTabNavigator}
+        options={{
+          headerShown: false,
+        }}
       />
+      <Stack.Screen name="OtherScreen" component={OtherScreen} />
+      <Stack.Screen name="OtherScreen2" component={OtherScreen} />
+      <Stack.Screen name="OtherScreen3" component={OtherScreen} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
     </Stack.Navigator>
   );

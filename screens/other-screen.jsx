@@ -15,6 +15,9 @@ export default function OtherScreen({ navigation }) {
       <TouchableOpacity style={styles.button} onPress={() => navigation?.navigate('OtherScreen2')}>
         <Text style={{ color: iOSColors.white, fontSize: 20 }}>OtherScreen2</Text>
       </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={() => navigation?.navigate('OtherScreen3')}>
+        <Text style={{ color: iOSColors.white, fontSize: 20 }}>OtherScreen3</Text>
+      </TouchableOpacity>
     </View>
   );
 }
