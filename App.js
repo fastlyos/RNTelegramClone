@@ -4,7 +4,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import AppNavigation from '@app/navigation/app-navigation';
 
-export default function App() {
+function App() {
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
@@ -19,4 +19,6 @@ const styles = StyleSheet.create({
   },
 });
 
+
+export default App;
 // export { default } from './storybook';
