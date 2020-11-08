@@ -3,9 +3,8 @@ import { text } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react-native';
 import React from 'react';
 import Text from './index';
-import CenterView from '@app/components/CenterView';
+import CenterView from '@app/components/center-view';
 
 storiesOf('Text', module)
   .addDecorator((getStory) => <CenterView>{getStory()}</CenterView>)
-  .add('with text', () => <Text>{text('Text', 'Hello Button')}</Text>)
-  .add('with some emoji', () => <Text>😀 😎 👍 💯</Text>);
+  .add('with text', () => <Text type={'h1'}>{'Hello Button'}</Text>);
