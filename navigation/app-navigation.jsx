@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavigationContainer, DefaultTheme, DarkTheme, useScrollToTop } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 // import {} from '@react-navigation/core';
 import {
   createStackNavigator,
@@ -9,7 +9,7 @@ import {
   CardStyleInterpolators,
   HeaderStyleInterpolators,
 } from '@react-navigation/stack';
-import { ColorSchemeName } from 'react-native';
+import themes from '@app/themes';
 
 import BottomTabNavigator from './bottom-tab-navigator';
 import LinkingConfiguration from './linking-configuration';
@@ -18,7 +18,7 @@ import OtherScreen from '@app/screens/other-screen';
 
 export default function AppNavigation({ colorScheme }) {
   return (
-    <NavigationContainer linking={LinkingConfiguration} theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+    <NavigationContainer linking={LinkingConfiguration} theme={colorScheme === 'dark' ? themes.dark : themes.light}>
       <RootNavigator />
     </NavigationContainer>
   );

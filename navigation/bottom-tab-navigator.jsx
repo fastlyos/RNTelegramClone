@@ -23,7 +23,7 @@ export default function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="TabChats"
+      initialRouteName="TabContacts"
       tabBarOptions={{
         activeTintColor: Colors[colorScheme].tint,
       }}>

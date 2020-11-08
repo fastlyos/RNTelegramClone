@@ -1,24 +1,23 @@
 import './ReactotronConfig';
 import { StatusBar } from 'expo-status-bar';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import useColorScheme from './hooks/useColorScheme';
 import AppNavigation from '@app/navigation/app-navigation';
+import useCachedResources from './hooks/useCachedResources';
 
 function App() {
+  const colorScheme = useColorScheme();
+  const isLoadingComplete = useCachedResources();
+  if (!isLoadingComplete) return null;
   return (
-    <View style={styles.container}>
+    <SafeAreaProvider>
+      <AppNavigation colorScheme={colorScheme} />
       <StatusBar style="auto" />
-      <AppNavigation />
-    </View>
+    </SafeAreaProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
-
 
 export default App;
 // export { default } from './storybook';

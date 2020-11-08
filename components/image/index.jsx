@@ -1,12 +1,13 @@
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import React from 'react';
+import PropTypes from 'prop-types';
+import Text from '@app/components/text';
+import View from '@app/components/view';
+import { StyleSheet, Image as RNImage, ImagePropTypes } from 'react-native';
 
-export default function Image() {
-  return (
-    <View>
-      <Text>Image</Text>
-    </View>
-  );
+export default function Image(props) {
+  return <RNImage {...props} />;
 }
 
-const styles = StyleSheet.create({})
+Image.proptypes = {};
+
+const styles = StyleSheet.create({});
