@@ -39,7 +39,7 @@ module.exports = {
   },
   globals: {
     arguments: true,
-    strapi: true,
     __DEV__: true,
+    reactotron,
   },
 };

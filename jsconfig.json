@@ -1,18 +1,16 @@
 {
-    "compilerOptions": {
-        "allowSyntheticDefaultImports": true,
-        "experimentalDecorators": true,
-        "jsx": "react",
-        "module": "es6",
-        "moduleResolution": "node",
-        "baseUrl": ".",
-        "paths": {
-            "@app/*" : ["./*"] // alias similar to defined in .babelrc
-        },
-        "sourceMap": true,
-        "target": "ES6"
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "jsx": "react",
+    "module": "es6",
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "paths": {
+      "@app/*": ["./*"] // alias similar to defined in .babelrc
     },
-    "exclude": [
-        "node_modules"
-    ]
+    "sourceMap": true,
+    "target": "ES6"
+  },
+  "exclude": ["node_modules"]
 }
