@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import { StyleSheet, TouchableHighlight } from 'react-native';
@@ -7,14 +7,15 @@ import View from '@app/components/view';
 import Image from '@app/components/image';
 import { useTheme } from '@react-navigation/native';
 
-export default function ContactListItem({ id, avatar, type, firstName, lastName, status, lastSeen, onPress }) {
+function ContactListItem({ id, avatar, type, firstName, lastName, status, lastSeen, onPress }) {
   const name = firstName + ' ' + lastName;
   const statusText = status === 'online' ? status : 'last seen ' + moment(lastSeen).fromNow();
   const theme = useTheme();
-  const borderStyle = {
-    borderBottomWidth: 0.75,
-    borderBottomColor: theme.colors.border,
-  };
+  const styles = createStyles({ theme });
+  // const borderStyle = {
+  //   borderBottomWidth: 0.75,
+  //   borderBottomColor: theme.colors.border,
+  // };
   //
   return (
     <TouchableHighlight
@@ -26,7 +27,7 @@ export default function ContactListItem({ id, avatar, type, firstName, lastName,
         <View style={styles.image}>
           <Image source={{ uri: avatar }} style={{ width: 40, height: 40, borderRadius: 999 }} />
         </View>
-        <View style={[styles.content, borderStyle]}>
+        <View style={[styles.content]}>
           <Text type="subheadEmphasized">{name}</Text>
           <Text>{statusText}</Text>
         </View>
@@ -36,21 +37,23 @@ export default function ContactListItem({ id, avatar, type, firstName, lastName,
 }
 
 ContactListItem.propTypes = {};
+export default memo(ContactListItem);
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'row',
-  },
-  image: {
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-    height: 50,
-    width: 60,
-    alignItems: 'center',
-  },
-  content: {
-    flex: 1,
-    justifyContent: 'center',
-  },
-});
+const createStyles = ({ theme }) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      flexDirection: 'row',
+    },
+    image: {
+      paddingVertical: 5,
+      paddingHorizontal: 10,
+      height: 52,
+      width: 60,
+      alignItems: 'center',
+    },
+    content: {
+      flex: 1,
+      justifyContent: 'center',
+    },
+  });
