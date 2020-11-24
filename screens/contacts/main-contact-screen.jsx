@@ -13,8 +13,9 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 import { useTheme } from '@react-navigation/native';
+import { HeaderStyleInterpolators } from '@react-navigation/stack';
 // components
-import { Text, Button, ContactListItem, ContactListHeader } from '@app/components';
+import { Text, Button, ContactListItem, ContactListHeader, SearchBar } from '@app/components';
 import { iOSColors } from 'react-native-typography';
 // data
 import contacts from '@app/fixtures/contacts';
@@ -27,9 +28,9 @@ export default function MainContactScreen({ navigation }) {
   const styles = createStyles({ theme, width, height });
   const listRef = useRef();
   const goto = () => navigation && navigation.navigate('NewContact');
-  const [sortedBy, setSortedBy] = useState(0);
+  const [sortedBy, setSortedBy] = useState(1);
+  const [headerShown, setheaderShown] = useState(true);
   const contactsTitle = useMemo(() => contacts.groupByContacts.map((i) => i.title), [contacts.groupByContacts]);
-  // console.tron.log({ groupByFirstName: contacts.groupByFirstName });
 
   const onPressSort = () =>
     ActionSheetIOS.showActionSheetWithOptions(
@@ -146,7 +147,7 @@ const createStyles = ({ theme, width, height }) =>
       flex: 1,
     },
     content: {
-      flex: 1,
+      // flex: 1,
     },
     button: {
       padding: 16,

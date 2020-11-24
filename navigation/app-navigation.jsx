@@ -15,6 +15,7 @@ import BottomTabNavigator from './bottom-tab-navigator';
 import LinkingConfiguration from './linking-configuration';
 import NotFoundScreen from '@app/screens/not-found-screen';
 import OtherScreen from '@app/screens/other-screen';
+import MainMessagesScreen from '@app/screens/chats/main-messages-screen';
 
 export default function AppNavigation({ colorScheme }) {
   return (
@@ -45,6 +46,7 @@ function RootNavigator() {
       <Stack.Screen name="OtherScreen" component={OtherScreen} />
       <Stack.Screen name="OtherScreen2" component={OtherScreen} />
       <Stack.Screen name="OtherScreen3" component={OtherScreen} />
+      <Stack.Screen name="MainMessagesScreen" component={MainMessagesScreen} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
     </Stack.Navigator>
   );
