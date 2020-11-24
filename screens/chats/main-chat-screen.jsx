@@ -1,36 +1,104 @@
-import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import randomString from 'random-string';
+import React, { useRef, memo, useCallback, useState, useEffect, createRef } from 'react';
+import {
+  StyleSheet,
+  SafeAreaView,
+  View,
+  FlatList,
+  Text,
+  Animated,
+  ScrollView,
+  VirtualizedList as RNVirtualizedList,
+  TouchableOpacity,
+} from 'react-native';
+import { useTheme } from '@react-navigation/native';
 import PropTypes from 'prop-types';
+import { ContactListItem, MainChatHeader, ChatListItem, Divider } from '@app/components';
 import { iOSColors } from 'react-native-typography';
+import CHATS from '@app/fixtures/chats';
+import MESSAGES from '@app/fixtures/messages';
 
-export default function ExampleScreen({ navigation }) {
-  const goto = () => navigation && navigation.navigate('NewContact');
+const CHAT_DATA = CHATS.items.map((chat) => ({
+  ...chat,
+  lastMessage: MESSAGES.lastMessageByIds[chat.id],
+}));
+
+const VirtualizedList = Animated.createAnimatedComponent(RNVirtualizedList);
+
+function MainChatScreen({ navigation }) {
+  const searchRef = useRef(null);
+  const theme = useTheme();
+  const styles = createStyles({ theme });
+
+  //
+  const goto = (routName, params) => () => navigation && navigation.navigate(routName, { ...params });
+
+  // const onScrollFlatlist = Animated.event(
+  //   [
+  //     {
+  //       nativeEvent: {
+  //         contentOffset: {
+  //           y: scrollFlatlistValue,
+  //         },
+  //       },
+  //     },
+  //   ],
+  //   {
+  //     useNativeDriver: false,
+  //   },
+  // );
+
+  // effect
+  useEffect(() => {
+    return () => {};
+  }, []);
+
   return (
-    <View style={styles.container}>
-      <View style={styles.content}>
-        <Text>MainContact</Text>
-      </View>
-      <TouchableOpacity style={styles.button} onPress={goto}>
-        <Text style={{ color: iOSColors.white, fontSize: 20 }}>New Contact</Text>
-      </TouchableOpacity>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <Animated.View style={styles.header}>
+        <MainChatHeader ref={searchRef} />
+      </Animated.View>
+      <Animated.FlatList
+        scrollEventThrottle={16}
+        onScroll={(e) => searchRef.current?.onScrollEvent(e)}
+        data={CHAT_DATA}
+        ItemSeparatorComponent={() => <Divider />}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item, index }) => <ChatListItem {...item} onPress={goto('MainMessagesScreen', { item })} />}
+        initialNumToRender={10}
+        style={styles.flatlist}
+        contentContainerStyle={styles.flatlistContainer}
+      />
+    </SafeAreaView>
   );
 }
 
-ExampleScreen.propTypes = {};
+MainChatScreen.propTypes = {};
+MainChatScreen.defaultProps = {};
+export default memo(MainChatScreen);
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  content: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  button: {
-    padding: 16,
-    backgroundColor: iOSColors.purple,
-  },
-});
+const createStyles = ({ theme }) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: theme.colors.card,
+    },
+    header: {
+      position: 'absolute',
+      width: '100%',
+      zIndex: 2,
+      backgroundColor: theme.colors.card,
+    },
+    flatlist: {
+      paddingTop: 60,
+    },
+    flatlistContainer: {
+     paddingBottom: 60 
+    }
+    // content: {
+    //   flex: 1,
+    // },
+    // button: {
+    //   padding: 16,
+    //   backgroundColor: iOSColors.purple,
+    // },
+  });

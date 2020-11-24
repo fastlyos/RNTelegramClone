@@ -1,4 +1,4 @@
-import Reactotron, { openInEditor } from 'reactotron-react-native';
+import Reactotron from 'reactotron-react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 
 const reactotron = Reactotron.setAsyncStorageHandler(AsyncStorage) // AsyncStorage would either come from `react-native` or `@react-native-community/async-storage` depending on where you get it from
@@ -12,5 +12,6 @@ const reactotron = Reactotron.setAsyncStorageHandler(AsyncStorage) // AsyncStora
   })
   .connect();
 
-global.reactotron = reactotron;
+console.tron = reactotron;
+
 export default reactotron;
