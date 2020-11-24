@@ -1,61 +1,30 @@
 import React from 'react';
-import { Image } from 'react-native';
+import faker from 'faker';
 import { Ionicons } from '@expo/vector-icons';
+import { StyleSheet } from 'react-native';
+import { BlurView } from 'expo-blur';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator, HeaderStyleInterpolators, TransitionSpecs, useHeaderHeight } from '@react-navigation/stack';
-
-import Colors from '@app/constants/Colors';
+import {
+  createStackNavigator,
+  HeaderStyleInterpolators,
+  CardStyleInterpolators,
+  TransitionSpecs,
+  useHeaderHeight,
+  HeaderTitle,
+} from '@react-navigation/stack';
 import useColorScheme from '@app/hooks/useColorScheme';
+
+// components
+import { Image, SearchListHeader } from '@app/components';
+
+// screens
 import ExampleScreen from '@app/screens';
-// contacts
-import MainContactScreen from '@app/screens/contacts/main-contact';
+import MainContactScreen from '@app/screens/contacts/main-contact-screen';
 // import NewContactScreen from '@app/screens/contacts/new-contact-screen';
-
-// chats
-import ListChatScreen from '@app/screens/chats/list-chat-screen';
-// settings
+import MainChatScreen from '@app/screens/chats/main-chat-screen';
 import MainSettingScreen from '@app/screens/settings/main-setting-screen';
-
-const BottomTab = createBottomTabNavigator();
-
-export default function BottomTabNavigator() {
-  const colorScheme = useColorScheme();
-
-  return (
-    <BottomTab.Navigator
-      initialRouteName="TabContacts"
-      tabBarOptions={{
-        activeTintColor: Colors[colorScheme].tint,
-      }}>
-      <BottomTab.Screen
-        name="TabContacts"
-        component={TabContactNavigator}
-        options={{
-          tabBarLabel: 'Contacts',
-          title: 'Contacts',
-          tabBarIcon: ({ color }) => <TabBarIcon name="md-contact" color={color} />,
-        }}
-      />
-      <BottomTab.Screen
-        name="TabChats"
-        component={TabChatsNavigator}
-        options={{
-          tabBarLabel: 'Chats',
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-chatbubbles" color={color} reverse />,
-        }}
-      />
-      <BottomTab.Screen
-        name="TabSettings"
-        component={TabSettingsNavigator}
-        options={{
-          tabBarLabel: 'Settings',
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-cog" color={color} />,
-          tabBarBadge: '!',
-        }}
-      />
-    </BottomTab.Navigator>
-  );
-}
+// styles
+import Colors from '@app/constants/Colors';
 
 function TabBarIcon({ name, color, reverse }) {
   return <Ionicons size={32} style={{ marginBottom: -3, transform: reverse && [{ rotateY: '180deg' }] }} name={name} color={color} />;
@@ -71,7 +40,19 @@ const TabContactsStack = createStackNavigator();
 function TabContactNavigator() {
   return (
     <TabContactsStack.Navigator>
-      <TabContactsStack.Screen name="TabContactsScreen" component={MainContactScreen} options={{ headerTitle: 'Contacts' }} />
+      <TabContactsStack.Screen
+        name="TabContactsScreen"
+        component={MainContactScreen}
+        options={{
+          // header: () => <SearchListHeader />,
+          headerTitle: 'Contacts',
+          // animationEnabled: true,
+          headerRight: () => <Ionicons name="ios-add" size={30} color="red" />,
+          headerRightContainerStyle: {
+            paddingHorizontal: 16,
+          },
+        }}
+      />
     </TabContactsStack.Navigator>
   );
 }
@@ -82,7 +63,17 @@ const TabChatsStack = createStackNavigator();
 function TabChatsNavigator() {
   return (
     <TabChatsStack.Navigator>
-      <TabChatsStack.Screen name="TabChatsScreen" component={ListChatScreen} options={{ headerTitle: 'Chats' }} />
+      <TabChatsStack.Screen
+        name="TabChatsScreen"
+        component={MainChatScreen}
+        options={{
+          headerTitle: 'Chats',
+          headerStyle: {
+            borderWidth: 0,
+            shadowOpacity: 0,
+          },
+        }}
+      />
     </TabChatsStack.Navigator>
   );
 }
@@ -109,8 +100,9 @@ function TabSettingsNavigator() {
         component={MainSettingScreen}
         options={{
           headerTitle: 'Settings',
+          cardStyle: { backgroundColor: 'transparent' },
+          cardOverlayEnabled: true,
           // header: (props) => {
-          //   console.log({ props });
           //   return <LogoTitle {...props} />;
           // },
           gestureDirection: 'horizontal',
@@ -119,5 +111,44 @@ function TabSettingsNavigator() {
         }}
       />
     </TabSettingsStack.Navigator>
+  );
+}
+
+const BottomTab = createBottomTabNavigator();
+export default function BottomTabNavigator() {
+  const colorScheme = useColorScheme();
+
+  return (
+    <BottomTab.Navigator
+      initialRouteName="TabChats"
+      tabBarOptions={{
+        activeTintColor: Colors[colorScheme].tint,
+      }}>
+      <BottomTab.Screen
+        name="TabContacts"
+        component={TabContactNavigator}
+        options={{
+          title: 'Contacts',
+          tabBarIcon: ({ color }) => <TabBarIcon name="md-contact" color={color} />,
+        }}
+      />
+      <BottomTab.Screen
+        name="TabChats"
+        component={TabChatsNavigator}
+        options={{
+          title: 'Chats',
+          tabBarIcon: ({ color }) => <TabBarIcon name="ios-chatbubbles" color={color} reverse />,
+        }}
+      />
+      <BottomTab.Screen
+        name="TabSettings"
+        component={TabSettingsNavigator}
+        options={{
+          title: 'Settings',
+          tabBarIcon: ({ color }) => <TabBarIcon name="ios-cog" color={color} />,
+          tabBarBadge: '!',
+        }}
+      />
+    </BottomTab.Navigator>
   );
 }

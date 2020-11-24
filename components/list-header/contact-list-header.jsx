@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity, TouchableHighlight } from 'react-native';
 import { AntDesign, FontAwesome5, Feather } from '@expo/vector-icons';
-import View from '@app/components/view';
-import Text from '@app/components/text';
+import { View } from '@app/components/view';
+import { Text } from '@app/components/text';
 import PropTypes from 'prop-types';
 import { useTheme } from '@react-navigation/native';
 

@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import faker from 'faker';
 
-const ids = {};
+const byIds = {};
 const STATUS = ['online', 'offline'];
 
 const contacts = new Array(100).fill(1).map((i) => {
@@ -17,7 +17,7 @@ const contacts = new Array(100).fill(1).map((i) => {
   return contact;
 });
 
-contacts.forEach((contact) => (ids[contact.id] = contact));
+contacts.forEach((contact) => (byIds[contact.id] = contact));
 const groupByFirstName = _.groupBy(contacts, (contact) => _.head(contact.firstName));
 const groupByContacts = Object.keys(groupByFirstName).map((key) => ({
   title: key,
@@ -25,8 +25,8 @@ const groupByContacts = Object.keys(groupByFirstName).map((key) => ({
 }));
 
 export default {
-  byIds: ids,
-  allIds: Object.keys(ids),
+  byIds: byIds,
+  allIds: Object.keys(byIds),
   items: contacts,
   groupByContacts: _.sortBy(groupByContacts, (i) => i.title),
 };
