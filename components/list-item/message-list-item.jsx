@@ -1,12 +1,36 @@
 import React, { memo } from 'react';
 import moment from 'moment';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Animated } from 'react-native';
 import { Text } from '../text';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
 import { useTheme } from '@react-navigation/native';
 import { iOSColors } from 'react-native-typography';
 import CURRENT_USER from '@app/fixtures/currentUser';
+import { RectButton } from 'react-native-gesture-handler';
+import Swipeable from 'react-native-gesture-handler/Swipeable';
+
+const renderLeftActions = (progress, dragX) => {
+  // const theme = useTheme();
+  const styles = createStyles({});
+  const trans = dragX.interpolate({
+    inputRange: [0, 50, 100, 101],
+    outputRange: [-20, 0, 0, 1],
+  });
+  return (
+    <RectButton style={styles.leftAction} onPress={() => {}}>
+      <Animated.Text
+        style={[
+          styles.actionText,
+          {
+            transform: [{ translateX: trans }],
+          },
+        ]}>
+        Share
+      </Animated.Text>
+    </RectButton>
+  );
+};
 
 function MessageListItem({ data }) {
   const theme = useTheme();
@@ -19,17 +43,21 @@ function MessageListItem({ data }) {
   // style
   const styles = createStyles({ theme, isRightContent: isCurentUser });
   return (
-    <View style={styles.container}>
-      <View style={styles.content}>
-        <View style={styles.textBodyBox}>
-          <Text type="subheadShort">{body}</Text>
-          <View style={styles.bottom}>
-            <Text type="caption2">{createdAtText}</Text>
-            <MaterialCommunityIcons name="check-all" size={15} style={{ paddingLeft: 5 }} />
+    <Swipeable renderRightActions={renderLeftActions}>
+      <View style={styles.container}>
+        <View style={styles.content}>
+          <View style={styles.textBodyBox}>
+            <Text type="subheadShort" style={styles.textbody}>
+              {body}
+            </Text>
+            <View style={styles.bottom}>
+              <Text type="caption2">{createdAtText}</Text>
+              <MaterialCommunityIcons name="check-all" size={15} style={{ paddingLeft: 5 }} />
+            </View>
           </View>
         </View>
       </View>
-    </View>
+    </Swipeable>
   );
 }
 
@@ -43,8 +71,8 @@ const createStyles = ({ theme, isRightContent }) =>
     container: {
       flex: 1,
       alignItems: isRightContent ? 'flex-end' : 'flex-start',
-      paddingLeft: isRightContent ? 40 : 5,
-      paddingRight: isRightContent ? 5 : 40,
+      paddingLeft: isRightContent ? 40 : 10,
+      paddingRight: isRightContent ? 10 : 40,
       paddingVertical: 5,
     },
     content: {
@@ -55,6 +83,8 @@ const createStyles = ({ theme, isRightContent }) =>
     },
     textBodyBox: {
       // backgroundColor: 'red',
+      // paddingHorizontal: 2,
+
       flex: 1,
       flexDirection: 'column',
       // flexWrap: 'wrap',
@@ -62,16 +92,23 @@ const createStyles = ({ theme, isRightContent }) =>
       // flexBasis:2
     },
     textbody: {
-      flex: 1,
+      // flex: 1,
+      // textAlign: "justify",
       // alignItems: 'flex-end',
-
       // flexDirection: 'column',
       // alignContent: 'stretch',
-      backgroundColor: 'red',
     },
     bottom: {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'flex-end',
+    },
+    leftAction: {
+      height: 80,
+      paddingVertical: 10,
+      paddingHorizontal: 20,
+      justifyContent: 'space-between',
+      flexDirection: 'column',
+      backgroundColor: 'white',
     },
   });

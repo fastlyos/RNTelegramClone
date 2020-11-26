@@ -7,3 +7,4 @@ export { default as SearchBar } from './search-bar/search-bar';
 export * from './list-item';
 export * from './list-header';
 export * from './view';
+export * from './text-input';

@@ -1,12 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput } from 'react-native';
+import { StyleSheet, Text, View, TextInput as RNTextInput } from 'react-native';
 import PropTypes from 'prop-types';
-i
 
-export default function TextInput(props) {
-  return <TextInput {...props} />;
+function TextInput(props) {
+  return <RNTextInput {...props} />;
 }
 
 TextInput.propTypes = {};
+export default TextInput;
 
 const styles = StyleSheet.create({});
