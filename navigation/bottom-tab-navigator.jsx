@@ -24,7 +24,7 @@ import MainContactScreen from '@app/screens/contacts/main-contact-screen';
 import MainChatScreen from '@app/screens/chats/main-chat-screen';
 import MainSettingScreen from '@app/screens/settings/main-setting-screen';
 // styles
-import Colors from '@app/constants/Colors';
+import Colors from '@app/constants/colors';
 
 function TabBarIcon({ name, color, reverse }) {
   return <Ionicons size={32} style={{ marginBottom: -3, transform: reverse && [{ rotateY: '180deg' }] }} name={name} color={color} />;
@@ -99,6 +99,7 @@ function TabSettingsNavigator() {
         name="TabSettingsScreen"
         component={MainSettingScreen}
         options={{
+          // header: () => <></>,
           headerTitle: 'Settings',
           cardStyle: { backgroundColor: 'transparent' },
           cardOverlayEnabled: true,
@@ -117,10 +118,9 @@ function TabSettingsNavigator() {
 const BottomTab = createBottomTabNavigator();
 export default function BottomTabNavigator() {
   const colorScheme = useColorScheme();
-
   return (
     <BottomTab.Navigator
-      initialRouteName="TabChats"
+      initialRouteName="TabSettings"
       tabBarOptions={{
         activeTintColor: Colors[colorScheme].tint,
       }}>
