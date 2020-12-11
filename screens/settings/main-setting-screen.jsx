@@ -1,11 +1,11 @@
-import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import { useHeaderHeight } from '@react-navigation/stack';
-import PropTypes from 'prop-types';
-import { iOSColors } from 'react-native-typography';
+import React from "react";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { useHeaderHeight } from "@react-navigation/stack";
+import PropTypes from "prop-types";
+import { iOSColors } from "react-native-typography";
 
 export default function MainSettingScreen({ navigation }) {
-  const gotoOther = () => navigation && navigation.navigate('OtherScreen');
+  const gotoOther = () => navigation && navigation.navigate("OtherScreen");
   return (
     <View style={styles.container}>
       <View style={styles.content}></View>

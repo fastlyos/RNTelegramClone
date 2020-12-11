@@ -1,6 +1,6 @@
-import React, { useState, useMemo, useRef, useCallback, memo } from 'react';
-import _ from 'lodash';
-import PropTypes from 'prop-types';
+import React, { useState, useMemo, useRef, useCallback, memo } from "react";
+import _ from "lodash";
+import PropTypes from "prop-types";
 import {
   StyleSheet,
   FlatList,
@@ -11,23 +11,23 @@ import {
   View,
   TouchableOpacity,
   TouchableWithoutFeedback,
-} from 'react-native';
-import { useTheme } from '@react-navigation/native';
-import { HeaderStyleInterpolators } from '@react-navigation/stack';
+} from "react-native";
+import { useTheme } from "@react-navigation/native";
+import { HeaderStyleInterpolators } from "@react-navigation/stack";
 // components
-import { Text, Button, ContactListItem, ContactListHeader, SearchBar } from '@app/components';
-import { iOSColors } from 'react-native-typography';
+import { Text, Button, ContactListItem, ContactListHeader, SearchBar } from "@app/components";
+import { iOSColors } from "react-native-typography";
 // data
-import contacts from '@app/fixtures/contacts';
+import contacts from "@app/fixtures/contacts";
 
-const SORTS = ['Name', 'Last Seen Time'];
+const SORTS = ["Name", "Last Seen Time"];
 
 export default function MainContactScreen({ navigation }) {
   const theme = useTheme();
   const { width, height } = useWindowDimensions();
   const styles = createStyles({ theme, width, height });
   const listRef = useRef();
-  const goto = () => navigation && navigation.navigate('NewContact');
+  const goto = () => navigation && navigation.navigate("NewContact");
   const [sortedBy, setSortedBy] = useState(1);
   const [headerShown, setheaderShown] = useState(true);
   const contactsTitle = useMemo(() => contacts.groupByContacts.map((i) => i.title), [contacts.groupByContacts]);
@@ -35,7 +35,7 @@ export default function MainContactScreen({ navigation }) {
   const onPressSort = () =>
     ActionSheetIOS.showActionSheetWithOptions(
       {
-        options: ['Cancel', ...SORTS],
+        options: ["Cancel", ...SORTS],
         cancelButtonIndex: 0,
       },
       (buttonIndex) => {
@@ -55,9 +55,7 @@ export default function MainContactScreen({ navigation }) {
         {sortedBy === 0 && (
           <SectionList
             ref={listRef}
-            ListHeaderComponent={() => (
-              <ContactListHeader title={`Sorted by ${SORTS[sortedBy]}`} onPress={onPressSort} />
-            )}
+            ListHeaderComponent={() => <ContactListHeader title={`Sorted by ${SORTS[sortedBy]}`} onPress={onPressSort} />}
             sections={contacts.groupByContacts}
             keyExtractor={(item, index) => item + index}
             renderItem={({ item }) => <ContactListItem {...item} />}
@@ -74,9 +72,7 @@ export default function MainContactScreen({ navigation }) {
             ref={listRef}
             initialNumToRender={10}
             ItemSeparatorComponent={() => <View style={styles.divider} />}
-            ListHeaderComponent={() => (
-              <ContactListHeader title={`Sorted by ${SORTS[sortedBy]}`} onPress={onPressSort} />
-            )}
+            ListHeaderComponent={() => <ContactListHeader title={`Sorted by ${SORTS[sortedBy]}`} onPress={onPressSort} />}
             data={contacts.items}
             keyExtractor={(item) => item.id}
             renderItem={({ item, index }) => <ContactListItem {...item} />}
@@ -135,7 +131,7 @@ const Item = ({ title, index, listRef, length }) => {
       pressRetentionOffset={{ top: 0, bottom: 0, left: 0, right: 0 }}
       style={styles.textTouch}
       onTouchMove={onTouchMove}>
-      <Text type={'footnoteEmphasized'}>{String(title)}</Text>
+      <Text type={"footnoteEmphasized"}>{String(title)}</Text>
     </View>
   );
 };
@@ -156,7 +152,7 @@ const createStyles = ({ theme, width, height }) =>
     header: {
       paddingHorizontal: 10,
       paddingVertical: 8,
-      justifyContent: 'center',
+      justifyContent: "center",
     },
     divider: {
       marginLeft: 60,
@@ -164,13 +160,13 @@ const createStyles = ({ theme, width, height }) =>
       borderBottomColor: theme.colors.border,
     },
     titleView: {
-      position: 'absolute',
+      position: "absolute",
       right: 0,
-      height: '100%',
+      height: "100%",
     },
     titleViewbox: {
       flex: 1,
-      justifyContent: 'center',
+      justifyContent: "center",
       // paddingHorizontal: 4,
       // backgroundColor: 'red',
     },
@@ -178,7 +174,7 @@ const createStyles = ({ theme, width, height }) =>
       maxHeight: 18,
       paddingHorizontal: 6,
       // marginVertical: 2,
-      alignItems: 'center',
+      alignItems: "center",
       // backgroundColor: 'red',
     },
   });

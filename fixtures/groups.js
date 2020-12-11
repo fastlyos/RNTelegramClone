@@ -1,7 +1,7 @@
-import _ from 'lodash';
-import faker from 'faker';
-import contacts from './contacts';
-import currentUser from './currentUser';
+import _ from "lodash";
+import faker from "faker";
+import contacts from "./contacts";
+import currentUser from "./currentUser";
 const byIds = {};
 
 export const GROUP_MEMBER_LENGTH = 4;
@@ -13,7 +13,7 @@ const defaultChat = () => ({
   members: [],
 });
 
-const friends = faker.random.arrayElements(_.reject(contacts.items, ['id', currentUser.id]), 12);
+const friends = faker.random.arrayElements(_.reject(contacts.items, ["id", currentUser.id]), 12);
 const groupMembers = _.chunk(friends, GROUP_MEMBER_LENGTH - 1).map((list) => [currentUser, ...list]);
 
 const groups = groupMembers.map((grMembers) => {
@@ -22,7 +22,7 @@ const groups = groupMembers.map((grMembers) => {
     members: grMembers.map((member) => member.id),
     groupName: _.join(
       grMembers.map((member) => member.firstName),
-      ', ',
+      ", ",
     ),
   };
 });

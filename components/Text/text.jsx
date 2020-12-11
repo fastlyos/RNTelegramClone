@@ -1,7 +1,7 @@
-import React from 'react';
-import Proptypes from 'prop-types';
-import { StyleSheet, Text as RNText } from 'react-native';
-import { iOSColors, iOSUIKit } from 'react-native-typography';
+import React from "react";
+import Proptypes from "prop-types";
+import { StyleSheet, Text as RNText } from "react-native";
+import { iOSColors, iOSUIKit } from "react-native-typography";
 
 const COLORS = {
   main: iOSColors.tealBlue,

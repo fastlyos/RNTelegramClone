@@ -1,9 +1,9 @@
-import _ from 'lodash';
-import faker from 'faker';
-import chats from './chats';
-import contacts from './contacts';
-import groups, { GROUP_MEMBER_LENGTH } from './groups';
-import currentUser from './currentUser';
+import _ from "lodash";
+import faker from "faker";
+import chats from "./chats";
+import contacts from "./contacts";
+import groups, { GROUP_MEMBER_LENGTH } from "./groups";
+import currentUser from "./currentUser";
 const byIds = {};
 
 function defaultMessage() {
@@ -18,7 +18,7 @@ function defaultMessage() {
 }
 
 // direct chat
-const directChats = chats.items.filter((item) => item.type === 'direct');
+const directChats = chats.items.filter((item) => item.type === "direct");
 const directMessages = _.flatten(
   directChats.map((chat) => {
     return new Array(20).fill(1).map((i) => ({
@@ -30,7 +30,7 @@ const directMessages = _.flatten(
 );
 
 // group
-const groupChats = chats.items.filter((item) => item.type === 'group');
+const groupChats = chats.items.filter((item) => item.type === "group");
 const groupMessages = _.flatten(
   groupChats.map((chat) => {
     return new Array(20).fill(1).map((i) => ({

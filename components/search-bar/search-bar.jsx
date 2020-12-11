@@ -1,7 +1,7 @@
-import React, { memo, useRef, useState, useEffect } from 'react';
-import { Ionicons } from '@expo/vector-icons';
-import { StyleSheet, Text, View, TextInput, Animated, Easing, TouchableWithoutFeedback } from 'react-native';
-import { useTheme } from '@react-navigation/native';
+import React, { memo, useRef, useState, useEffect } from "react";
+import { Ionicons } from "@expo/vector-icons";
+import { StyleSheet, Text, View, TextInput, Animated, Easing, TouchableWithoutFeedback } from "react-native";
+import { useTheme } from "@react-navigation/native";
 
 function SearchBar(props) {
   const theme = useTheme();
@@ -66,9 +66,9 @@ const createStyles = ({ theme }) =>
       flex: 1,
       backgroundColor: theme.colors.backgroundCenter,
       borderRadius: 15,
-      flexDirection: 'row',
-      justifyContent: 'center',
-      alignItems: 'center',
+      flexDirection: "row",
+      justifyContent: "center",
+      alignItems: "center",
     },
 
     iconSearch: {

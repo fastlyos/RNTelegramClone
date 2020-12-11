@@ -1,8 +1,8 @@
-import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import randomString from 'random-string';
-import PropTypes from 'prop-types';
-import { iOSColors } from 'react-native-typography';
+import React from "react";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import randomString from "random-string";
+import PropTypes from "prop-types";
+import { iOSColors } from "react-native-typography";
 
 export default function OtherScreen({ navigation }) {
   return (
@@ -12,10 +12,10 @@ export default function OtherScreen({ navigation }) {
       <TouchableOpacity style={styles.button} onPress={() => navigation?.goBack()}>
         <Text style={{ color: iOSColors.white, fontSize: 20 }}>Back</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={() => navigation?.navigate('OtherScreen2')}>
+      <TouchableOpacity style={styles.button} onPress={() => navigation?.navigate("OtherScreen2")}>
         <Text style={{ color: iOSColors.white, fontSize: 20 }}>OtherScreen2</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={() => navigation?.navigate('OtherScreen3')}>
+      <TouchableOpacity style={styles.button} onPress={() => navigation?.navigate("OtherScreen3")}>
         <Text style={{ color: iOSColors.white, fontSize: 20 }}>OtherScreen3</Text>
       </TouchableOpacity>
     </View>
@@ -27,8 +27,8 @@ OtherScreen.propTypes = {};
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   button: {
     padding: 16,

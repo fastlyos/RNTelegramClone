@@ -1,4 +1,4 @@
-import React, { useRef, memo, useCallback, useState, useEffect, createRef } from 'react';
+import React, { useRef, memo, useCallback, useState, useEffect, createRef } from "react";
 import {
   StyleSheet,
   SafeAreaView,
@@ -9,13 +9,13 @@ import {
   ScrollView,
   VirtualizedList as RNVirtualizedList,
   TouchableOpacity,
-} from 'react-native';
-import { useTheme } from '@react-navigation/native';
-import PropTypes from 'prop-types';
-import { ContactListItem, MainChatHeader, ChatListItem, Divider } from '@app/components';
-import { iOSColors } from 'react-native-typography';
-import CHATS from '@app/fixtures/chats';
-import MESSAGES from '@app/fixtures/messages';
+} from "react-native";
+import { useTheme } from "@react-navigation/native";
+import PropTypes from "prop-types";
+import { ContactListItem, MainChatHeader, ChatListItem, Divider } from "@app/components";
+import { iOSColors } from "react-native-typography";
+import CHATS from "@app/fixtures/chats";
+import MESSAGES from "@app/fixtures/messages";
 
 const CHAT_DATA = CHATS.items.map((chat) => ({
   ...chat,
@@ -115,7 +115,7 @@ function MainChatScreen({ navigation }) {
           // ListHeaderComponent={() => <MainChatHeader ref={searchRef} />}
           ItemSeparatorComponent={() => <Divider />}
           keyExtractor={(item) => item.id}
-          renderItem={({ item, index }) => <ChatListItem {...item} onPress={goto('MainMessagesScreen', { item })} />}
+          renderItem={({ item, index }) => <ChatListItem {...item} onPress={goto("MainMessagesScreen", { item })} />}
           initialNumToRender={10}
         />
         {/* {new Array(100).fill(1).map((i, index) => {

@@ -1,8 +1,8 @@
-import _ from 'lodash';
-import faker from 'faker';
+import _ from "lodash";
+import faker from "faker";
 
 const byIds = {};
-const STATUS = ['online', 'offline'];
+const STATUS = ["online", "offline"];
 
 const contacts = new Array(100).fill(1).map((i) => {
   const status = STATUS[Math.floor(Math.random() * STATUS.length)];
