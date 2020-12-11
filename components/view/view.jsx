@@ -1,7 +1,7 @@
-import React, { memo } from 'react';
-import { useTheme } from '@react-navigation/native';
-import { StyleSheet, View as RNView } from 'react-native';
-import PropTypes from 'prop-types';
+import React, { memo } from "react";
+import { useTheme } from "@react-navigation/native";
+import { StyleSheet, View as RNView } from "react-native";
+import PropTypes from "prop-types";
 
 function View({ backgroundColor, children, ...props }) {
   const theme = useTheme();

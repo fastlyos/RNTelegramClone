@@ -1,10 +1,10 @@
-import React, { memo, useState, useEffect } from 'react';
-import { StyleSheet, View, TouchableOpacity, SectionList, Switch } from 'react-native';
-import { useTheme, useNavigation } from '@react-navigation/native';
-import PropTypes from 'prop-types';
-import { iOSColors } from 'react-native-typography';
-import { recentCalls } from '@app/constants/schema';
-import { CommonListItem, Divider, Text } from '@app/components';
+import React, { memo, useState, useEffect } from "react";
+import { StyleSheet, View, TouchableOpacity, SectionList, Switch } from "react-native";
+import { useTheme, useNavigation } from "@react-navigation/native";
+import PropTypes from "prop-types";
+import { iOSColors } from "react-native-typography";
+import { recentCalls } from "@app/constants/schema";
+import { CommonListItem, Divider, Text } from "@app/components";
 
 function SwitchComponent() {
   const [value, setValue] = useState(false);
@@ -74,13 +74,13 @@ const createStyles = ({ theme }) => {
       backgroundColor: theme.colors.card,
     },
     content: {
-      position: 'absolute',
+      position: "absolute",
       top: 0,
       left: 0,
       width: width,
       height: height,
-      justifyContent: 'center',
-      alignItems: 'center',
+      justifyContent: "center",
+      alignItems: "center",
     },
     flatlistContent: {
       marginVertical: 20,

@@ -1,15 +1,15 @@
-import React, { memo } from 'react';
-import moment from 'moment';
-import PropTypes from 'prop-types';
-import { StyleSheet, TouchableHighlight } from 'react-native';
-import { Text } from '@app/components/text';
-import { View } from '@app/components/view';
-import Image from '@app/components/image/image';
-import { useTheme } from '@react-navigation/native';
+import React, { memo } from "react";
+import moment from "moment";
+import PropTypes from "prop-types";
+import { StyleSheet, TouchableHighlight } from "react-native";
+import { Text } from "@app/components/text";
+import { View } from "@app/components/view";
+import Image from "@app/components/image/image";
+import { useTheme } from "@react-navigation/native";
 
 function ContactListItem({ id, avatar, type, firstName, lastName, status, lastSeen, onPress, navigation }) {
-  const name = firstName + ' ' + lastName;
-  const statusText = status === 'online' ? status : 'last seen ' + moment(lastSeen).fromNow();
+  const name = firstName + " " + lastName;
+  const statusText = status === "online" ? status : "last seen " + moment(lastSeen).fromNow();
   const theme = useTheme();
   const styles = createStyles({ theme });
   // const borderStyle = {
@@ -39,17 +39,17 @@ const createStyles = ({ theme }) =>
   StyleSheet.create({
     container: {
       flex: 1,
-      flexDirection: 'row',
+      flexDirection: "row",
     },
     image: {
       paddingVertical: 5,
       paddingHorizontal: 10,
       height: 52,
       width: 60,
-      alignItems: 'center',
+      alignItems: "center",
     },
     content: {
       flex: 1,
-      justifyContent: 'center',
+      justifyContent: "center",
     },
   });

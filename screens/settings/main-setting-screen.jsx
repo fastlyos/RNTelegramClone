@@ -1,16 +1,16 @@
-import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Animated, SectionList } from 'react-native';
-import { useHeaderHeight } from '@react-navigation/stack';
-import { useTheme } from '@react-navigation/native';
-import PropTypes from 'prop-types';
-import { iOSColors } from 'react-native-typography';
-import { settingList } from '@app/constants/schema';
-import { CommonListItem, Divider } from '@app/components';
+import React from "react";
+import { StyleSheet, Text, View, TouchableOpacity, Animated, SectionList } from "react-native";
+import { useHeaderHeight } from "@react-navigation/stack";
+import { useTheme } from "@react-navigation/native";
+import PropTypes from "prop-types";
+import { iOSColors } from "react-native-typography";
+import { settingList } from "@app/constants/schema";
+import { CommonListItem, Divider } from "@app/components";
 
 export default function MainSettingScreen({ navigation }) {
   const theme = useTheme();
   const styles = createStyles({ theme });
-  const gotoOther = () => navigation && navigation.navigate('OtherScreen');
+  const gotoOther = () => navigation && navigation.navigate("OtherScreen");
   return (
     <View style={styles.container}>
       <View style={styles.content}>
@@ -57,7 +57,7 @@ const createStyles = ({ theme }) =>
       paddingVertical: 10,
     },
     bgSeparator: {
-      backgroundColor: 'white',
+      backgroundColor: "white",
     },
     marginLeft: {
       marginLeft: 62,

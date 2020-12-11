@@ -1,9 +1,9 @@
-import React from 'react';
-import faker from 'faker';
-import { Ionicons } from '@expo/vector-icons';
-import { StyleSheet } from 'react-native';
-import { BlurView } from 'expo-blur';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import React from "react";
+import faker from "faker";
+import { Ionicons } from "@expo/vector-icons";
+import { StyleSheet } from "react-native";
+import { BlurView } from "expo-blur";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
   createStackNavigator,
   HeaderStyleInterpolators,
@@ -11,23 +11,23 @@ import {
   TransitionSpecs,
   useHeaderHeight,
   HeaderTitle,
-} from '@react-navigation/stack';
-import useColorScheme from '@app/hooks/useColorScheme';
+} from "@react-navigation/stack";
+import useColorScheme from "@app/hooks/useColorScheme";
 
 // components
-import { Image, SearchListHeader } from '@app/components';
+import { Image, SearchListHeader } from "@app/components";
 
 // screens
-import ExampleScreen from '@app/screens';
-import MainContactScreen from '@app/screens/contacts/main-contact-screen';
+import ExampleScreen from "@app/screens";
+import MainContactScreen from "@app/screens/contacts/main-contact-screen";
 // import NewContactScreen from '@app/screens/contacts/new-contact-screen';
-import MainChatScreen from '@app/screens/chats/main-chat-screen';
-import MainSettingScreen from '@app/screens/settings/main-setting-screen';
+import MainChatScreen from "@app/screens/chats/main-chat-screen";
+import MainSettingScreen from "@app/screens/settings/main-setting-screen";
 // styles
-import Colors from '@app/constants/colors';
+import Colors from "@app/constants/colors";
 
 function TabBarIcon({ name, color, reverse }) {
-  return <Ionicons size={32} style={{ marginBottom: -3, transform: reverse && [{ rotateY: '180deg' }] }} name={name} color={color} />;
+  return <Ionicons size={32} style={{ marginBottom: -3, transform: reverse && [{ rotateY: "180deg" }] }} name={name} color={color} />;
 }
 
 /**
@@ -45,7 +45,7 @@ function TabContactNavigator() {
         component={MainContactScreen}
         options={{
           // header: () => <SearchListHeader />,
-          headerTitle: 'Contacts',
+          headerTitle: "Contacts",
           // animationEnabled: true,
           headerRight: () => <Ionicons name="ios-add" size={30} color="red" />,
           headerRightContainerStyle: {
@@ -67,7 +67,7 @@ function TabChatsNavigator() {
         name="TabChatsScreen"
         component={MainChatScreen}
         options={{
-          headerTitle: 'Chats',
+          headerTitle: "Chats",
           headerStyle: {
             borderWidth: 0,
             shadowOpacity: 0,
@@ -86,7 +86,7 @@ function LogoTitle() {
     <Image
       style={{ width: 50, height: 50 }}
       source={{
-        uri: 'https://reactnative.dev/img/tiny_logo.png',
+        uri: "https://reactnative.dev/img/tiny_logo.png",
       }}
     />
   );
@@ -100,15 +100,15 @@ function TabSettingsNavigator() {
         component={MainSettingScreen}
         options={{
           // header: () => <></>,
-          headerTitle: 'Settings',
-          cardStyle: { backgroundColor: 'transparent' },
+          headerTitle: "Settings",
+          cardStyle: { backgroundColor: "transparent" },
           cardOverlayEnabled: true,
           // header: (props) => {
           //   return <LogoTitle {...props} />;
           // },
-          gestureDirection: 'horizontal',
+          gestureDirection: "horizontal",
           headerStyleInterpolator: HeaderStyleInterpolators.forSlideLeft,
-          headerBackTitle: 'Back',
+          headerBackTitle: "Back",
         }}
       />
     </TabSettingsStack.Navigator>
@@ -128,7 +128,7 @@ export default function BottomTabNavigator() {
         name="TabContacts"
         component={TabContactNavigator}
         options={{
-          title: 'Contacts',
+          title: "Contacts",
           tabBarIcon: ({ color }) => <TabBarIcon name="md-contact" color={color} />,
         }}
       />
@@ -136,7 +136,7 @@ export default function BottomTabNavigator() {
         name="TabChats"
         component={TabChatsNavigator}
         options={{
-          title: 'Chats',
+          title: "Chats",
           tabBarIcon: ({ color }) => <TabBarIcon name="ios-chatbubbles" color={color} reverse />,
         }}
       />
@@ -144,9 +144,9 @@ export default function BottomTabNavigator() {
         name="TabSettings"
         component={TabSettingsNavigator}
         options={{
-          title: 'Settings',
+          title: "Settings",
           tabBarIcon: ({ color }) => <TabBarIcon name="ios-cog" color={color} />,
-          tabBarBadge: '!',
+          tabBarBadge: "!",
         }}
       />
     </BottomTab.Navigator>

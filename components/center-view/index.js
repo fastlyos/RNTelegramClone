@@ -1,1 +1,1 @@
-export { default as CenterView } from './center-view';
+export { default as CenterView } from "./center-view";

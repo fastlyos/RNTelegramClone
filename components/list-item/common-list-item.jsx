@@ -1,12 +1,12 @@
-import React, { memo } from 'react';
-import { StyleSheet, View, TouchableHighlight, Image, ViewPropTypes, Switch } from 'react-native';
-import { Entypo } from '@expo/vector-icons';
-import { useTheme } from '@react-navigation/native';
-import { Text } from '@app/components/text';
-import PropTypes from 'prop-types';
+import React, { memo } from "react";
+import { StyleSheet, View, TouchableHighlight, Image, ViewPropTypes, Switch } from "react-native";
+import { Entypo } from "@expo/vector-icons";
+import { useTheme } from "@react-navigation/native";
+import { Text } from "@app/components/text";
+import PropTypes from "prop-types";
 
 function CommonListItem({ title, left, right, onPress }) {
-  const { invisible = false, icon = '', iconBackgroundColor } = left;
+  const { invisible = false, icon = "", iconBackgroundColor } = left;
   const invisibleLeft = left.invisible;
   const invisibleRight = right.invisible;
   const { hideChevronRight = false, isRoundText, isCustomComponent, component: RightComponent } = right;
@@ -32,7 +32,7 @@ function CommonListItem({ title, left, right, onPress }) {
           {!invisibleRight && !isCustomComponent && (
             <>
               <View style={isRoundText && styles.rightTextView}>
-                <Text type="body" color={isRoundText ? 'white' : 'gray'}>
+                <Text type="body" color={isRoundText ? "white" : "gray"}>
                   {rightText}
                 </Text>
               </View>
@@ -67,9 +67,9 @@ const createStyles = ({ theme }) =>
   StyleSheet.create({
     container: {
       // borderWidth: 0.25,
-      backgroundColor: 'white',
-      alignItems: 'center',
-      flexDirection: 'row',
+      backgroundColor: "white",
+      alignItems: "center",
+      flexDirection: "row",
       paddingVertical: 8,
       paddingHorizontal: 4,
     },
@@ -85,11 +85,11 @@ const createStyles = ({ theme }) =>
       paddingHorizontal: 2,
     },
     rightItem: {
-      flexDirection: 'row',
+      flexDirection: "row",
       paddingHorizontal: 8,
     },
     rightTextView: {
-      backgroundColor: 'rgb(12,102,223)',
+      backgroundColor: "rgb(12,102,223)",
       paddingHorizontal: 6,
       borderRadius: 99,
     },

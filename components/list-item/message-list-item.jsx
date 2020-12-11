@@ -1,14 +1,14 @@
-import React, { memo } from 'react';
-import moment from 'moment';
-import { StyleSheet, View, Animated } from 'react-native';
-import { Text } from '../text';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import PropTypes from 'prop-types';
-import { useTheme } from '@react-navigation/native';
-import { iOSColors } from 'react-native-typography';
-import CURRENT_USER from '@app/fixtures/currentUser';
-import { RectButton } from 'react-native-gesture-handler';
-import Swipeable from 'react-native-gesture-handler/Swipeable';
+import React, { memo } from "react";
+import moment from "moment";
+import { StyleSheet, View, Animated } from "react-native";
+import { Text } from "../text";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import PropTypes from "prop-types";
+import { useTheme } from "@react-navigation/native";
+import { iOSColors } from "react-native-typography";
+import CURRENT_USER from "@app/fixtures/currentUser";
+import { RectButton } from "react-native-gesture-handler";
+import Swipeable from "react-native-gesture-handler/Swipeable";
 
 const renderLeftActions = (progress, dragX) => {
   // const theme = useTheme();
@@ -37,7 +37,7 @@ function MessageListItem({ data }) {
   const currentuser = CURRENT_USER;
 
   const { body, chatId, isEdit, createdAt, createBy } = data;
-  const createdAtText = moment(createdAt).format('HH:mm');
+  const createdAtText = moment(createdAt).format("HH:mm");
 
   const isCurentUser = currentuser.id === createBy;
   // style
@@ -70,7 +70,7 @@ const createStyles = ({ theme, isRightContent }) =>
   StyleSheet.create({
     container: {
       flex: 1,
-      alignItems: isRightContent ? 'flex-end' : 'flex-start',
+      alignItems: isRightContent ? "flex-end" : "flex-start",
       paddingLeft: isRightContent ? 40 : 10,
       paddingRight: isRightContent ? 10 : 40,
       paddingVertical: 5,
@@ -86,7 +86,7 @@ const createStyles = ({ theme, isRightContent }) =>
       // paddingHorizontal: 2,
 
       flex: 1,
-      flexDirection: 'column',
+      flexDirection: "column",
       // flexWrap: 'wrap',
       // flexGrow: 1,
       // flexBasis:2
@@ -99,16 +99,16 @@ const createStyles = ({ theme, isRightContent }) =>
       // alignContent: 'stretch',
     },
     bottom: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'flex-end',
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "flex-end",
     },
     leftAction: {
       height: 80,
       paddingVertical: 10,
       paddingHorizontal: 20,
-      justifyContent: 'space-between',
-      flexDirection: 'column',
-      backgroundColor: 'white',
+      justifyContent: "space-between",
+      flexDirection: "column",
+      backgroundColor: "white",
     },
   });

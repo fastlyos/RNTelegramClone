@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useCallback, forwardRef, useRef, memo } from 'react';
-import { StyleSheet, Text, View, Animated } from 'react-native';
-import SearchBar from '../search-bar/search-bar';
-import { useTheme } from '@react-navigation/native';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect, useCallback, forwardRef, useRef, memo } from "react";
+import { StyleSheet, Text, View, Animated } from "react-native";
+import SearchBar from "../search-bar/search-bar";
+import { useTheme } from "@react-navigation/native";
+import PropTypes from "prop-types";
 
 const ChatHeader = memo(({ searchBarRef }) => {
   //
@@ -10,13 +10,13 @@ const ChatHeader = memo(({ searchBarRef }) => {
   const headerHeight = scrollValue.interpolate({
     inputRange: [60, 110],
     outputRange: [60, 0],
-    extrapolateRight: 'clamp',
-    extrapolateLeft: 'clamp',
+    extrapolateRight: "clamp",
+    extrapolateLeft: "clamp",
   });
   const marginTop = scrollValue.interpolate({
     inputRange: [-10, 0],
     outputRange: [10, 0],
-    extrapolateRight: 'clamp',
+    extrapolateRight: "clamp",
   });
   //
   const theme = useTheme();

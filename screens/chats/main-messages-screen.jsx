@@ -1,6 +1,6 @@
-import _ from 'lodash';
-import React, { memo, useCallback, useMemo, useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import _ from "lodash";
+import React, { memo, useCallback, useMemo, useState, useEffect } from "react";
+import PropTypes from "prop-types";
 // components
 import {
   StyleSheet,
@@ -12,18 +12,18 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
   useWindowDimensions,
-} from 'react-native';
-import { ContactListItem, ChatListItem, Divider, Text, MessageListItem, MessageTyping } from '@app/components';
+} from "react-native";
+import { ContactListItem, ChatListItem, Divider, Text, MessageListItem, MessageTyping } from "@app/components";
 // theme
-import { useTheme } from '@react-navigation/native';
-import { iOSColors } from 'react-native-typography';
+import { useTheme } from "@react-navigation/native";
+import { iOSColors } from "react-native-typography";
 
 // DATA
-import CHATS from '@app/fixtures/chats';
-import MESSAGES from '@app/fixtures/messages';
-import CONTACTS from '@app/fixtures/contacts';
+import CHATS from "@app/fixtures/chats";
+import MESSAGES from "@app/fixtures/messages";
+import CONTACTS from "@app/fixtures/contacts";
 
-const keyboardVerticalOffset = Platform.OS === 'ios' ? 95 : 0;
+const keyboardVerticalOffset = Platform.OS === "ios" ? 95 : 0;
 
 function MainMessagesScreen({ navigation, route }) {
   const theme = useTheme();
@@ -31,7 +31,7 @@ function MainMessagesScreen({ navigation, route }) {
   const chat = route.params?.item;
   const DATA_MESSAGES = _.sortBy(
     MESSAGES.items.filter((mess) => mess.chatId === chat.id),
-    'createdAt',
+    "createdAt",
   ).reverse();
 
   //

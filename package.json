@@ -7,7 +7,8 @@
     "web": "expo start --web",
     "eject": "expo eject",
     "test": "jest",
-    "storybook": "start-storybook -p 7007"
+    "storybook": "start-storybook -p 7007",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@expo/vector-icons": "^10.2.1",
@@ -43,6 +44,7 @@
   },
   "devDependencies": {
     "@babel/core": "~7.9.0",
+    "prettier": "2.2.1",
     "@storybook/addon-actions": "^6.0.28",
     "@storybook/addon-knobs": "^6.0.28",
     "@storybook/addon-links": "^5.3",

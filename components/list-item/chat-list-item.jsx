@@ -1,10 +1,10 @@
-import React, { useCallback, useEffect, memo } from 'react';
-import { StyleSheet, TouchableHighlight } from 'react-native';
-import { useTheme } from '@react-navigation/native';
-import { Text } from '@app/components/text';
-import { View } from '@app/components/view';
-import Image from '@app/components/image/image';
-import PropTypes from 'prop-types';
+import React, { useCallback, useEffect, memo } from "react";
+import { StyleSheet, TouchableHighlight } from "react-native";
+import { useTheme } from "@react-navigation/native";
+import { Text } from "@app/components/text";
+import { View } from "@app/components/view";
+import Image from "@app/components/image/image";
+import PropTypes from "prop-types";
 
 function ChatListItem({ id, image, chatName, lastMessage, isMute, unreadCount, onPress }) {
   const theme = useTheme();
@@ -34,14 +34,14 @@ export default memo(ChatListItem);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   imageBox: {
     paddingVertical: 8,
     paddingHorizontal: 10,
     // width: 60,
     // height: 60,
-    alignItems: 'center',
+    alignItems: "center",
   },
   image: {
     width: 60,
@@ -50,6 +50,6 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
 });

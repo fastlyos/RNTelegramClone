@@ -1,11 +1,11 @@
-import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import randomString from 'random-string';
-import PropTypes from 'prop-types';
-import { iOSColors } from 'react-native-typography';
+import React from "react";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import randomString from "random-string";
+import PropTypes from "prop-types";
+import { iOSColors } from "react-native-typography";
 
 export default function ExampleScreen({ navigation }) {
-  const goto = () => navigation && navigation.navigate('NewContact');
+  const goto = () => navigation && navigation.navigate("NewContact");
   return (
     <View style={styles.container}>
       <View style={styles.content}>
@@ -26,8 +26,8 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   button: {
     padding: 16,
