@@ -18,27 +18,29 @@ function CommonListItem({ title, left, right, onPress }) {
     <TouchableHighlight onPress={onPress}>
       <View style={styles.container}>
         {/* left */}
-        {!invisibleLeft && (
-          <View style={styles.leftItem}>
-            {!!icon ? <Image source={icon} /> : <View style={[styles.tempIcon, { backgroundColor: iconBackgroundColor }]} />}
-          </View>
-        )}
+        <View style={styles.leftItem}>
+          {!invisibleLeft && (
+            <>{!!icon ? <Image source={icon} /> : <View style={[styles.tempIcon, { backgroundColor: iconBackgroundColor }]} />}</>
+          )}
+        </View>
         {/* content */}
         <View style={styles.body}>
           <Text type="body">{title}</Text>
         </View>
         {/* right */}
-        {!invisibleRight && !isCustomComponent && (
-          <View style={styles.rightItem}>
-            <View style={isRoundText && styles.rightTextView}>
-              <Text type="body" color={isRoundText ? 'white' : 'gray'}>
-                {rightText}
-              </Text>
-            </View>
-            {!hideChevronRight && <Entypo name="chevron-right" size={24} color="rgb(172,170,176)" />}
-          </View>
-        )}
-        {isCustomComponent && <RightComponent />}
+        <View style={styles.rightItem}>
+          {!invisibleRight && !isCustomComponent && (
+            <>
+              <View style={isRoundText && styles.rightTextView}>
+                <Text type="body" color={isRoundText ? 'white' : 'gray'}>
+                  {rightText}
+                </Text>
+              </View>
+              {!hideChevronRight && <Entypo name="chevron-right" size={24} color="rgb(172,170,176)" />}
+            </>
+          )}
+          {isCustomComponent && <RightComponent />}
+        </View>
       </View>
     </TouchableHighlight>
   );
@@ -69,14 +71,14 @@ const createStyles = ({ theme }) =>
       alignItems: 'center',
       flexDirection: 'row',
       paddingVertical: 8,
-      paddingHorizontal: 2,
+      paddingHorizontal: 4,
     },
     tempIcon: {
       height: 30,
       width: 30,
     },
     leftItem: {
-      paddingHorizontal: 16,
+      paddingHorizontal: 12,
     },
     body: {
       flex: 1,

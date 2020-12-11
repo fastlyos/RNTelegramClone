@@ -16,7 +16,6 @@ export default function MainSettingScreen({ navigation }) {
       <View style={styles.content}>
         <SectionList
           sections={settingList}
-          ListHeaderComponent={() => <></>}
           // sections={() => <></>}
           keyExtractor={(item, index) => item + index}
           renderItem={({ item }) => <CommonListItem {...item} onPress={() => item.onPress && item.onPress({ navigation })} />}
