@@ -1,5 +1,22 @@
 import faker from "faker";
 
+// STRUCTURE
+const structure = {
+  left: {
+    invisible: false,
+    icon: "",
+    iconBackgroundColor: "rgb(239, 122, 9)",
+  },
+  title: "title",
+  right: {
+    invisible: false,
+    hideChevronRight: false,
+    text: "",
+    isRoundText: true,
+  },
+  footerTitle: "footerTitle",
+};
+
 export const settingList = [
   {
     title: "Group 1",
@@ -38,6 +55,7 @@ export const settingList = [
         },
         title: "Chat Folders",
         right: {},
+        onPress: ({ navigation }) => navigation && navigation.navigate("FoldersScreen"),
       },
     ],
   },
@@ -144,22 +162,24 @@ export const recentCalls = [
         },
       },
     ],
-    footerTitle: "",
+    footerTitle: "A call icon will appear in the tab bar",
   },
 ];
 
-//
-const structure = {
-  left: {
-    invisible: false,
-    icon: "",
-    iconBackgroundColor: "rgb(239, 122, 9)",
+export const chatFolders = [
+  {
+    title: "FOLDERS",
+    data: [
+      {
+        left: {
+          invisible: true,
+        },
+        title: "Create New Folder",
+        right: {
+          invisible: true,
+        },
+      },
+    ],
+    footerTitle: "Tap 'Edit' to change the order or delete folders.",
   },
-  title: "title",
-  right: {
-    invisible: false,
-    hideChevronRight: false,
-    text: "",
-    isRoundText: true,
-  },
-};
+];

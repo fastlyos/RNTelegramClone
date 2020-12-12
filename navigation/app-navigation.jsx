@@ -15,7 +15,9 @@ import BottomTabNavigator from "./bottom-tab-navigator";
 import LinkingConfiguration from "./linking-configuration";
 import NotFoundScreen from "@app/screens/not-found-screen";
 import OtherScreen from "@app/screens/other-screen";
+// personal
 import RecentCallScreen from "@app/screens/settings/personal/recent-call-screen";
+import FoldersScreen from "@app/screens/settings/personal/folders-screen";
 import MainMessagesScreen from "@app/screens/chats/main-messages-screen";
 
 export default function AppNavigation({ colorScheme }) {
@@ -52,6 +54,7 @@ function RootNavigator() {
       {/* settings */}
       {/* Personal */}
       <Stack.Screen name="RecentCallScreen" component={RecentCallScreen} />
+      <Stack.Screen name="FoldersScreen" component={FoldersScreen} options={{ title: "Folders" }} />
 
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: "Oops!" }} />
     </Stack.Navigator>

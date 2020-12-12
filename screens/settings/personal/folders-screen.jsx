@@ -3,7 +3,7 @@ import { StyleSheet, View, TouchableOpacity, SectionList, Switch } from "react-n
 import { useTheme, useNavigation } from "@react-navigation/native";
 import PropTypes from "prop-types";
 import { iOSColors } from "react-native-typography";
-import { recentCalls } from "@app/constants/schema";
+import { chatFolders } from "@app/constants/schema";
 import { CommonListItem, Divider, Text } from "@app/components";
 
 function SwitchComponent() {
@@ -11,19 +11,7 @@ function SwitchComponent() {
   return <Switch value={value} onValueChange={setValue} />;
 }
 
-const SECTIONLIST_DATA = recentCalls.map((s) => ({
-  ...s,
-  data: s.data.map((i) => ({
-    ...i,
-    right: {
-      ...i.right,
-      isCustomComponent: true,
-      component: memo(SwitchComponent),
-    },
-  })),
-}));
-
-function RecentCallScreen({}) {
+function FoldersScreen({}) {
   const navigation = useNavigation();
   // const goto = () => navigation && navigation.navigate('');
   const theme = useTheme();
@@ -39,19 +27,20 @@ function RecentCallScreen({}) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.content}>
-        <Text type="body">Your recent calls will appear here</Text>
+      <View style={styles.header}>
+        <Text type="footnote" style={{ textAlign: "center" }}>
+          Create folders for different groups of chats and quickly switch between them.
+        </Text>
       </View>
       <SectionList
-        sections={SECTIONLIST_DATA}
+        sections={chatFolders}
         keyExtractor={(item) => item.id}
-        contentContainerStyle={styles.flatlistContent}
-        // ItemSeparatorComponent={() => <Divider />}
+        contentContainerStyle={styles.contentList}
         SectionSeparatorComponent={() => <Divider />}
         ListHeaderComponent={() => <></>}
         renderSectionHeader={({ section: { title } }) => (
-          <View style={styles.header} backgroundColor="card">
-            {/* <Text type="footnoteEmphasized">{title}</Text> */}
+          <View style={styles.headerList} backgroundColor="card">
+            <Text type="footnoteEmphasized">{title}</Text>
           </View>
         )}
         renderItem={({ item, index }) => <CommonListItem {...item} onPress={() => item.onPress && item.onPress({ navigation })} />}
@@ -65,9 +54,9 @@ function RecentCallScreen({}) {
   );
 }
 
-RecentCallScreen.propTypes = {};
-RecentCallScreen.defaultProps = {};
-export default memo(RecentCallScreen);
+FoldersScreen.propTypes = {};
+FoldersScreen.defaultProps = {};
+export default memo(FoldersScreen);
 
 const createStyles = ({ theme }) => {
   const { dimemsions = {} } = theme;
@@ -77,31 +66,23 @@ const createStyles = ({ theme }) => {
       flex: 1,
       backgroundColor: theme.colors.card,
     },
-    content: {
-      position: "absolute",
-      top: 0,
-      left: 0,
-      width: width,
-      height: height,
-      justifyContent: "center",
+    header: {
+      // justifyContent: "center",
       alignItems: "center",
+      paddingHorizontal: 30,
     },
-    flatlistContent: {
+    headerList: {
+      paddingHorizontal: 20,
+    },
+    contentList: {
       marginVertical: 20,
-      // ...theme.applicationStyles.divider,
-      // borderWidth: 1,
-      // borderColor: theme.colors.border,
     },
     columnWrapperStyle: {
       ...theme.applicationStyles.divider,
     },
     footerView: {
       paddingVertical: 5,
-      paddingHorizontal: 10
-    }
-    // button: {
-    //   padding: 16,
-    //   backgroundColor: iOSColors.purple,
-    // },
+      paddingHorizontal: 10,
+    },
   });
 };
