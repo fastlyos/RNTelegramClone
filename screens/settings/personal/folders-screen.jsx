@@ -3,7 +3,7 @@ import { StyleSheet, View, TouchableOpacity, SectionList, Switch } from "react-n
 import { useTheme, useNavigation } from "@react-navigation/native";
 import PropTypes from "prop-types";
 import { iOSColors } from "react-native-typography";
-import { chatFolders } from "@app/constants/schema";
+import { chatFolders } from "./schema";
 import { CommonListItem, Divider, Text } from "@app/components";
 
 function SwitchComponent() {
@@ -60,7 +60,6 @@ export default memo(FoldersScreen);
 
 const createStyles = ({ theme }) => {
   const { dimemsions = {} } = theme;
-  const { width, height } = dimemsions;
   return StyleSheet.create({
     container: {
       flex: 1,

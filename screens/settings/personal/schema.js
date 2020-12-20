@@ -17,6 +17,26 @@ const structure = {
   footerTitle: "footerTitle",
 };
 
+export const recentCalls = [
+  {
+    title: "Group 3",
+    data: [
+      {
+        id: faker.random.uuid(),
+        left: {
+          invisible: true,
+        },
+        title: "Show Calls Tab",
+        right: {
+          hideChevronRight: true,
+          isCustomComponent: true,
+        },
+      },
+    ],
+    footerTitle: "A call icon will appear in the tab bar",
+  },
+];
+
 export const chatFolders = [
   {
     title: "FOLDERS",

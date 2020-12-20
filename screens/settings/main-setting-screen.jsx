@@ -4,7 +4,7 @@ import { useHeaderHeight } from "@react-navigation/stack";
 import { useTheme } from "@react-navigation/native";
 import PropTypes from "prop-types";
 import { iOSColors } from "react-native-typography";
-import { settingList } from "@app/constants/schema";
+import { settingList } from "./schema";
 import { CommonListItem, Divider } from "@app/components";
 
 export default function MainSettingScreen({ navigation }) {

@@ -25,7 +25,7 @@ export const notificationList = [
   {
     id: faker.random.uuid(),
     title: "MESSAGE NOTIFICATIONS",
-    footerTitle: "Set custom notifications for specific users",
+    footerTitle: ["Set custom notifications for specific users"],
     data: [
       {
         id: faker.random.uuid(),
@@ -78,7 +78,7 @@ export const notificationList = [
   {
     id: faker.random.uuid(),
     title: "GROUP NOTIFICATIONS",
-    footerTitle: "Set custom notifications for specific groups",
+    footerTitle: ["Set custom notifications for specific groups"],
     data: [
       {
         id: faker.random.uuid(),
@@ -131,7 +131,7 @@ export const notificationList = [
   {
     id: faker.random.uuid(),
     title: "CHANNEL NOTIFICATIONS",
-    footerTitle: "Set custom notifications for specific channels",
+    footerTitle: ["Set custom notifications for specific channels"],
     data: [
       {
         id: faker.random.uuid(),
@@ -226,7 +226,7 @@ export const notificationList = [
   },
   {
     id: faker.random.uuid(),
-    footerTitle: `Display names in notifications when the device is locked. To disable, make sure that "Show Previews" is also set to "When Unlocked" or "Never" in iOS Settings > Notifications.`,
+    footerTitle: [`Display names in notifications when the device is locked. To disable, make sure that "Show Previews" is also set to "When Unlocked" or "Never" in iOS Settings > Notifications.`],
     data: [
       {
         id: faker.random.uuid(),
@@ -245,7 +245,7 @@ export const notificationList = [
   {
     id: faker.random.uuid(),
     title: "BADGE COUNTER",
-    footerTitle: `Switch off to show the number of unread chats instead of messages`,
+    footerTitle: [`Switch off to show the number of unread chats instead of messages`],
     data: [
       {
         id: faker.random.uuid(),
@@ -276,7 +276,7 @@ export const notificationList = [
   {
     id: faker.random.uuid(),
     title: "",
-    footerTitle: `Receive push notifications when one of your contacts becomes available on Telegram`,
+    footerTitle: [`Receive push notifications when one of your contacts becomes available on Telegram`],
     data: [
       {
         id: faker.random.uuid(),
@@ -295,7 +295,7 @@ export const notificationList = [
   {
     id: faker.random.uuid(),
     title: "",
-    footerTitle: `Undo all custom notification settings for all your contacts, groups and channels`,
+    footerTitle: [`Undo all custom notification settings for all your contacts, groups and channels`],
     data: [
       {
         id: faker.random.uuid(),
