@@ -1,6 +1,12 @@
 import _ from "lodash";
-import React, { memo, useCallback, useMemo, useState, useEffect } from "react";
+import React, { memo, useCallback, useMemo, useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
+import * as MediaLibrary from "expo-media-library";
+import * as FileSystem from "expo-file-system";
+import * as ImagePicker from "expo-image-picker";
+import Constants from "expo-constants";
+import { Camera } from "expo-camera";
+
 // components
 import {
   StyleSheet,
@@ -12,7 +18,12 @@ import {
   KeyboardAvoidingView,
   Keyboard,
   TouchableWithoutFeedback,
+  TouchableHighlight,
+  ImageBackground,
+  TouchableOpacity,
   useWindowDimensions,
+  useColorScheme,
+  Image,
 } from "react-native";
 import * as Animatable from "react-native-animatable";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -28,6 +39,7 @@ import { iOSColors } from "react-native-typography";
 import CHATS from "@app/fixtures/chats";
 import MESSAGES from "@app/fixtures/messages";
 import CONTACTS from "@app/fixtures/contacts";
+import { STICKERS } from "./schema";
 
 // containers
 import AttactmentBottomSheet from "./containers/attactment-bottom-sheet";
@@ -71,16 +83,70 @@ function BottomStickers() {
 }
 
 function MainMessagesScreen({ navigation, route }) {
+  const sheetRef = useRef(null);
   const theme = useTheme();
   const styles = createStyles({ theme });
+  const bottomStyles = createBottomStyles({ theme });
+
   const chat = route.params?.item;
   const DATA_MESSAGES = _.sortBy(
     MESSAGES.items.filter((mess) => mess.chatId === chat.id),
     "createdAt",
   ).reverse();
 
-  //
-  const goto = (routName) => () => navigation && navigation.navigate(routName);
+  // states
+  const fall = useRef(new Animated.Value(1)).current;
+  const [isVisibleStickers, setVisibleStickers] = useState(false);
+  const [isVisibleAttachments, setVisibleAttachments] = useState(true);
+  const [assetsList, setAssetsList] = useState([]);
+
+  // callbacks
+  const goto = useCallback((routName) => () => navigation && navigation.navigate(routName), [navigation]);
+  const setCloseSheet = () => sheetRef.current?.snapTo(1);
+  const setOpenSheet = () => sheetRef.current?.snapTo(0);
+  const handlePressStickers = useCallback(() => {
+    Keyboard.dismiss();
+    setVisibleStickers(true);
+  }, []);
+  const handleFocusMessageTyping = useCallback(() => {
+    setVisibleStickers(false);
+  }, []);
+  const handlePressAtachment = useCallback(() => {
+    Keyboard.dismiss();
+    setVisibleStickers(false);
+    setOpenSheet();
+  }, []);
+  const handlePressVoice = useCallback(() => {
+    Keyboard.dismiss();
+  }, []);
+
+  // effects
+  // useEffect(() => {
+  //   Keyboard.addListener("keyboardDidShow", (e) => {
+  //     // console.log(e.endCoordinates.height);
+  //   });
+  // }, []);
+
+  useEffect(() => {
+    (async () => {
+      const { granted } = await MediaLibrary.requestPermissionsAsync();
+      if (granted) {
+        const response = await MediaLibrary.getAssetsAsync({ mediaType: MediaLibrary.MediaType.photo });
+        const { assets = [] } = response;
+        assets.sort((a, b) => b.creationTime - a.creationTime);
+        setAssetsList(assets);
+      }
+    })();
+    return () => {};
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      const { status } = await Camera.requestPermissionsAsync();
+    })();
+  }, []);
+
+  useEffect(() => {}, []);
 
   return (
     <>

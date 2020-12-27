@@ -10,6 +10,9 @@ export default {
     border: iOSColors.lightGray,
     backgroundCenter: iOSColors.customGray,
     iOSColors,
+    typography: {
+      primary: "",
+    },
   },
   dark: {
     // primary: 'rgb(255, 45, 85)',
@@ -20,5 +23,9 @@ export default {
     backgroundCenter: iOSColors.customGray,
     iOSColors,
     // notification: 'rgb(255, 69, 58)',
+
+    typography: {
+      primary: "",
+    },
   },
 };

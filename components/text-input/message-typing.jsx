@@ -1,7 +1,7 @@
 import React, { memo } from "react";
 import PropTypes from "prop-types";
 // components
-import { StyleSheet, Text, View, TextInput, Image } from "react-native";
+import { StyleSheet, Text, View, TextInput, Image, TouchableOpacity } from "react-native";
 import { Entypo, SimpleLineIcons, MaterialCommunityIcons } from "@expo/vector-icons";
 import Svg, { Defs, ClipPath, Path, G } from "react-native-svg";
 // import TextInput from './text-input';
@@ -10,28 +10,43 @@ import Svg, { Defs, ClipPath, Path, G } from "react-native-svg";
 import { useTheme } from "@react-navigation/native";
 import { iOSColors, iOSUIKit } from "react-native-typography";
 
-function MessageTyping(props) {
+function MessageTyping({ onPressVoice, onPressStickers, onPressAtachment, onFocus }) {
   const theme = useTheme();
   const styles = createStyles({ theme });
   return (
     <View style={styles.container}>
       <View style={styles.content}>
         <View style={styles.itemLeft}>
-          <Entypo name="attachment" size={24} color="black" />
+          <TouchableOpacity onPress={onPressAtachment}>
+            <Entypo name="attachment" size={24} color="black" />
+          </TouchableOpacity>
         </View>
         <View style={styles.inputBox}>
-          <TextInput placeholder="Message" style={[iOSUIKit.body, styles.textinput]} />
-          <MaterialCommunityIcons name="sticker" size={24} color="black" style={styles.sticker} />
+          <TextInput onFocus={onFocus} placeholder="Message" style={[iOSUIKit.body, styles.textinput]} />
+          <TouchableOpacity onPress={onPressStickers}>
+            <MaterialCommunityIcons name="sticker" size={24} color="black" style={styles.sticker} />
+          </TouchableOpacity>
         </View>
         <View style={styles.itemRight}>
-          <MaterialCommunityIcons name="microphone-outline" size={24} color="black" />
+          <TouchableOpacity onPress={onPressVoice}>
+            <MaterialCommunityIcons name="microphone-outline" size={24} color="black" />
+          </TouchableOpacity>
         </View>
       </View>
     </View>
   );
 }
 
-MessageTyping.propTypes = {};
+MessageTyping.propTypes = {
+  onPressStickers: PropTypes.func.isRequired,
+  onPressVoice: PropTypes.func.isRequired,
+  onPressAtachment: PropTypes.func.isRequired,
+};
+MessageTyping.defaultProps = {
+  onPressStickers: () => {},
+  onPressVoice: () => {},
+  onPressAtachment: () => {},
+};
 export default MessageTyping;
 
 const createStyles = ({ theme }) => {
