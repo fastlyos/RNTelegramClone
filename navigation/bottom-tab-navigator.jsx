@@ -4,14 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { StyleSheet } from "react-native";
 import { BlurView } from "expo-blur";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import {
-  createStackNavigator,
-  HeaderStyleInterpolators,
-  CardStyleInterpolators,
-  TransitionSpecs,
-  useHeaderHeight,
-  HeaderTitle,
-} from "@react-navigation/stack";
+import { createStackNavigator, HeaderStyleInterpolators, CardStyleInterpolators, TransitionSpecs, useHeaderHeight, HeaderTitle } from "@react-navigation/stack";
 import useColorScheme from "@app/hooks/useColorScheme";
 
 // components
