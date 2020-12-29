@@ -1,7 +1,6 @@
 import React, { memo } from "react";
 import moment from "moment";
 import { StyleSheet, View, Animated } from "react-native";
-import { Text } from "../text";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import PropTypes from "prop-types";
 import { useTheme } from "@react-navigation/native";
@@ -9,6 +8,8 @@ import { iOSColors } from "react-native-typography";
 import CURRENT_USER from "@app/fixtures/currentUser";
 import { RectButton } from "react-native-gesture-handler";
 import Swipeable from "react-native-gesture-handler/Swipeable";
+//
+import { Text } from "../text";
 
 const renderLeftActions = (progress, dragX) => {
   // const theme = useTheme();

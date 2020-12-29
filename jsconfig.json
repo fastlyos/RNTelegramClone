@@ -7,7 +7,8 @@
     "moduleResolution": "node",
     "baseUrl": ".",
     "paths": {
-      "@app/*": ["./*"] // alias similar to defined in .babelrc
+      "@app/*": ["./*"], // alias similar to defined in .babelrc,
+      "@assets/*": ["./assets/*"]
     },
     "sourceMap": true,
     "target": "ES6"

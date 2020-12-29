@@ -1,10 +1,10 @@
-import "./ReactotronConfig";
-import { StatusBar } from "expo-status-bar";
-import { SafeAreaProvider } from "react-native-safe-area-context";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import useColorScheme from "./hooks/useColorScheme";
+import { StyleSheet, Text, View, StatusBar } from "react-native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import AppNavigation from "@app/navigation/app-navigation";
+
+import "./ReactotronConfig";
+import useColorScheme from "./hooks/useColorScheme";
 import useCachedResources from "./hooks/useCachedResources";
 
 function App() {
@@ -12,8 +12,8 @@ function App() {
   // const isLoadingComplete = useCachedResources();
   return (
     <SafeAreaProvider>
+      <StatusBar barStyle="default" />
       <AppNavigation colorScheme={colorScheme} />
-      <StatusBar style="auto" />
     </SafeAreaProvider>
   );
 }

@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 export default function MessageDate() {
   return (
     <View>
-      <Text></Text>
+      <Text>123</Text>
     </View>
   );
 }

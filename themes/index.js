@@ -1,6 +1,7 @@
-import colors from "./colors";
 import { Platform, Dimensions } from "react-native";
 import { DefaultTheme, DarkTheme } from "@react-navigation/native";
+import colors from "./colors";
+
 const { width, height, fontScale, scale } = Dimensions.get("screen");
 
 export default {

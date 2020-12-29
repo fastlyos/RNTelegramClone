@@ -8,6 +8,7 @@ export default function Image(props) {
   return <RNImage {...props} />;
 }
 
-Image.proptypes = {};
+Image.propTypes = {};
+Image.defaultProps = {};
 
 const styles = StyleSheet.create({});

@@ -2,6 +2,7 @@ import _ from "lodash";
 import faker from "faker";
 import contacts from "./contacts";
 import currentUser from "./currentUser";
+
 const byIds = {};
 
 export const GROUP_MEMBER_LENGTH = 4;
@@ -27,10 +28,12 @@ const groups = groupMembers.map((grMembers) => {
   };
 });
 
-groups.forEach((group) => (byIds[group.id] = group));
+groups.forEach((group) => {
+  byIds[group.id] = group;
+});
 
 export default {
-  byIds: byIds,
+  byIds,
   allIds: Object.keys(byIds),
   items: groups,
 };

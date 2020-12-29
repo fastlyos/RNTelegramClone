@@ -1,5 +1,5 @@
 import React from "react";
-import Proptypes from "prop-types";
+import PropTypes from "prop-types";
 import { StyleSheet, Text as RNText } from "react-native";
 import { iOSColors, iOSUIKit } from "react-native-typography";
 
@@ -23,7 +23,7 @@ const TYPES = {
 };
 
 function Text({ type, color, children, style, ...otherProps }) {
-  const typeStyle = TYPES[type] || iOSUIKit.footnote;
+  const typeStyle = TYPES[type];
   const colorStyle = { color: COLORS[color] };
   return (
     <RNText allowFontScaling style={[typeStyle, colorStyle, style]} {...otherProps}>
@@ -32,9 +32,14 @@ function Text({ type, color, children, style, ...otherProps }) {
   );
 }
 
-Text.proptypes = {
-  type: Proptypes.string.isRequired,
-  color: Proptypes.string.isRequired,
+Text.propTypes = {
+  color: PropTypes.string,
+  type: PropTypes.string,
+};
+
+Text.defaultProps = {
+  color: undefined,
+  type: "footnote",
 };
 
 export default Text;

@@ -1,8 +1,8 @@
 import React, { memo } from "react";
-import { StyleSheet, useWindowDimensions } from "react-native";
-import View from "./view";
-import { useTheme } from "@react-navigation/native";
 import PropTypes from "prop-types";
+import { StyleSheet, useWindowDimensions } from "react-native";
+import { useTheme } from "@react-navigation/native";
+import View from "./view";
 
 function Divider({ style }) {
   const theme = useTheme();

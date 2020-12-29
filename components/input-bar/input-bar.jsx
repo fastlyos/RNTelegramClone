@@ -11,5 +11,6 @@ export default function InputBar() {
 }
 
 InputBar.propTypes = {};
+InputBar.defaultProps = {};
 
 const styles = StyleSheet.create({});

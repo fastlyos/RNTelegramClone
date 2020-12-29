@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback, forwardRef, useRef, memo } from "react";
 import { StyleSheet, Text, View, Animated } from "react-native";
-import SearchBar from "../search-bar/search-bar";
 import { useTheme } from "@react-navigation/native";
 import PropTypes from "prop-types";
+import SearchBar from "../search-bar/search-bar";
 
 const ChatHeader = memo(({ searchBarRef }) => {
   //
@@ -74,7 +74,7 @@ const createAnimatedStyles = ({ headerHeight = 0, marginTop = 0 }) => ({
     height: headerHeight,
   },
   padding: {
-    marginTop: marginTop,
+    marginTop,
   },
 });
 
@@ -88,7 +88,6 @@ const createStyles = ({ theme }) =>
       flex: 1,
     },
     borderHeader: {
-      shadowOffset: 0.85,
       shadowRadius: 0,
       shadowOffset: {
         width: 0,

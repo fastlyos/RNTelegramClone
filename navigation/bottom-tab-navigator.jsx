@@ -1,11 +1,13 @@
 import React from "react";
 import faker from "faker";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, FontAwesome } from "@expo/vector-icons";
 import { StyleSheet } from "react-native";
 import { BlurView } from "expo-blur";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator, HeaderStyleInterpolators, CardStyleInterpolators, TransitionSpecs, useHeaderHeight, HeaderTitle } from "@react-navigation/stack";
 import useColorScheme from "@app/hooks/useColorScheme";
+// styles
+import Colors from "@app/constants/colors";
 
 // components
 import { Image, SearchListHeader } from "@app/components";
@@ -16,8 +18,6 @@ import MainContactScreen from "@app/screens/contacts/main-contact-screen";
 // import NewContactScreen from '@app/screens/contacts/new-contact-screen';
 import MainChatScreen from "@app/screens/chats/main-chat-screen";
 import MainSettingScreen from "@app/screens/settings/main-setting-screen";
-// styles
-import Colors from "@app/constants/Colors";
 
 function TabBarIcon({ name, color, reverse }) {
   return <Ionicons size={32} style={{ marginBottom: -3, transform: reverse && [{ rotateY: "180deg" }] }} name={name} color={color} />;
@@ -122,7 +122,7 @@ export default function BottomTabNavigator() {
         component={TabContactNavigator}
         options={{
           title: "Contacts",
-          tabBarIcon: ({ color }) => <TabBarIcon name="md-contact" color={color} />,
+          tabBarIcon: ({ color }) => <FontAwesome name="user-circle" size={24} color={color} />,
         }}
       />
       <BottomTab.Screen

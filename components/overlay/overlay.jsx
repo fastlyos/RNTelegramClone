@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from "react-native";
 export default function Overlay() {
   return (
     <View>
-      <Text></Text>
+      <Text>123</Text>
     </View>
   );
 }

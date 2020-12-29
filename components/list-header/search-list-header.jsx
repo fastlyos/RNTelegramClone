@@ -1,8 +1,8 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { StyleSheet, Text, View, SafeAreaView } from "react-native";
 import { HeaderBackButton, HeaderTitle, useHeaderHeight } from "@react-navigation/stack";
 import SearchBar from "../search-bar/search-bar";
-import PropTypes from "prop-types";
 
 function SearchListHeader(props) {
   return (

@@ -11,13 +11,15 @@ const contacts = new Array(100).fill(1).map((i) => {
     avatar: faker.image.avatar(),
     firstName: faker.name.firstName(),
     lastName: faker.name.lastName(),
-    status: status,
+    status,
     lastSeen: faker.date.recent(),
   };
   return contact;
 });
 
-contacts.forEach((contact) => (byIds[contact.id] = contact));
+contacts.forEach((contact) => {
+  byIds[contact.id] = contact;
+});
 const groupByFirstName = _.groupBy(contacts, (contact) => _.head(contact.firstName));
 const groupByContacts = Object.keys(groupByFirstName).map((key) => ({
   title: key,
@@ -25,7 +27,7 @@ const groupByContacts = Object.keys(groupByFirstName).map((key) => ({
 }));
 
 export default {
-  byIds: byIds,
+  byIds,
   allIds: Object.keys(byIds),
   items: contacts,
   groupByContacts: _.sortBy(groupByContacts, (i) => i.title),

@@ -3,6 +3,7 @@ import faker from "faker";
 import contacts from "./contacts";
 import currentUser from "./currentUser";
 import groups from "./groups";
+
 const byIds = {};
 
 const CHAT_TYPES = ["group", "direct", "other"];
@@ -38,10 +39,13 @@ const groupChats = groups.items.map((group) => ({
 }));
 
 const chats = groupChats.concat(directChats);
-chats.forEach((chat) => (byIds[chat.id] = chat));
+
+chats.forEach((chat) => {
+  byIds[chat.id] = chat;
+});
 
 export default {
-  byIds: byIds,
+  byIds,
   allIds: Object.keys(byIds),
   items: chats,
 };

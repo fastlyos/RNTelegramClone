@@ -4,12 +4,8 @@ module.exports = {
     es6: true,
     node: true,
   },
-  parser: "babel-eslint",
+  parser: "@babel/eslint-parser",
   extends: ["plugin:react/recommended", "plugin:react-hooks/recommended", "airbnb"],
-  globals: {
-    Atomics: "readonly",
-    SharedArrayBuffer: "readonly",
-  },
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -20,6 +16,7 @@ module.exports = {
   plugins: ["react"],
   rules: {
     eqeqeq: [2, "smart"],
+    quotes: ["error", "double"],
     "no-unused-vars": "off",
     "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx"] }],
     "arrow-body-style": "off",
@@ -32,14 +29,36 @@ module.exports = {
     "no-param-reassign": "off",
     "no-console": "off",
     "no-alert": "off",
-    "import/no-named-as-default-member": "off",
-    "import/no-named-as-default": "off",
+    "import/no-named-as-default-member": ["off"],
+    "import/no-named-as-default": ["off"],
+    "import/prefer-default-export": ["off"],
     "consistent-return": "off",
     "max-len": [2, 300, 4],
+    "object-curly-newline": "off",
+    "react/jsx-boolean-value": "off",
+    "implicit-arrow-linebreak": ["off"],
+    "import/no-unresolved": [2, { ignore: [".png$", ".webp$", ".jpg$"] }],
+    "react/jsx-closing-bracket-location": ["off"],
+    "react/jsx-curly-brace-presence": ["off"],
+    "no-plusplus": ["error", { allowForLoopAfterthoughts: true }],
+    "prefer-destructuring": ["error", { object: true, array: false }],
   },
   globals: {
     arguments: true,
     __DEV__: true,
-    reactotron,
+    reactotron: true,
+    Atomics: "readonly",
+    SharedArrayBuffer: "readonly",
+  },
+  settings: {
+    "import/resolver": {
+      alias: {
+        map: [
+          ["@app/*", "./"],
+          ["@assets/*", "./assets/"],
+        ],
+        extensions: [".ts", ".js", ".jsx", ".json", ".png", ".svg"],
+      },
+    },
   },
 };

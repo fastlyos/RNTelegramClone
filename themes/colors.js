@@ -1,4 +1,5 @@
 import { iOSColors } from "react-native-typography";
+
 export default {
   light: {
     // primary: 'rgb(255, 45, 85)',

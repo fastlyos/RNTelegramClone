@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from "react-native";
 export default function IntroScreen() {
   return (
     <View>
-      <Text></Text>
+      <Text>intro</Text>
     </View>
   );
 }

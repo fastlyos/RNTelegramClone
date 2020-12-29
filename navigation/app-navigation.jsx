@@ -11,11 +11,11 @@ import {
 } from "@react-navigation/stack";
 import themes from "@app/themes";
 
-import BottomTabNavigator from "./bottom-tab-navigator";
-import LinkingConfiguration from "./linking-configuration";
 import NotFoundScreen from "@app/screens/not-found-screen";
 import OtherScreen from "@app/screens/other-screen";
 import MainMessagesScreen from "@app/screens/chats/main-messages-screen";
+import BottomTabNavigator from "./bottom-tab-navigator";
+import LinkingConfiguration from "./linking-configuration";
 
 export default function AppNavigation({ colorScheme }) {
   return (
