@@ -1,6 +1,6 @@
-import React, { memo } from "react";
+import React, { memo, useEffect, useRef } from "react";
 import moment from "moment";
-import { StyleSheet, View, Animated } from "react-native";
+import { StyleSheet, View, Animated, Image } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import PropTypes from "prop-types";
 import { useTheme } from "@react-navigation/native";
@@ -10,14 +10,17 @@ import { RectButton } from "react-native-gesture-handler";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 //
 import { Text } from "../text";
+// import A from "@assets/images/main/Images.xcassets/Chat/Message/ReplyCount.imageset/replies.svg";
 
 const renderLeftActions = (progress, dragX) => {
   // const theme = useTheme();
   const styles = createStyles({});
+  const currentuser = CURRENT_USER;
   const trans = dragX.interpolate({
-    inputRange: [0, 50, 100, 101],
-    outputRange: [-20, 0, 0, 1],
+    inputRange: [0, 50, 100, 101, 200],
+    outputRange: [-5, 0, 0, 1, 1],
   });
+
   return (
     <RectButton style={styles.leftAction} onPress={() => {}}>
       <Animated.Text
@@ -33,6 +36,7 @@ const renderLeftActions = (progress, dragX) => {
   );
 };
 
+//
 function MessageListItem({ data }) {
   const theme = useTheme();
   const currentuser = CURRENT_USER;
@@ -44,7 +48,7 @@ function MessageListItem({ data }) {
   // style
   const styles = createStyles({ theme, isRightContent: isCurentUser });
   return (
-    <Swipeable renderRightActions={renderLeftActions}>
+    <Swipeable renderRightActions={renderLeftActions} overshootRight={false}>
       <View style={styles.container}>
         <View style={styles.content}>
           <View style={styles.textBodyBox}>

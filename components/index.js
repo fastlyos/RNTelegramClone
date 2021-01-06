@@ -7,3 +7,4 @@ export * from "./list-item";
 export * from "./list-header";
 export * from "./view";
 export * from "./text-input";
+export * from "./check-box";

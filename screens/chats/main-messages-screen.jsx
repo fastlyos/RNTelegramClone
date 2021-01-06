@@ -1,6 +1,7 @@
 import _ from "lodash";
 import React, { memo, useCallback, useMemo, useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
+import moment from "moment";
 import * as MediaLibrary from "expo-media-library";
 import * as FileSystem from "expo-file-system";
 import * as ImagePicker from "expo-image-picker";
@@ -39,10 +40,9 @@ import { iOSColors } from "react-native-typography";
 import CHATS from "@app/fixtures/chats";
 import MESSAGES from "@app/fixtures/messages";
 import CONTACTS from "@app/fixtures/contacts";
-import { STICKERS } from "./schema";
 
 // containers
-import AttactmentBottomSheet from "./containers/attactment-bottom-sheet";
+import AttachmentBottomSheet from "./containers/attachment-bottom-sheet";
 import { STICKERS } from "./schema";
 
 const keyboardVerticalOffset = Platform.OS === "ios" ? 95 : 0;
@@ -86,19 +86,20 @@ function MainMessagesScreen({ navigation, route }) {
   const sheetRef = useRef(null);
   const theme = useTheme();
   const styles = createStyles({ theme });
-  const bottomStyles = createBottomStyles({ theme });
 
   const chat = route.params?.item;
   const DATA_MESSAGES = _.sortBy(
     MESSAGES.items.filter((mess) => mess.chatId === chat.id),
     "createdAt",
   ).reverse();
+  const groups = _.groupBy(MESSAGES.items, (item) => moment(item).startOf("day").format());
 
   // states
   const fall = useRef(new Animated.Value(1)).current;
   const [isVisibleStickers, setVisibleStickers] = useState(false);
-  const [isVisibleAttachments, setVisibleAttachments] = useState(true);
+  const [isVisibleAttachments, setVisibleAttachments] = useState(false);
   const [assetsList, setAssetsList] = useState([]);
+  const [isShowReply, setIsShowReply] = useState(false);
 
   // callbacks
   const goto = useCallback((routName) => () => navigation && navigation.navigate(routName), [navigation]);
@@ -152,26 +153,61 @@ function MainMessagesScreen({ navigation, route }) {
     <>
       <SafeAreaView style={styles.container}>
         <KeyboardAvoidingView behavior="padding" style={styles.container} keyboardVerticalOffset={keyboardVerticalOffset}>
-          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-            <View style={styles.content}>
-              <FlatList
-                keyExtractor={(item) => item.id}
-                showsVerticalScrollIndicator={false}
-                inverted={true}
-                data={DATA_MESSAGES}
-                // ItemSeparatorComponent={() => <Divider />}
-                renderItem={({ item, index }) => <MessageListItem data={item} />}
-                // initialNumToRender={10}
-              />
-            </View>
-          </TouchableWithoutFeedback>
+          <View style={styles.content}>
+            <FlatList
+              keyExtractor={(item) => item.id}
+              showsVerticalScrollIndicator={false}
+              inverted={true}
+              on
+              data={DATA_MESSAGES}
+              // ItemSeparatorComponent={() => <Divider />}
+              renderItem={({ item, index }) => <MessageListItem data={item} />}
+              // initialNumToRender={10}
+            />
+            {/* Pin message */}
+            <TouchableHighlight
+              style={{
+                position: "absolute",
+                height: 50,
+                width: "100%",
+                backgroundColor: iOSColors.customGray,
+                paddingHorizontal: 10,
+                borderBottomWidth: 0.5,
+                borderBottomColor: iOSColors.lightGray2,
+              }}
+              underlayColor={theme.colors.backgroundCenter}
+              onPress={() => {}}>
+              <View style={{ flexDirection: "row" }}>
+                <View style={{ flex: 1, justifyContent: "center" }}>
+                  <Text type="footnoteEmphasized" color="blue">
+                    Pined Message
+                  </Text>
+                  <Text type="footnote" ellipsizeMode="tail" numberOfLines={1}>
+                    {DATA_MESSAGES[0].body}
+                  </Text>
+                </View>
+                <View style={{ height: 50, width: 30, backgroundColor: iOSColors.blue }} />
+              </View>
+            </TouchableHighlight>
+          </View>
           <View style={styles.bottom}>
-            <MessageTyping />
+            <MessageTyping
+              onPressVoice={handlePressVoice}
+              onPressStickers={handlePressStickers}
+              onPressAtachment={handlePressAtachment}
+              onFocus={handleFocusMessageTyping}
+              isShowReply={isShowReply}
+              setCloseReply={() => setIsShowReply(false)}
+            />
+            {isVisibleStickers && <BottomStickers />}
           </View>
         </KeyboardAvoidingView>
       </SafeAreaView>
+
+      {/* Attachment */}
       <Animated.View
-        pointerEvents="none"
+        onTouchEnd={setCloseSheet}
+        pointerEvents={isVisibleAttachments ? "auto" : "none"}
         style={[
           styles.opacityView,
           {
@@ -184,15 +220,18 @@ function MainMessagesScreen({ navigation, route }) {
       />
       <BottomSheet
         ref={sheetRef}
-        snapPoints={[430, -50]}
+        onCloseEnd={() => setVisibleAttachments(false)}
+        onOpenEnd={() => setVisibleAttachments(true)}
+        snapPoints={[420, -50]}
         initialSnap={1}
         enabledGestureInteraction
         enabledInnerScrolling
+        overdragResistanceFactor={100}
+        enabledContentTapInteraction
         enabledContentGestureInteraction
         enabledHeaderGestureInteraction
         callbackNode={fall}
-        // borderRadius={10}
-        renderContent={() => <AttactmentBottomSheet assetsList={assetsList} setCloseSheet={setCloseSheet} />}
+        renderContent={() => <AttachmentBottomSheet assetsList={assetsList} setAssetsList={setAssetsList} setCloseSheet={setCloseSheet} />}
       />
     </>
   );
