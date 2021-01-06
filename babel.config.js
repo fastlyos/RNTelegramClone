@@ -13,7 +13,6 @@ module.exports = function babelConfig(api) {
         {
           alias: {
             "@app": ".", // if app files is inside "app/" folder, replace with "./app"
-            "@assets": "./assets",
           },
         },
       ],
