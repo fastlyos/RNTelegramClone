@@ -2,7 +2,7 @@ import React, { memo } from "react";
 import PropTypes from "prop-types";
 // components
 import { StyleSheet, View, Image, TouchableOpacity } from "react-native";
-import { Text } from "@app/components";
+import { Text, TextInput } from "@app/components";
 import { Entypo, SimpleLineIcons, MaterialCommunityIcons } from "@expo/vector-icons";
 // import Svg, { Defs, ClipPath, Path, G } from "react-native-svg";
 // import colors from "@app/constants/colors";
@@ -10,8 +10,6 @@ import { Entypo, SimpleLineIcons, MaterialCommunityIcons } from "@expo/vector-ic
 // theme
 import { useTheme } from "@react-navigation/native";
 import { iOSColors, iOSUIKit } from "react-native-typography";
-
-import TextInput from "./text-input";
 
 function MessageTyping({ onPressVoice, onPressStickers, onPressAtachment, onFocus, isShowReply = false, setCloseReply }) {
   const theme = useTheme();
@@ -58,8 +56,8 @@ function MessageTyping({ onPressVoice, onPressStickers, onPressAtachment, onFocu
 }
 
 MessageTyping.propTypes = {
-  onPressStickers: PropTypes.func.isRequired,
   onPressVoice: PropTypes.func.isRequired,
+  onPressStickers: PropTypes.func.isRequired,
   onPressAtachment: PropTypes.func.isRequired,
 };
 MessageTyping.defaultProps = {

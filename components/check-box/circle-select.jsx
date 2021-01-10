@@ -1,27 +1,35 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, ViewPropTypes, TouchableOpacity } from "react-native";
 import { Text } from "../text";
 
-export default function CircleSelect({ number }) {
+const SIZE = {
+  small: { height: 25, width: 25 },
+  medium: { height: 35, width: 35 },
+};
+
+export default function CircleSelect({ number, size, style, onPress }) {
   const styles = createStyles({ number });
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={[styles.container, SIZE[size], style]} onPress={onPress} activeOpacity={1}>
       {number > 0 && (
         <Text style={styles.number} type="subheadEmphasized">
           {number}
         </Text>
       )}
-    </View>
+    </TouchableOpacity>
   );
 }
 CircleSelect.propTypes = {
-  // isSelected: PropTypes.bool.isRequired,
   number: PropTypes.number.isRequired,
+  size: PropTypes.string.isRequired,
+  style: ViewPropTypes.style,
+  onPress: PropTypes.func.isRequired,
 };
 CircleSelect.defaultProps = {
-  // isSelected: false,
   number: 0,
+  size: "small",
+  onPress: () => {},
 };
 
 const createStyles = ({ number }) =>

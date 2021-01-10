@@ -5,7 +5,9 @@ import { iOSColors, iOSUIKit } from "react-native-typography";
 
 const COLORS = {
   main: iOSColors.tealBlue,
-  blue: iOSColors.blue
+  blue: iOSColors.blue,
+  black: iOSColors.black,
+  white: iOSColors.white,
 };
 const TYPES = {
   largeTitleEmphasized: iOSUIKit.largeTitleEmphasized,

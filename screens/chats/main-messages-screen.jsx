@@ -12,6 +12,7 @@ import { Camera } from "expo-camera";
 import {
   StyleSheet,
   SafeAreaView,
+  TextInput,
   Platform,
   ScrollView,
   View,
@@ -28,14 +29,15 @@ import {
 } from "react-native";
 import * as Animatable from "react-native-animatable";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import ImageView from "@app/submodules/react-native-image-viewing/dist";
 import Animated from "react-native-reanimated";
 import BottomSheet from "reanimated-bottom-sheet";
 
-import { ContactListItem, ChatListItem, Divider, Text, MessageListItem, MessageTyping, SearchListHeader } from "@app/components";
+import { ContactListItem, ChatListItem, Divider, Text, MessageListItem, MessageTyping, SearchListHeader, CircleSelect } from "@app/components";
 
 // theme
 import { useTheme } from "@react-navigation/native";
-import { iOSColors } from "react-native-typography";
+import { iOSColors, iOSUIKit } from "react-native-typography";
 // DATA
 import CHATS from "@app/fixtures/chats";
 import MESSAGES from "@app/fixtures/messages";
@@ -100,6 +102,10 @@ function MainMessagesScreen({ navigation, route }) {
   const [isVisibleAttachments, setVisibleAttachments] = useState(false);
   const [assetsList, setAssetsList] = useState([]);
   const [isShowReply, setIsShowReply] = useState(false);
+  const [isVisibleImageViewer, setIsVisibleImageViewer] = useState(false);
+  const [imageIndex, setImageIndex] = useState(0);
+  const [selectArray, setSelectArray] = useState([]);
+  // const [viewImages, setViewImages] = useState([]);
 
   // callbacks
   const goto = useCallback((routName) => () => navigation && navigation.navigate(routName), [navigation]);
@@ -119,7 +125,32 @@ function MainMessagesScreen({ navigation, route }) {
   }, []);
   const handlePressVoice = useCallback(() => {
     Keyboard.dismiss();
+    setIsVisible(true);
   }, []);
+  const handlePressItemImage = useCallback((item, index) => {
+    setImageIndex(index);
+    setIsVisibleImageViewer(true);
+  }, []);
+  const handleSelectImage = useCallback(
+    (index) => {
+      let assetsListTemp = assetsList.map((i) => i);
+      let selectArrayTemp = [...selectArray];
+      let selectedNumberArray = _.map(assetsList, (i) => i.selectedNumber);
+      const targetNumber = selectedNumberArray[index];
+      if (!_.includes(selectArrayTemp, index)) {
+        selectArrayTemp.push(index);
+      } else {
+        selectArrayTemp = selectArrayTemp.filter((i) => i !== index);
+      }
+      assetsListTemp = assetsListTemp.map((item, idx) => ({
+        ...item,
+        selectedNumber: _.findIndex(selectArrayTemp, (i) => i === idx) + 1,
+      }));
+      setAssetsList(assetsListTemp);
+      setSelectArray(selectArrayTemp);
+    },
+    [assetsList, selectArray],
+  );
 
   // effects
   // useEffect(() => {
@@ -231,7 +262,75 @@ function MainMessagesScreen({ navigation, route }) {
         enabledContentGestureInteraction
         enabledHeaderGestureInteraction
         callbackNode={fall}
-        renderContent={() => <AttachmentBottomSheet assetsList={assetsList} setAssetsList={setAssetsList} setCloseSheet={setCloseSheet} />}
+        renderContent={() => (
+          <AttachmentBottomSheet
+            assetsList={assetsList}
+            selectArray={selectArray}
+            setAssetsList={setAssetsList}
+            setCloseSheet={setCloseSheet}
+            handlePressItemImage={handlePressItemImage}
+            handleSelectImage={handleSelectImage}
+          />
+        )}
+      />
+      <ImageView
+        swipeToCloseEnabled
+        doubleTapToZoomEnabled
+        images={assetsList}
+        animationType="fade"
+        imageIndex={imageIndex}
+        visible={isVisibleImageViewer}
+        onRequestClose={() => setIsVisibleImageViewer(false)}
+        HeaderComponent={() => (
+          <SafeAreaView style={{ flex: 1 }}>
+            <View style={{ flex: 1, flexDirection: "row", alignItems: "center", justifyContent: "space-between", paddingHorizontal: 15 }}>
+              <Text color="white">Name</Text>
+              <CircleSelect size="medium" />
+            </View>
+          </SafeAreaView>
+        )}
+        FooterComponent={() => {
+          const [focus, setFocus] = useState(false);
+          const textInputRef = useRef(null);
+          const [value, setValue] = useState("");
+          return (
+            <SafeAreaView style={{ flex: 1 }}>
+              {/* <KeyboardAvoidingView keyboardVerticalOffset={300} behavior={Platform.OS === "ios" ? "padding" : "position"} style={{ flex: 1 }}> */}
+              <View style={{ alignItems: "center", paddingVertical: 25, paddingHorizontal: 10 }}>
+                <TextInput
+                  ref={textInputRef}
+                  onFocus={() => setFocus(true)}
+                  onBlur={() => {
+                    if (!value) setFocus(false);
+                  }}
+                  value={value}
+                  onChangeText={setValue}
+                  placeholder="Add a caption..."
+                  style={[
+                    iOSUIKit.body,
+                    { color: iOSColors.white },
+                    focus && {
+                      borderRadius: 20,
+                      backgroundColor: "rgba(255,255,255,0.08)",
+                      paddingHorizontal: 15,
+                      paddingVertical: 5,
+                      width: "100%",
+                    },
+                  ]}
+                  placeholderTextColor={iOSColors.customGray}
+                />
+              </View>
+              {/* </KeyboardAvoidingView> */}
+              <View style={{ flex: 1, flexDirection: "row", alignItems: "center", justifyContent: "space-between", paddingHorizontal: 15 }}>
+                <View style={{ width: 40, height: 40, backgroundColor: "red" }} />
+                <View style={{ width: 40, height: 40, backgroundColor: "red" }} />
+                <View style={{ width: 40, height: 40, backgroundColor: "red" }} />
+                <View style={{ width: 40, height: 40, backgroundColor: "red" }} />
+                <View style={{ width: 40, height: 40, backgroundColor: "blue" }} />
+              </View>
+            </SafeAreaView>
+          );
+        }}
       />
     </>
   );

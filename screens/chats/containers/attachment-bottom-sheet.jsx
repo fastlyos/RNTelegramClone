@@ -8,34 +8,10 @@ import { Camera } from "expo-camera";
 import Constants from "expo-constants";
 import { CircleSelect, Text } from "@app/components";
 
-function AttachmentBottomSheet({ assetsList, setAssetsList, setCloseSheet }) {
+function AttachmentBottomSheet({ assetsList, selectArray, setAssetsList, setCloseSheet, handlePressItemImage, handleSelectImage }) {
   // states
   const theme = useTheme();
   const styles = createStyles({ theme });
-  const [selectArray, setSelectArray] = useState([]);
-
-  // callbacks
-  const handleSelectImage = useCallback(
-    (index) => {
-      let assetsListTemp = assetsList.map((i) => i);
-      let selectArrayTemp = [...selectArray];
-      let selectedNumberArray = _.map(assetsList, (i) => i.selectedNumber);
-      const targetNumber = selectedNumberArray[index];
-      if (!_.includes(selectArrayTemp, index)) {
-        selectArrayTemp.push(index);
-      } else {
-        selectArrayTemp = selectArrayTemp.filter((i) => i !== index);
-      }
-      assetsListTemp = assetsListTemp.map((item, idx) => ({
-        ...item,
-        selectedNumber: _.findIndex(selectArrayTemp, (i) => i === idx) + 1,
-      }));
-      console.log(index, targetNumber, selectArrayTemp);
-      setAssetsList(assetsListTemp);
-      setSelectArray(selectArrayTemp);
-    },
-    [assetsList, selectArray],
-  );
 
   // effects
 
@@ -49,10 +25,10 @@ function AttachmentBottomSheet({ assetsList, setAssetsList, setCloseSheet }) {
               <View style={{ height: 90, width: 90, margin: 4, borderRadius: 5 }}>
                 <Camera style={{ flex: 1, borderRadius: 10, overflow: "hidden" }} type={Camera.Constants.Type.back}>
                   <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-                    {/* <Image
-                      source={require("@assets/images/main/Images.xcassets/Avatar/EditAvatarIcon.imageset/SettingsCameraIcon.png")}
+                    <Image
+                      source={require("@app/assets/images/main/Images.xcassets/Avatar/EditAvatarIcon.imageset/SettingsCameraIcon.png")}
                       style={{ width: 44, height: 33 }}
-                    /> */}
+                    />
                   </View>
 
                   {/* <View style={styles.buttonContainer}>
@@ -80,10 +56,9 @@ function AttachmentBottomSheet({ assetsList, setAssetsList, setCloseSheet }) {
                     width: 90,
                     margin: 4,
                   }}>
-                  <View style={{ flex: 1, alignItems: "flex-end" }}>
-                    <TouchableOpacity activeOpacity={1} onPress={() => handleSelectImage(index)} style={{ padding: 4 }}>
-                      <CircleSelect number={item.selectedNumber} />
-                    </TouchableOpacity>
+                  <TouchableOpacity style={{ flex: 1 }} onPress={() => handlePressItemImage(item, index)} />
+                  <View style={{ position: "absolute", width: "100%", alignItems: "flex-end" }}>
+                    <CircleSelect number={item.selectedNumber} activeOpacity={1} onPress={() => handleSelectImage(index)} style={{ padding: 4 }} />
                   </View>
                 </ImageBackground>
               );
@@ -142,10 +117,12 @@ function AttachmentBottomSheet({ assetsList, setAssetsList, setCloseSheet }) {
 
 AttachmentBottomSheet.propTypes = {
   assetsList: PropTypes.array.isRequired,
+  handlePressItemImage: PropTypes.func.isRequired,
 };
 
 AttachmentBottomSheet.defaultProps = {
   assetsList: [],
+  handlePressItemImage: (item) => {},
 };
 export default AttachmentBottomSheet;
 
