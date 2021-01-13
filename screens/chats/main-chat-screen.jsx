@@ -64,7 +64,7 @@ function MainChatScreen({ navigation }) {
 
 MainChatScreen.propTypes = {};
 MainChatScreen.defaultProps = {};
-export default memo(MainChatScreen);
+export default MainChatScreen;
 
 const createStyles = ({ theme }) =>
   StyleSheet.create({

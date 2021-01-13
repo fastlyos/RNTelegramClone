@@ -8,7 +8,37 @@ import { Camera } from "expo-camera";
 import Constants from "expo-constants";
 import { CircleSelect, Text } from "@app/components";
 
-function AttachmentBottomSheet({ assetsList, selectArray, setAssetsList, setCloseSheet, handlePressItemImage, handleSelectImage }) {
+export const ACTION_ELEMENTS = [
+  {
+    id: 1,
+    title: "Photo or Video",
+  },
+  {
+    id: 2,
+    title: "File",
+  },
+  {
+    id: 3,
+    title: "Location",
+  },
+  {
+    id: 4,
+    title: "Contact",
+  },
+];
+
+export const ACTION_AFTER_SELECT_ELEMENTS = [
+  {
+    id: 1,
+    title: ({ number }) => `Send ${number} Photo`,
+  },
+  {
+    id: 2,
+    title: "Send as File",
+  },
+];
+
+function AttachmentBottomSheet({ visible, assetsList, selectArray, setAssetsList, setCloseSheet, handlePressItemImage, handleSelectImage }) {
   // states
   const theme = useTheme();
   const styles = createStyles({ theme });
@@ -22,25 +52,17 @@ function AttachmentBottomSheet({ assetsList, selectArray, setAssetsList, setClos
           <FlatList
             horizontal
             ListHeaderComponent={() => (
-              <View style={{ height: 90, width: 90, margin: 4, borderRadius: 5 }}>
-                <Camera style={{ flex: 1, borderRadius: 10, overflow: "hidden" }} type={Camera.Constants.Type.back}>
-                  <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-                    <Image
-                      source={require("@app/assets/images/main/Images.xcassets/Avatar/EditAvatarIcon.imageset/SettingsCameraIcon.png")}
-                      style={{ width: 44, height: 33 }}
-                    />
-                  </View>
-
-                  {/* <View style={styles.buttonContainer}>
-                    <TouchableOpacity
-                      style={styles.button}
-                      onPress={() => {
-                        setType(type === Camera.Constants.Type.back ? Camera.Constants.Type.front : Camera.Constants.Type.back);
-                      }}>
-                      <Text style={styles.text}> Flip </Text>
-                    </TouchableOpacity>
-                  </View> */}
-                </Camera>
+              <View style={{ height: 90, width: 90, margin: 4, borderRadius: 5, backgroundColor: iOSColors.black }}>
+                {visible && (
+                  <Camera style={{ flex: 1, borderRadius: 10, overflow: "hidden" }} type={Camera.Constants.Type.back}>
+                    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+                      <Image
+                        source={require("@app/assets/images/main/Images.xcassets/Avatar/EditAvatarIcon.imageset/SettingsCameraIcon.png")}
+                        style={{ width: 44, height: 33 }}
+                      />
+                    </View>
+                  </Camera>
+                )}
               </View>
             )}
             showsHorizontalScrollIndicator={false}
@@ -57,8 +79,8 @@ function AttachmentBottomSheet({ assetsList, selectArray, setAssetsList, setClos
                     margin: 4,
                   }}>
                   <TouchableOpacity style={{ flex: 1 }} onPress={() => handlePressItemImage(item, index)} />
-                  <View style={{ position: "absolute", width: "100%", alignItems: "flex-end" }}>
-                    <CircleSelect number={item.selectedNumber} activeOpacity={1} onPress={() => handleSelectImage(index)} style={{ padding: 4 }} />
+                  <View style={{ position: "absolute", width: "100%", alignItems: "flex-end", padding: 4 }}>
+                    <CircleSelect number={item.selectedNumber} activeOpacity={1} onPress={() => handleSelectImage(index)} />
                   </View>
                 </ImageBackground>
               );
@@ -67,40 +89,24 @@ function AttachmentBottomSheet({ assetsList, selectArray, setAssetsList, setClos
         </View>
         {selectArray.length === 0 && (
           <>
-            <TouchableHighlight onPress={() => {}} style={styles.item} underlayColor={iOSColors.customGray}>
-              <Text type="title3" color="blue">
-                Photo or Video
-              </Text>
-            </TouchableHighlight>
-            <TouchableHighlight onPress={() => {}} style={styles.item} underlayColor={iOSColors.customGray}>
-              <Text type="title3" color="blue">
-                File
-              </Text>
-            </TouchableHighlight>
-            <TouchableHighlight onPress={() => {}} style={styles.item} underlayColor={iOSColors.customGray}>
-              <Text type="title3" color="blue">
-                Location
-              </Text>
-            </TouchableHighlight>
-            <TouchableHighlight onPress={() => {}} style={[styles.item, { borderBottomWidth: 0 }]} underlayColor={iOSColors.customGray}>
-              <Text type="title3" color="blue">
-                Contact
-              </Text>
-            </TouchableHighlight>
+            {ACTION_ELEMENTS.map((item) => (
+              <TouchableHighlight onPress={() => {}} style={styles.item} underlayColor={iOSColors.customGray}>
+                <Text type="title3" color="blue">
+                  {typeof item.title === "string" ? item.title : item.title({})}
+                </Text>
+              </TouchableHighlight>
+            ))}
           </>
         )}
         {selectArray.length > 0 && (
           <>
-            <TouchableHighlight onPress={() => {}} style={styles.item} underlayColor={iOSColors.customGray}>
-              <Text type="title3Emphasized" color="blue">
-                {`Send ${selectArray.length} Photo`}
-              </Text>
-            </TouchableHighlight>
-            <TouchableHighlight onPress={() => {}} style={styles.item} underlayColor={iOSColors.customGray}>
-              <Text type="title3" color="blue">
-                {`Send as File`}
-              </Text>
-            </TouchableHighlight>
+            {ACTION_AFTER_SELECT_ELEMENTS.map((item) => (
+              <TouchableHighlight onPress={() => {}} style={styles.item} underlayColor={iOSColors.customGray}>
+                <Text type="title3Emphasized" color="blue">
+                  {typeof item.title === "string" ? item.title : item.title({ number: selectArray.length })}
+                </Text>
+              </TouchableHighlight>
+            ))}
           </>
         )}
       </View>
@@ -116,11 +122,13 @@ function AttachmentBottomSheet({ assetsList, selectArray, setAssetsList, setClos
 }
 
 AttachmentBottomSheet.propTypes = {
+  visible: PropTypes.bool.isRequired,
   assetsList: PropTypes.array.isRequired,
   handlePressItemImage: PropTypes.func.isRequired,
 };
 
 AttachmentBottomSheet.defaultProps = {
+  visible: false,
   assetsList: [],
   handlePressItemImage: (item) => {},
 };

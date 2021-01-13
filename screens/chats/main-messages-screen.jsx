@@ -84,6 +84,49 @@ function BottomStickers() {
   );
 }
 
+function FooterComponent() {
+  const [focus, setFocus] = useState(false);
+  const textInputRef = useRef(null);
+  const [value, setValue] = useState("");
+  return (
+    <SafeAreaView style={{ flex: 1 }}>
+      {/* <KeyboardAvoidingView keyboardVerticalOffset={300} behavior={Platform.OS === "ios" ? "padding" : "position"} style={{ flex: 1 }}> */}
+      <View style={{ alignItems: "center", paddingVertical: 25, paddingHorizontal: 10 }}>
+        <TextInput
+          ref={textInputRef}
+          onFocus={() => setFocus(true)}
+          onBlur={() => {
+            if (!value) setFocus(false);
+          }}
+          value={value}
+          onChangeText={setValue}
+          placeholder="Add a caption..."
+          style={[
+            iOSUIKit.body,
+            { color: iOSColors.white },
+            focus && {
+              borderRadius: 20,
+              backgroundColor: "rgba(255,255,255,0.08)",
+              paddingHorizontal: 15,
+              paddingVertical: 5,
+              width: "100%",
+            },
+          ]}
+          placeholderTextColor={iOSColors.customGray}
+        />
+      </View>
+      {/* </KeyboardAvoidingView> */}
+      <View style={{ flex: 1, flexDirection: "row", alignItems: "center", justifyContent: "space-between", paddingHorizontal: 15 }}>
+        <View style={{ width: 40, height: 40, backgroundColor: "red" }} />
+        <View style={{ width: 40, height: 40, backgroundColor: "red" }} />
+        <View style={{ width: 40, height: 40, backgroundColor: "red" }} />
+        <View style={{ width: 40, height: 40, backgroundColor: "red" }} />
+        <View style={{ width: 40, height: 40, backgroundColor: "blue" }} />
+      </View>
+    </SafeAreaView>
+  );
+}
+
 function MainMessagesScreen({ navigation, route }) {
   const sheetRef = useRef(null);
   const theme = useTheme();
@@ -135,7 +178,7 @@ function MainMessagesScreen({ navigation, route }) {
     (index) => {
       let assetsListTemp = assetsList.map((i) => i);
       let selectArrayTemp = [...selectArray];
-      let selectedNumberArray = _.map(assetsList, (i) => i.selectedNumber);
+      const selectedNumberArray = _.map(assetsList, (i) => i.selectedNumber);
       const targetNumber = selectedNumberArray[index];
       if (!_.includes(selectArrayTemp, index)) {
         selectArrayTemp.push(index);
@@ -264,6 +307,7 @@ function MainMessagesScreen({ navigation, route }) {
         callbackNode={fall}
         renderContent={() => (
           <AttachmentBottomSheet
+            visible={isVisibleAttachments}
             assetsList={assetsList}
             selectArray={selectArray}
             setAssetsList={setAssetsList}
@@ -289,48 +333,7 @@ function MainMessagesScreen({ navigation, route }) {
             </View>
           </SafeAreaView>
         )}
-        FooterComponent={() => {
-          const [focus, setFocus] = useState(false);
-          const textInputRef = useRef(null);
-          const [value, setValue] = useState("");
-          return (
-            <SafeAreaView style={{ flex: 1 }}>
-              {/* <KeyboardAvoidingView keyboardVerticalOffset={300} behavior={Platform.OS === "ios" ? "padding" : "position"} style={{ flex: 1 }}> */}
-              <View style={{ alignItems: "center", paddingVertical: 25, paddingHorizontal: 10 }}>
-                <TextInput
-                  ref={textInputRef}
-                  onFocus={() => setFocus(true)}
-                  onBlur={() => {
-                    if (!value) setFocus(false);
-                  }}
-                  value={value}
-                  onChangeText={setValue}
-                  placeholder="Add a caption..."
-                  style={[
-                    iOSUIKit.body,
-                    { color: iOSColors.white },
-                    focus && {
-                      borderRadius: 20,
-                      backgroundColor: "rgba(255,255,255,0.08)",
-                      paddingHorizontal: 15,
-                      paddingVertical: 5,
-                      width: "100%",
-                    },
-                  ]}
-                  placeholderTextColor={iOSColors.customGray}
-                />
-              </View>
-              {/* </KeyboardAvoidingView> */}
-              <View style={{ flex: 1, flexDirection: "row", alignItems: "center", justifyContent: "space-between", paddingHorizontal: 15 }}>
-                <View style={{ width: 40, height: 40, backgroundColor: "red" }} />
-                <View style={{ width: 40, height: 40, backgroundColor: "red" }} />
-                <View style={{ width: 40, height: 40, backgroundColor: "red" }} />
-                <View style={{ width: 40, height: 40, backgroundColor: "red" }} />
-                <View style={{ width: 40, height: 40, backgroundColor: "blue" }} />
-              </View>
-            </SafeAreaView>
-          );
-        }}
+        FooterComponent={() => <FooterComponent />}
       />
     </>
   );
