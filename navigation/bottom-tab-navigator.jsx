@@ -7,7 +7,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator, HeaderStyleInterpolators, CardStyleInterpolators, TransitionSpecs, useHeaderHeight, HeaderTitle } from "@react-navigation/stack";
 import useColorScheme from "@app/hooks/useColorScheme";
 // styles
-import Colors from "@app/constants/colors";
+import Colors from "@app/constants/Colors";
 
 // components
 import { Image, SearchListHeader } from "@app/components";
