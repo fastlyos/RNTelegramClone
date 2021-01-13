@@ -1,3 +1,3 @@
 # RNTelegramClone
 
-Because I'm excited about animation in Telegram, so I want to try to make it with React Native
+Because I'm excited about animated in Telegram, so I'll try to make it by React Native
