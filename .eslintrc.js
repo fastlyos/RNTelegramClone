@@ -49,6 +49,7 @@ module.exports = {
     reactotron: true,
     Atomics: "readonly",
     SharedArrayBuffer: "readonly",
+    it: true,
   },
   settings: {
     "import/resolver": {
