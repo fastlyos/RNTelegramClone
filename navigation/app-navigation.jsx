@@ -13,6 +13,7 @@ import themes from "@app/themes";
 
 import NotFoundScreen from "@app/screens/not-found-screen";
 import OtherScreen from "@app/screens/other-screen";
+import IntroScreen from "@app/screens/intro";
 import MainMessagesScreen from "@app/screens/chats/main-messages-screen";
 import BottomTabNavigator from "./bottom-tab-navigator";
 import LinkingConfiguration from "./linking-configuration";
@@ -29,6 +30,7 @@ const Stack = createStackNavigator();
 function RootNavigator() {
   return (
     <Stack.Navigator
+      initialRouteName="IntroScreen"
       screenOptions={{
         headerShown: true,
         gestureDirection: "horizontal",
@@ -39,6 +41,13 @@ function RootNavigator() {
       <Stack.Screen
         name="Root"
         component={BottomTabNavigator}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="IntroScreen"
+        component={IntroScreen}
         options={{
           headerShown: false,
         }}
