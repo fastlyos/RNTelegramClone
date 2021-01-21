@@ -46,6 +46,13 @@ function RootNavigator() {
           headerShown: false,
         }}
       />
+      <Stack.Screen
+        name="IntroScreen"
+        component={IntroScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
       <Stack.Screen name="OtherScreen" component={OtherScreen} />
       <Stack.Screen name="OtherScreen2" component={OtherScreen} />
       <Stack.Screen name="OtherScreen3" component={OtherScreen} />

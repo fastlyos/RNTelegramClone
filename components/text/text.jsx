@@ -25,6 +25,7 @@ const TYPES = {
   caption2: iOSUIKit.caption2,
 };
 
+
 function Text({ type, color, children, style, ...otherProps }) {
   const typeStyle = TYPES[type];
   const colorStyle = { color: COLORS[color] };

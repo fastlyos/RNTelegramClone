@@ -1,7 +1,7 @@
 import * as Linking from "expo-linking";
 
 export default {
-  prefixes: [Linking.makeUrl("/tlg")],
+  // prefixes: [Linking.makeUrl("/tlg")],
   config: {
     screens: {
       Root: {

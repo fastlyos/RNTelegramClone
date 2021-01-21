@@ -8,11 +8,11 @@ import "./ReactotronConfig";
 import useColorScheme from "./hooks/useColorScheme";
 import useCachedResources from "./hooks/useCachedResources";
 
-LogBox.ignoreLogs(["Require cycle"]);
+LogBox.ignoreLogs(["RCTBridge", "Require cycle"]);
 
 function App() {
   const colorScheme = useColorScheme();
-  // const isLoadingComplete = useCachedResources();
+  const isLoadingComplete = useCachedResources();
   return (
     <SafeAreaProvider>
       <StatusBar barStyle="default" />

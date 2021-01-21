@@ -28,8 +28,7 @@ import {
   Image,
 } from "react-native";
 import * as Animatable from "react-native-animatable";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-import ImageView from "@app/submodules/react-native-image-viewing/dist";
+// import ImageView from "@app/submodules/react-native-image-viewing/dist";
 import Animated from "react-native-reanimated";
 import BottomSheet from "reanimated-bottom-sheet";
 
@@ -44,7 +43,7 @@ import MESSAGES from "@app/fixtures/messages";
 import CONTACTS from "@app/fixtures/contacts";
 
 // containers
-import AttachmentBottomSheet from "./containers/attachment-bottom-sheet";
+// import AttachmentBottomSheet from "./containers/attachment-bottom-sheet";
 import { STICKERS } from "./schema";
 
 const keyboardVerticalOffset = Platform.OS === "ios" ? 95 : 0;
@@ -221,8 +220,6 @@ function MainMessagesScreen({ navigation, route }) {
     })();
   }, []);
 
-  useEffect(() => {}, []);
-
   return (
     <>
       <SafeAreaView style={styles.container}>
@@ -292,7 +289,7 @@ function MainMessagesScreen({ navigation, route }) {
           },
         ]}
       />
-      <BottomSheet
+      {/* <BottomSheet
         ref={sheetRef}
         onCloseEnd={() => setVisibleAttachments(false)}
         onOpenEnd={() => setVisibleAttachments(true)}
@@ -335,6 +332,24 @@ function MainMessagesScreen({ navigation, route }) {
         )}
         FooterComponent={() => <FooterComponent />}
       />
+      <ImageView
+        swipeToCloseEnabled
+        doubleTapToZoomEnabled
+        images={assetsList}
+        animationType="fade"
+        imageIndex={imageIndex}
+        visible={isVisibleImageViewer}
+        onRequestClose={() => setIsVisibleImageViewer(false)}
+        HeaderComponent={() => (
+          <SafeAreaView style={{ flex: 1 }}>
+            <View style={{ flex: 1, flexDirection: "row", alignItems: "center", justifyContent: "space-between", paddingHorizontal: 15 }}>
+              <Text color="white">Name</Text>
+              <CircleSelect size="medium" />
+            </View>
+          </SafeAreaView>
+        )}
+        FooterComponent={() => <FooterComponent />}
+      /> */}
     </>
   );
 }
