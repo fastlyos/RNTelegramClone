@@ -43,7 +43,7 @@ import MESSAGES from "@app/fixtures/messages";
 import CONTACTS from "@app/fixtures/contacts";
 
 // containers
-// import AttachmentBottomSheet from "./containers/attachment-bottom-sheet";
+import AttachmentBottomSheet from "./containers/attachment-bottom-sheet";
 import { STICKERS } from "./schema";
 
 const keyboardVerticalOffset = Platform.OS === "ios" ? 95 : 0;
@@ -167,7 +167,7 @@ function MainMessagesScreen({ navigation, route }) {
   }, []);
   const handlePressVoice = useCallback(() => {
     Keyboard.dismiss();
-    setIsVisible(true);
+    // setIsVisible(true);
   }, []);
   const handlePressItemImage = useCallback((item, index) => {
     setImageIndex(index);
@@ -204,6 +204,7 @@ function MainMessagesScreen({ navigation, route }) {
   useEffect(() => {
     (async () => {
       const { granted } = await MediaLibrary.requestPermissionsAsync();
+
       if (granted) {
         const response = await MediaLibrary.getAssetsAsync({ mediaType: MediaLibrary.MediaType.photo });
         const { assets = [] } = response;
@@ -289,7 +290,7 @@ function MainMessagesScreen({ navigation, route }) {
           },
         ]}
       />
-      {/* <BottomSheet
+      <BottomSheet
         ref={sheetRef}
         onCloseEnd={() => setVisibleAttachments(false)}
         onOpenEnd={() => setVisibleAttachments(true)}
@@ -314,7 +315,7 @@ function MainMessagesScreen({ navigation, route }) {
           />
         )}
       />
-      <ImageView
+      {/* <ImageView
         swipeToCloseEnabled
         doubleTapToZoomEnabled
         images={assetsList}
@@ -331,8 +332,8 @@ function MainMessagesScreen({ navigation, route }) {
           </SafeAreaView>
         )}
         FooterComponent={() => <FooterComponent />}
-      />
-      <ImageView
+      /> */}
+      {/* <ImageView
         swipeToCloseEnabled
         doubleTapToZoomEnabled
         images={assetsList}

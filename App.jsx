@@ -8,7 +8,7 @@ import "./ReactotronConfig";
 import useColorScheme from "./hooks/useColorScheme";
 import useCachedResources from "./hooks/useCachedResources";
 
-LogBox.ignoreLogs(["RCTBridge", "Require cycle"]);
+LogBox.ignoreLogs(["RCTBridge", "Require cycle", "Modal with", "Native splash screen is already hidden"]);
 
 function App() {
   const colorScheme = useColorScheme();
@@ -16,8 +16,8 @@ function App() {
   return (
     <SafeAreaProvider>
       <StatusBar barStyle="default" />
-      {/* <AppNavigation colorScheme={colorScheme} /> */}
-      <Devscreen colorScheme={colorScheme} />
+      <AppNavigation colorScheme={colorScheme} />
+      {/* <Devscreen colorScheme={colorScheme} /> */}
     </SafeAreaProvider>
   );
 }

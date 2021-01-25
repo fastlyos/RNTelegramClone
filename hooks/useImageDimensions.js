@@ -13,22 +13,21 @@ const CACHE_SIZE = 50;
 const imageDimensionsCache = createCache(CACHE_SIZE);
 const useImageDimensions = (image) => {
   const [dimensions, setDimensions] = useState(null);
-  const getImageDimensions = (image) => {
+  const getImageDimensions = (_image) => {
     return new Promise((resolve) => {
       if (typeof image == "number") {
-        const cacheKey = `${image}`;
+        const cacheKey = `${_image}`;
         let imageDimensions = imageDimensionsCache.get(cacheKey);
         if (!imageDimensions) {
-          const { width, height } = Image.resolveAssetSource(image);
+          const { width, height } = Image.resolveAssetSource(_image);
           imageDimensions = { width, height };
           imageDimensionsCache.set(cacheKey, imageDimensions);
         }
         resolve(imageDimensions);
         return;
       }
-      // @ts-ignore
-      if (image.uri) {
-        const source = image;
+      if (_image.uri) {
+        const source = _image;
         const cacheKey = source.uri;
         const imageDimensions = imageDimensionsCache.get(cacheKey);
         if (imageDimensions) {

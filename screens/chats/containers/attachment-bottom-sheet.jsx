@@ -124,13 +124,21 @@ function AttachmentBottomSheet({ visible, assetsList, selectArray, setAssetsList
 AttachmentBottomSheet.propTypes = {
   visible: PropTypes.bool.isRequired,
   assetsList: PropTypes.array.isRequired,
+  selectArray: PropTypes.array.isRequired,
   handlePressItemImage: PropTypes.func.isRequired,
+  handleSelectImage: PropTypes.func.isRequired,
+  setCloseSheet: PropTypes.func.isRequired,
+  setAssetsList: PropTypes.func.isRequired,
 };
 
 AttachmentBottomSheet.defaultProps = {
   visible: false,
   assetsList: [],
-  handlePressItemImage: (item) => {},
+  selectArray: [],
+  handlePressItemImage: () => {},
+  handleSelectImage: () => {},
+  setCloseSheet: () => {},
+  setAssetsList: () => {},
 };
 export default AttachmentBottomSheet;
 

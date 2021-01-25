@@ -13,3 +13,7 @@ export { default as NotFoundScreen } from "./not-found-screen";
 export { default as OtherScreen } from "./other-screen";
 export { default as ExampleScreen } from "./index";
 export { default as DevsScreen } from "./devs-screen";
+
+// intro
+export { default as IntroScreen } from "./intro";
+

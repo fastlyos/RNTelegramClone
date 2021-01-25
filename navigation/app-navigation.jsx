@@ -13,7 +13,7 @@ import {
 import themes from "@app/themes";
 
 // screens
-import { OtherScreen, MainMessagesScreen, NotFoundScreen, PinLocationScreen, DevsScreen } from "@app/screens/routes";
+import { OtherScreen, MainMessagesScreen, NotFoundScreen, PinLocationScreen, DevsScreen, IntroScreen } from "@app/screens/routes";
 
 // navigations
 import BottomTabNavigator from "./bottom-tab-navigator";
@@ -31,7 +31,7 @@ const Stack = createStackNavigator();
 function RootNavigator() {
   return (
     <Stack.Navigator
-      initialRouteName="DevsScreen"
+      initialRouteName="PinLocationScreen"
       screenOptions={{
         headerShown: true,
         gestureDirection: "horizontal",
@@ -58,10 +58,12 @@ function RootNavigator() {
       <Stack.Screen name="OtherScreen3" component={OtherScreen} />
       {/* Messages */}
       <Stack.Screen name="MainMessagesScreen" component={MainMessagesScreen} />
+      <Stack.Screen name="DevsScreen" component={DevsScreen} />
       <Stack.Screen
         name="PinLocationScreen"
         component={PinLocationScreen}
         options={{
+          headerShown: false,
           // animationEnabled: true,
           // gestureDirection: "vertical",
           // cardOverlayEnabled: true,
@@ -71,7 +73,6 @@ function RootNavigator() {
 
       {/* others */}
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: "Oops!" }} />
-      <Stack.Screen name="DevsScreen" component={DevsScreen} options={{ title: "Oops!" }} />
     </Stack.Navigator>
   );
 }

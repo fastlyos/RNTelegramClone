@@ -42,6 +42,8 @@ module.exports = {
     "react/jsx-curly-brace-presence": ["off"],
     "no-plusplus": ["error", { allowForLoopAfterthoughts: true }],
     "prefer-destructuring": ["error", { object: true, array: false }],
+    "no-unused-expressions": ["error", { allowShortCircuit: true }],
+    indent: "off",
   },
   globals: {
     arguments: true,

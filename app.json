@@ -46,10 +46,6 @@
         "json",
         "wasm",
         "svg"
-      ],
-      "assetExts": [
-        "ttf",
-        "mp4"
       ]
     }
   }

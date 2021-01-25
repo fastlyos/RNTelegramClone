@@ -4,11 +4,12 @@ import { StyleSheet, View, SafeAreaView, FlatList, Dimensions, Image, TouchableO
 import { Text } from "@app/components";
 import { useTheme } from "@react-navigation/native";
 import Carousel, { Pagination } from "react-native-snap-carousel";
+import { SCREEN_WIDTH, SCREEN_HEIGHT } from "@app/constants/Layout";
 
 import IntroHeaderImages from "./components/intro-header-images";
 
 import { findCharStyle } from "./utils";
-import { CONTENT, TOP_CONFIG, SCREEN_WIDTH, SCREEN_HEIGHT } from "./schema";
+import { CONTENT, TOP_CONFIG } from "./schema";
 
 function renderContentItem({ item, index }) {
   const contentLines = item.content.map((line) => findCharStyle(line, "<bold>", "</bold>"));
