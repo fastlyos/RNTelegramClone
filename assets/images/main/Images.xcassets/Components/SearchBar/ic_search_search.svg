@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="24pt" height="24pt" viewBox="0 0 24 24">
+<g enable-background="new">
+<clipPath id="cp0">
+<path transform="matrix(1,0,0,-1,0,24)" d="M 11 19.665 C 14.68098 19.665 17.665 16.68098 17.665 13 C 17.665 11.45853 17.1417 10.03927 16.26307 8.910201 L 20.0869 5.086899 C 20.41103 4.762763 20.41103 4.237237 20.0869 3.913101 C 19.78977 3.615977 19.32343 3.591217 18.9981 3.83882 L 18.9131 3.913101 L 15.0898 7.736934 C 13.96073 6.858297 12.54147 6.335 11 6.335 C 7.319022 6.335 4.335 9.319022 4.335 13 C 4.335 16.68098 7.319022 19.665 11 19.665 Z M 11 18.335 C 8.053561 18.335 5.665 15.94644 5.665 13 C 5.665 10.05356 8.053561 7.665 11 7.665 C 13.94644 7.665 16.335 10.05356 16.335 13 C 16.335 15.94644 13.94644 18.335 11 18.335 Z "/>
+</clipPath>
+<g clip-path="url(#cp0)">
+<clipPath id="cp1">
+<path transform="matrix(1,0,0,-1,0,24)" d="M 0 0 L 24 0 L 24 24 L 0 24 Z "/>
+</clipPath>
+<g clip-path="url(#cp1)">
+<path transform="matrix(1,0,0,-1,0,24)" d="M -.665 24.665 L 25.33 24.665 L 25.33 -1.33 L -.665 -1.33 Z "/>
+</g>
+</g>
+</g>
+</svg>
