@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="72pt" height="72pt" viewBox="0 0 72 72">
+<g enable-background="new">
+<clipPath id="cp0">
+<path transform="matrix(1,0,0,-1,0,72)" d="M 39 47 C 41.20914 47 43 45.20914 43 43 L 43 29 C 43 26.79086 41.20914 25 39 25 L 25 25 C 22.79086 25 21 26.79086 21 29 L 21 43 C 21 45.20914 22.79086 47 25 47 L 39 47 Z M 51.5 44.5 C 52.2797 44.5 52.92045 43.90511 52.99313 43.14446 L 53 43 L 53 29 C 53 28.67544 52.89473 28.35964 52.7 28.1 C 52.23218 27.47624 51.37182 27.32057 50.71969 27.71882 L 50.6 27.8 L 45.8 31.4 C 45.34217 31.74337 45.0556 32.26449 45.00728 32.82936 L 45 33 L 45 39 C 45 39.57229 45.24495 40.11421 45.66786 40.49179 L 45.8 40.6 L 50.6 44.2 C 50.85964 44.39473 51.17544 44.5 51.5 44.5 Z "/>
+</clipPath>
+<g clip-path="url(#cp0)">
+<path transform="matrix(1,0,0,-1,0,72)" d="M 16 52 L 58 52 L 58 20 L 16 20 Z "/>
+</g>
+</g>
+</svg>
