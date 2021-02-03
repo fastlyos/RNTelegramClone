@@ -4,7 +4,7 @@ import { useTheme } from "@react-navigation/native";
 import PropTypes from "prop-types";
 import SearchBar from "../search-bar/search-bar";
 
-const ChatHeader = memo(({ searchBarRef }) => {
+const ChatHeader = memo(({ searchBarRef, placeholder }) => {
   //
   const scrollValue = useRef(new Animated.Value(0)).current;
   const headerHeight = scrollValue.interpolate({
@@ -50,7 +50,7 @@ const ChatHeader = memo(({ searchBarRef }) => {
   return (
     <Animated.View style={[styles.header, styles.borderHeader, animatedStyles.header, animatedStyles.padding]}>
       <View style={styles.searchBarBox}>
-        <SearchBar />
+        <SearchBar placeholder={placeholder} />
       </View>
     </Animated.View>
   );

@@ -39,3 +39,9 @@ export const STICKERS = [
     ],
   },
 ];
+
+export const PLACE_LOCATIONS = new Array(50).fill(1).map((i, index) => ({
+  id: index,
+  title: faker.random.words(2),
+  address: faker.address.streetAddress(),
+}));

@@ -32,7 +32,7 @@ import * as Animatable from "react-native-animatable";
 import Animated from "react-native-reanimated";
 import BottomSheet from "reanimated-bottom-sheet";
 
-import { ContactListItem, ChatListItem, Divider, Text, MessageListItem, MessageTyping, SearchListHeader } from "@app/components";
+import { ContactListItem, ChatListItem, Divider, Text, MessageListItem, MessageTyping, SearchListHeader, CircleSelect } from "@app/components";
 
 // theme
 import { useTheme } from "@react-navigation/native";
@@ -43,7 +43,7 @@ import MESSAGES from "@app/fixtures/messages";
 import CONTACTS from "@app/fixtures/contacts";
 
 // containers
-// import AttachmentBottomSheet from "./containers/attachment-bottom-sheet";
+import AttachmentBottomSheet from "./containers/attachment-bottom-sheet";
 import { STICKERS } from "./schema";
 
 const keyboardVerticalOffset = Platform.OS === "ios" ? 95 : 0;
@@ -203,7 +203,11 @@ function MainMessagesScreen({ navigation, route }) {
 
   useEffect(() => {
     (async () => {
+      const { status } = await Camera.requestPermissionsAsync();
+    })();
+    (async () => {
       const { granted } = await MediaLibrary.requestPermissionsAsync();
+
       if (granted) {
         const response = await MediaLibrary.getAssetsAsync({ mediaType: MediaLibrary.MediaType.photo });
         const { assets = [] } = response;
@@ -213,14 +217,6 @@ function MainMessagesScreen({ navigation, route }) {
     })();
     return () => {};
   }, []);
-
-  useEffect(() => {
-    (async () => {
-      const { status } = await Camera.requestPermissionsAsync();
-    })();
-  }, []);
-
-  useEffect(() => {}, []);
 
   return (
     <>
@@ -291,7 +287,7 @@ function MainMessagesScreen({ navigation, route }) {
           },
         ]}
       />
-      {/* <BottomSheet
+      <BottomSheet
         ref={sheetRef}
         onCloseEnd={() => setVisibleAttachments(false)}
         onOpenEnd={() => setVisibleAttachments(true)}
@@ -316,7 +312,25 @@ function MainMessagesScreen({ navigation, route }) {
           />
         )}
       />
-      <ImageView
+      {/* <ImageView
+        swipeToCloseEnabled
+        doubleTapToZoomEnabled
+        images={assetsList}
+        animationType="fade"
+        imageIndex={imageIndex}
+        visible={isVisibleImageViewer}
+        onRequestClose={() => setIsVisibleImageViewer(false)}
+        HeaderComponent={() => (
+          <SafeAreaView style={{ flex: 1 }}>
+            <View style={{ flex: 1, flexDirection: "row", alignItems: "center", justifyContent: "space-between", paddingHorizontal: 15 }}>
+              <Text color="white">Name</Text>
+              <CircleSelect size="medium" />
+            </View>
+          </SafeAreaView>
+        )}
+        FooterComponent={() => <FooterComponent />}
+      /> */}
+      {/* <ImageView
         swipeToCloseEnabled
         doubleTapToZoomEnabled
         images={assetsList}

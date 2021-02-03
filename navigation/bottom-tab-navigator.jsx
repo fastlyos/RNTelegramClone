@@ -13,11 +13,13 @@ import Colors from "@app/constants/Colors";
 import { Image, SearchListHeader } from "@app/components";
 
 // screens
-import ExampleScreen from "@app/screens";
-import MainContactScreen from "@app/screens/contacts/main-contact-screen";
-// import NewContactScreen from '@app/screens/contacts/new-contact-screen';
-import MainChatScreen from "@app/screens/chats/main-chat-screen";
-import MainSettingScreen from "@app/screens/settings/main-setting-screen";
+import {
+  ExampleScreen,
+  MainContactScreen,
+  MainChatScreen,
+  MainSettingScreen,
+  // NewContactScreen
+} from "@app/screens/routes";
 
 function TabBarIcon({ name, color, reverse }) {
   return <Ionicons size={32} style={{ marginBottom: -3, transform: reverse && [{ rotateY: "180deg" }] }} name={name} color={color} />;

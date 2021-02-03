@@ -5,6 +5,10 @@ import { iOSColors, iOSUIKit } from "react-native-typography";
 
 const COLORS = {
   main: iOSColors.tealBlue,
+  blue: iOSColors.blue,
+  black: iOSColors.black,
+  white: iOSColors.white,
+  red: iOSColors.red,
 };
 const TYPES = {
   largeTitleEmphasized: iOSUIKit.largeTitleEmphasized,
@@ -21,7 +25,6 @@ const TYPES = {
   caption2Emphasized: iOSUIKit.caption2Emphasized,
   caption2: iOSUIKit.caption2,
 };
-
 
 function Text({ type, color, children, style, ...otherProps }) {
   const typeStyle = TYPES[type];

@@ -3,7 +3,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { StyleSheet, Text, View, TextInput, Animated, Easing, TouchableWithoutFeedback } from "react-native";
 import { useTheme } from "@react-navigation/native";
 
-function SearchBar(props) {
+function SearchBar({ placeholder }) {
   const theme = useTheme();
   const textinputRef = useRef();
 
@@ -44,7 +44,7 @@ function SearchBar(props) {
               onFocus={onFocus}
               onEndEditing={onBlur}
               defaultValue=""
-              placeholder="Search"
+              placeholder={placeholder ? placeholder : "Search"}
               style={styles.textinput}
             />
           </View>

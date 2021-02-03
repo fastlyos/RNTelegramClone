@@ -45,7 +45,7 @@ function MainChatScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <Animated.View style={styles.header}>
-        <MainChatHeader ref={searchRef} />
+        <MainChatHeader ref={searchRef} placeholder={"Search for messages or users"} />
       </Animated.View>
       <Animated.FlatList
         scrollEventThrottle={16}
@@ -64,7 +64,7 @@ function MainChatScreen({ navigation }) {
 
 MainChatScreen.propTypes = {};
 MainChatScreen.defaultProps = {};
-export default memo(MainChatScreen);
+export default MainChatScreen;
 
 const createStyles = ({ theme }) =>
   StyleSheet.create({

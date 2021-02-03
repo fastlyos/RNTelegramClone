@@ -2,8 +2,9 @@ import React, { useCallback, useEffect, useState, memo, useMemo } from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import useImageDimensions from "@app/hooks/useImageDimensions";
 import { iOSColors, materialColors } from "react-native-typography";
-import { SCREEN_WIDTH, TOP_CONFIG } from "../schema";
+import { SCREEN_WIDTH } from "@app/constants/Layout";
 import { SmileIcon, CameraIcon, BubbleIcon, PencilIcon, PinIcon, VideoCamIcon } from "./Icons";
+import { TOP_CONFIG } from "../schema";
 
 const { STAR_OFFSET_LEFT, STAR_OFFSET_TOP, STAR_OFFSET_TOP_LIMIT, STAR_OFFSET_LEFT_LIMIT } = TOP_CONFIG;
 
