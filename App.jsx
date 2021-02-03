@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, StatusBar, LogBox } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import AppNavigation from "@app/navigation/app-navigation";
 import Devscreen from "@app/screens/devs-screen";
+// import DevsAnimationScreen from "@app/screens/devs-animation-screen";
 
 import "./ReactotronConfig";
 import useColorScheme from "./hooks/useColorScheme";

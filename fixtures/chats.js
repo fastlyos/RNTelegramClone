@@ -29,7 +29,6 @@ const directChats = friends.map((friend) => ({
 }));
 
 // groups
-
 const groupChats = groups.items.map((group) => ({
   ...defaultChat(),
   chatName: group.groupName,

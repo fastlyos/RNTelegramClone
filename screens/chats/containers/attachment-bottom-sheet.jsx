@@ -57,7 +57,7 @@ function AttachmentBottomSheet({ visible, assetsList, selectArray, setAssetsList
                   <Camera style={{ flex: 1, borderRadius: 10, overflow: "hidden" }} type={Camera.Constants.Type.back}>
                     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
                       <Image
-                        source={require("@app/assets/images/main/Images.xcassets/Avatar/EditAvatarIcon.imageset/SettingsCameraIcon.png")}
+                        source={require("@app/assets/images/main/Images.xcassets/Avatar/EditAvatarIcon/SettingsCameraIcon.png")}
                         style={{ width: 44, height: 33 }}
                       />
                     </View>

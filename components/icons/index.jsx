@@ -1,7 +1,7 @@
 import React from "react";
 import { AntDesign as RNAntDesign, Ionicons as RNIonicons } from "@expo/vector-icons";
 import { StyleSheet, Image, View } from "react-native";
-import { PNG_ICON_SOURCES, SVG_ICON_SOURCES } from "./assets-path";
+import { PNG_ICON_SOURCES, SVG_ICON_SOURCES } from "./icons-path";
 
 const DEFAULT_SIZE = 24;
 
@@ -18,7 +18,8 @@ export function PngIcons({ name, style, ...props }) {
 }
 
 export function SvgIcons({ name, backgroundColor, containerStyle, tintColor, ...props }) {
-  const SvgImage = SVG_ICON_SOURCES[name] || "ic_addgroup";
+  if (!name) return null;
+  const SvgImage = SVG_ICON_SOURCES[name];
   if (!SvgImage) return null;
   return (
     <View style={[containerStyle, { backgroundColor: backgroundColor || "transparent" }]}>

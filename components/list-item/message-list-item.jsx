@@ -10,7 +10,6 @@ import { RectButton } from "react-native-gesture-handler";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 //
 import { Text } from "../text";
-// import A from "@assets/images/main/Images.xcassets/Chat/Message/ReplyCount.imageset/replies.svg";
 
 const renderLeftActions = (progress, dragX) => {
   // const theme = useTheme();

@@ -31,7 +31,7 @@ const Stack = createStackNavigator();
 function RootNavigator() {
   return (
     <Stack.Navigator
-      initialRouteName="PinLocationScreen"
+      initialRouteName="Root"
       screenOptions={{
         headerShown: true,
         gestureDirection: "horizontal",

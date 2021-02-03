@@ -203,6 +203,9 @@ function MainMessagesScreen({ navigation, route }) {
 
   useEffect(() => {
     (async () => {
+      const { status } = await Camera.requestPermissionsAsync();
+    })();
+    (async () => {
       const { granted } = await MediaLibrary.requestPermissionsAsync();
 
       if (granted) {
@@ -213,12 +216,6 @@ function MainMessagesScreen({ navigation, route }) {
       }
     })();
     return () => {};
-  }, []);
-
-  useEffect(() => {
-    (async () => {
-      const { status } = await Camera.requestPermissionsAsync();
-    })();
   }, []);
 
   return (
