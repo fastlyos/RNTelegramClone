@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="24pt" height="24pt" viewBox="0 0 24 24">
+<g enable-background="new">
+<path transform="matrix(1,0,0,1,4.269549,10)" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke="#000000" d="M 15.73045 0 L 15.73045 7 C 15.73045 8.104569 14.83502 9 13.73045 9 L 1.730451 9 C .9915825 9 .3462939 8.599336 0 8.003423 "/>
+<path transform="matrix(1,0,0,1,4,4)" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke="#000000" d="M 0 3 C 0 2.444444 0 2.111111 0 2 C 0 .8954305 .8954305 0 2 0 L 4.171573 0 C 4.702006 0 5.210714 .2107137 5.585786 .5857864 L 6.414214 1.414214 C 6.789286 1.789286 7.297994 2 7.828427 2 L 14 2 C 15.10457 2 16 2.895431 16 4 L 16 6 "/>
+<path transform="matrix(0,1,1,0,2,9.5)" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke="#000000" d="M 0 3 L 3 0 L 6 3 "/>
+<path transform="matrix(0,1,-1,-0,13.5,12)" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke="#000000" d="M .5 11.5 L .5 0 "/>
+</g>
+</svg>

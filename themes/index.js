@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import colors from "./colors";
 import { Platform, Dimensions } from "react-native";
 import { DefaultTheme, DarkTheme } from "@react-navigation/native";
@@ -29,6 +30,29 @@ const darkTheme = {
     divider: {
       borderWidth: 1,
       borderColor: colors.dark.border,
+=======
+import { Platform, Dimensions } from "react-native";
+import { DefaultTheme, DarkTheme } from "@react-navigation/native";
+import colors from "./colors";
+
+const { width, height, fontScale, scale } = Dimensions.get("screen");
+
+export default {
+  light: {
+    ...DefaultTheme,
+    dimemsions: Dimensions.get("screen"),
+    colors: {
+      ...DefaultTheme.colors,
+      ...colors.light,
+    },
+  },
+  dark: {
+    ...DarkTheme,
+    dimemsions: Dimensions.get("screen"),
+    colors: {
+      ...DarkTheme.colors,
+      ...colors.dark,
+>>>>>>> origin/main
     },
   },
 };

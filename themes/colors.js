@@ -1,4 +1,8 @@
 import { iOSColors } from "react-native-typography";
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/main
 export default {
   light: {
     // primary: 'rgb(255, 45, 85)',
@@ -9,6 +13,12 @@ export default {
     border: iOSColors.lightGray,
     backgroundCenter: iOSColors.customGray,
     iOSColors,
+<<<<<<< HEAD
+=======
+    typography: {
+      primary: "",
+    },
+>>>>>>> origin/main
   },
   dark: {
     // primary: 'rgb(255, 45, 85)',
@@ -19,5 +29,9 @@ export default {
     backgroundCenter: iOSColors.customGray,
     iOSColors,
     // notification: 'rgb(255, 69, 58)',
+
+    typography: {
+      primary: "",
+    },
   },
 };

@@ -1,4 +1,5 @@
 import React, { useRef, memo, useCallback, useState, useEffect, createRef } from "react";
+<<<<<<< HEAD
 import {
   StyleSheet,
   SafeAreaView,
@@ -10,6 +11,9 @@ import {
   VirtualizedList as RNVirtualizedList,
   TouchableOpacity,
 } from "react-native";
+=======
+import { StyleSheet, SafeAreaView, View, FlatList, Text, Animated, ScrollView, VirtualizedList as RNVirtualizedList, TouchableOpacity } from "react-native";
+>>>>>>> origin/main
 import { useTheme } from "@react-navigation/native";
 import PropTypes from "prop-types";
 import { ContactListItem, MainChatHeader, ChatListItem, Divider } from "@app/components";

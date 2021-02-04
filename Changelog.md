@@ -7,20 +7,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [1.0.1] - 2020-11-03
+## [0.0.3] - 2021-01-11
 
 ### Added
 
-- reactotron.
-- core navigation app.
+- eslint
+
+## Change
+
+- change expo to bare project
+
+## [0.0.2] - 2020-11-03
+
+### Added
+
+- Reactotron - devtools.
+- Core navigation app.
 - theme.
-- i18n.
-- blank screens.
-- basic component.
+- I18n.
+- Blank screens.
+- Basic component.
 
 ## [Unreleased]
 
-## [1.0.0] - 2020-11-03
+## [0.0.1] - 2020-11-03
 
 ### Added
 

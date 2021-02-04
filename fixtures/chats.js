@@ -3,6 +3,10 @@ import faker from "faker";
 import contacts from "./contacts";
 import currentUser from "./currentUser";
 import groups from "./groups";
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/main
 const byIds = {};
 
 const CHAT_TYPES = ["group", "direct", "other"];
@@ -28,7 +32,6 @@ const directChats = friends.map((friend) => ({
 }));
 
 // groups
-
 const groupChats = groups.items.map((group) => ({
   ...defaultChat(),
   chatName: group.groupName,
@@ -38,10 +41,13 @@ const groupChats = groups.items.map((group) => ({
 }));
 
 const chats = groupChats.concat(directChats);
-chats.forEach((chat) => (byIds[chat.id] = chat));
+
+chats.forEach((chat) => {
+  byIds[chat.id] = chat;
+});
 
 export default {
-  byIds: byIds,
+  byIds,
   allIds: Object.keys(byIds),
   items: chats,
 };

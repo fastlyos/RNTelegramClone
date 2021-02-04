@@ -15,7 +15,11 @@ import {
 import { useTheme } from "@react-navigation/native";
 import { HeaderStyleInterpolators } from "@react-navigation/stack";
 // components
+<<<<<<< HEAD
 import { Text, Button, ContactListItem, ContactListHeader, SearchBar } from "@app/components";
+=======
+import { Text, ContactListItem, ContactListHeader, SearchBar } from "@app/components";
+>>>>>>> origin/main
 import { iOSColors } from "react-native-typography";
 // data
 import contacts from "@app/fixtures/contacts";
@@ -102,12 +106,13 @@ const Item = ({ title, index, listRef, length }) => {
 
   const onTouchMove = useCallback(
     (evt) => {
-      const sectionIndex = parseInt(evt.nativeEvent.locationY / 18) + index;
+      const sectionIndex = parseInt(evt.nativeEvent.locationY / 18, 10) + index;
+
       if (sectionIndex >= 0 && sectionIndex < length && sectionIndex !== currentSection) {
         listRef?.current?.scrollToLocation({
           animated: false,
           itemIndex: 0,
-          sectionIndex: sectionIndex,
+          sectionIndex,
           viewPosition: 0,
         });
         setCurrentSection(sectionIndex);

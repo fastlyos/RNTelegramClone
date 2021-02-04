@@ -1,5 +1,6 @@
 import React from "react";
 import faker from "faker";
+<<<<<<< HEAD
 import { Ionicons } from "@expo/vector-icons";
 import { StyleSheet } from "react-native";
 import { BlurView } from "expo-blur";
@@ -13,11 +14,22 @@ import {
   HeaderTitle,
 } from "@react-navigation/stack";
 import useColorScheme from "@app/hooks/useColorScheme";
+=======
+import { Ionicons, FontAwesome } from "@expo/vector-icons";
+import { StyleSheet } from "react-native";
+import { BlurView } from "expo-blur";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createStackNavigator, HeaderStyleInterpolators, CardStyleInterpolators, TransitionSpecs, useHeaderHeight, HeaderTitle } from "@react-navigation/stack";
+import useColorScheme from "@app/hooks/useColorScheme";
+// styles
+import Colors from "@app/constants/Colors";
+>>>>>>> origin/main
 
 // components
 import { Image, SearchListHeader } from "@app/components";
 
 // screens
+<<<<<<< HEAD
 import ExampleScreen from "@app/screens";
 import MainContactScreen from "@app/screens/contacts/main-contact-screen";
 // import NewContactScreen from '@app/screens/contacts/new-contact-screen';
@@ -25,6 +37,15 @@ import MainChatScreen from "@app/screens/chats/main-chat-screen";
 import MainSettingScreen from "@app/screens/settings/main-setting-screen";
 // styles
 import Colors from "@app/constants/colors";
+=======
+import {
+  ExampleScreen,
+  MainContactScreen,
+  MainChatScreen,
+  MainSettingScreen,
+  // NewContactScreen
+} from "@app/screens/routes";
+>>>>>>> origin/main
 
 function TabBarIcon({ name, color, reverse }) {
   return <Ionicons size={32} style={{ marginBottom: -3, transform: reverse && [{ rotateY: "180deg" }] }} name={name} color={color} />;
@@ -99,7 +120,10 @@ function TabSettingsNavigator() {
         name="TabSettingsScreen"
         component={MainSettingScreen}
         options={{
+<<<<<<< HEAD
           // header: () => <></>,
+=======
+>>>>>>> origin/main
           headerTitle: "Settings",
           cardStyle: { backgroundColor: "transparent" },
           cardOverlayEnabled: true,
@@ -129,7 +153,11 @@ export default function BottomTabNavigator() {
         component={TabContactNavigator}
         options={{
           title: "Contacts",
+<<<<<<< HEAD
           tabBarIcon: ({ color }) => <TabBarIcon name="md-contact" color={color} />,
+=======
+          tabBarIcon: ({ color }) => <FontAwesome name="user-circle" size={24} color={color} />,
+>>>>>>> origin/main
         }}
       />
       <BottomTab.Screen

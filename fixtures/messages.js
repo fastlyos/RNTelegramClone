@@ -4,6 +4,10 @@ import chats from "./chats";
 import contacts from "./contacts";
 import groups, { GROUP_MEMBER_LENGTH } from "./groups";
 import currentUser from "./currentUser";
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/main
 const byIds = {};
 
 function defaultMessage() {
@@ -42,7 +46,9 @@ const groupMessages = _.flatten(
 );
 
 const messages = groupMessages.concat(directMessages);
-messages.forEach((chat) => (byIds[chat.id] = chat));
+messages.forEach((chat) => {
+  byIds[chat.id] = chat;
+});
 
 const lastMessages = chats.items.map((chat) => {
   const chatMessages = messages.filter((message) => message.chatId === chat.id);
@@ -53,10 +59,12 @@ const lastMessages = chats.items.map((chat) => {
   };
 });
 const lastMessageByIds = {};
-lastMessages.forEach((i) => (lastMessageByIds[i.chatId] = i.lastMessage));
+lastMessages.forEach((i) => {
+  lastMessageByIds[i.chatId] = i.lastMessage;
+});
 
 export default {
-  byIds: byIds,
+  byIds,
   allIds: Object.keys(byIds),
   items: messages,
   lastMessages,

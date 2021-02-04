@@ -1,4 +1,5 @@
 import React, { useRef, memo, useCallback, useState, useEffect, createRef } from "react";
+<<<<<<< HEAD
 import {
   StyleSheet,
   SafeAreaView,
@@ -10,6 +11,9 @@ import {
   VirtualizedList as RNVirtualizedList,
   TouchableOpacity,
 } from "react-native";
+=======
+import { StyleSheet, SafeAreaView, View, FlatList, Text, Animated, ScrollView, VirtualizedList as RNVirtualizedList, TouchableOpacity } from "react-native";
+>>>>>>> origin/main
 import { useTheme } from "@react-navigation/native";
 import PropTypes from "prop-types";
 import { ContactListItem, MainChatHeader, ChatListItem, Divider } from "@app/components";
@@ -22,7 +26,11 @@ const CHAT_DATA = CHATS.items.map((chat) => ({
   lastMessage: MESSAGES.lastMessageByIds[chat.id],
 }));
 
+<<<<<<< HEAD
 // const VirtualizedList = Animated.createAnimatedComponent(RNVirtualizedList);
+=======
+// const Virtualizedist = Animated.createAnimatedComponent(RNVirtualizedList);
+>>>>>>> origin/main
 
 function MainChatScreen({ navigation }) {
   const searchRef = useRef(null);
@@ -55,7 +63,7 @@ function MainChatScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <Animated.View style={styles.header}>
-        <MainChatHeader ref={searchRef} />
+        <MainChatHeader ref={searchRef} placeholder={"Search for messages or users"} />
       </Animated.View>
       <Animated.FlatList
         scrollEventThrottle={16}
@@ -74,7 +82,7 @@ function MainChatScreen({ navigation }) {
 
 MainChatScreen.propTypes = {};
 MainChatScreen.defaultProps = {};
-export default memo(MainChatScreen);
+export default MainChatScreen;
 
 const createStyles = ({ theme }) =>
   StyleSheet.create({

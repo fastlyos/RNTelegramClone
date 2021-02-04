@@ -1,15 +1,13 @@
+//
 module.exports = {
   env: {
     browser: true,
     es6: true,
     node: true,
   },
-  parser: "babel-eslint",
-  extends: ["plugin:react/recommended", "plugin:react-hooks/recommended", "airbnb"],
-  globals: {
-    Atomics: "readonly",
-    SharedArrayBuffer: "readonly",
-  },
+  parser: "@babel/eslint-parser",
+  // parser: "@typescript-eslint/parser",
+  extends: ["plugin:react/recommended", "plugin:react-hooks/recommended", "airbnb", "eslint:recommended"],
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -17,12 +15,14 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: "module",
   },
-  plugins: ["react"],
+  plugins: ["react", "@typescript-eslint"],
   rules: {
     eqeqeq: [2, "smart"],
+    quotes: ["error", "double"],
     "no-unused-vars": "off",
-    "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx"] }],
+    "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx", ".ts", ".tsx"] }],
     "arrow-body-style": "off",
+    "import/newline-after-import": "off",
     "react/prop-types": "off",
     "react/jsx-props-no-spreading": "off",
     "no-use-before-define": "off",
@@ -36,10 +36,38 @@ module.exports = {
     "import/no-named-as-default": "off",
     "consistent-return": "off",
     "max-len": [2, 300, 4],
+    "import/no-named-as-default-member": ["off"],
+    "import/no-named-as-default": ["off"],
+    "import/prefer-default-export": ["off"],
+    "consistent-return": "off",
+    "max-len": [2, 300, 4],
+    "object-curly-newline": "off",
+    "react/jsx-boolean-value": "off",
+    "implicit-arrow-linebreak": ["off"],
+    "import/no-unresolved": [2, { ignore: [".png$", ".webp$", ".jpg$"] }],
+    "react/jsx-closing-bracket-location": ["off"],
+    "react/jsx-curly-brace-presence": ["off"],
+    "no-plusplus": ["error", { allowForLoopAfterthoughts: true }],
+    "prefer-destructuring": ["error", { object: true, array: false }],
+    "no-unused-expressions": ["error", { allowShortCircuit: true }],
+    indent: "off",
+    "@typescript-eslint/no-var-requires": "off",
+    "@typescript-eslint/no-unused-vars": "off",
   },
   globals: {
     arguments: true,
     __DEV__: true,
-    reactotron,
+    reactotron: true,
+    Atomics: "readonly",
+    SharedArrayBuffer: "readonly",
+    it: true,
+  },
+  settings: {
+    "import/resolver": {
+      alias: {
+        map: [["@app/*", "./"]],
+        extensions: [".ts", ".tsx", ".js", ".jsx", ".json", ".png", ".svg"],
+      },
+    },
   },
 };

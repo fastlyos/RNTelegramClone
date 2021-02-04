@@ -1,4 +1,8 @@
 import React from "react";
+<<<<<<< HEAD
+=======
+import { Text } from "react-native";
+>>>>>>> origin/main
 import { NavigationContainer } from "@react-navigation/native";
 // import {} from '@react-navigation/core';
 import {
@@ -11,6 +15,7 @@ import {
 } from "@react-navigation/stack";
 import themes from "@app/themes";
 
+<<<<<<< HEAD
 import BottomTabNavigator from "./bottom-tab-navigator";
 import LinkingConfiguration from "./linking-configuration";
 import NotFoundScreen from "@app/screens/not-found-screen";
@@ -23,6 +28,14 @@ import FoldersScreen from "@app/screens/settings/personal/folders-screen";
 import MainMessagesScreen from "@app/screens/chats/main-messages-screen";
 // notification
 import NotificationAndSoundScreen from "@app/screens/settings/notification/notification-and-sound-screen";
+=======
+// screens
+import { OtherScreen, MainMessagesScreen, NotFoundScreen, PinLocationScreen, DevsScreen, IntroScreen } from "@app/screens/routes";
+
+// navigations
+import BottomTabNavigator from "./bottom-tab-navigator";
+import LinkingConfiguration from "./linking-configuration";
+>>>>>>> origin/main
 
 export default function AppNavigation({ colorScheme }) {
   return (
@@ -36,6 +49,7 @@ const Stack = createStackNavigator();
 function RootNavigator() {
   return (
     <Stack.Navigator
+      initialRouteName="Root"
       screenOptions={{
         headerShown: true,
         gestureDirection: "horizontal",
@@ -50,10 +64,19 @@ function RootNavigator() {
           headerShown: false,
         }}
       />
+      <Stack.Screen
+        name="IntroScreen"
+        component={IntroScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
       <Stack.Screen name="OtherScreen" component={OtherScreen} />
       <Stack.Screen name="OtherScreen2" component={OtherScreen} />
       <Stack.Screen name="OtherScreen3" component={OtherScreen} />
+      {/* Messages */}
       <Stack.Screen name="MainMessagesScreen" component={MainMessagesScreen} />
+<<<<<<< HEAD
 
       {/* Settings */}
       {/* personal */}
@@ -62,6 +85,22 @@ function RootNavigator() {
       {/*  notification */}
       <Stack.Screen name="NotificationAndSoundScreen" component={NotificationAndSoundScreen} options={{ title: "Notifications" }} />
 
+=======
+      <Stack.Screen name="DevsScreen" component={DevsScreen} />
+      <Stack.Screen
+        name="PinLocationScreen"
+        component={PinLocationScreen}
+        options={{
+          headerShown: false,
+          // animationEnabled: true,
+          // gestureDirection: "vertical",
+          // cardOverlayEnabled: true,
+          // cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        }}
+      />
+
+      {/* others */}
+>>>>>>> origin/main
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: "Oops!" }} />
     </Stack.Navigator>
   );
