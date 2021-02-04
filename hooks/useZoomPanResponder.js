@@ -8,7 +8,6 @@
 import { useMemo, useEffect } from "react";
 import { Animated, Dimensions } from "react-native";
 import { createPanResponder, getDistanceBetweenTouches, getImageTranslate, getImageDimensionsByTranslate } from "./utils";
-
 const SCREEN = Dimensions.get("window");
 const SCREEN_WIDTH = SCREEN.width;
 const SCREEN_HEIGHT = SCREEN.height;

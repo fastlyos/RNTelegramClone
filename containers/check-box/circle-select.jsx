@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { StyleSheet, View, ViewPropTypes, TouchableOpacity } from "react-native";
-import { Text } from "../text";
+import { Text } from "@app/components";
 
 const SIZE = {
   small: { height: 25, width: 25 },

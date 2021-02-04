@@ -1,4 +1,5 @@
 import React, { memo, useRef, useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { Ionicons } from "@expo/vector-icons";
 import { StyleSheet, Text, View, TextInput, Animated, Easing, TouchableWithoutFeedback } from "react-native";
 import { useTheme } from "@react-navigation/native";
@@ -44,7 +45,7 @@ function SearchBar({ placeholder }) {
               onFocus={onFocus}
               onEndEditing={onBlur}
               defaultValue=""
-              placeholder={placeholder ? placeholder : "Search"}
+              placeholder={placeholder}
               style={styles.textinput}
             />
           </View>
@@ -54,7 +55,14 @@ function SearchBar({ placeholder }) {
   );
 }
 
-export default memo(SearchBar);
+export default SearchBar;
+
+SearchBar.propTypes = {
+  placeholder: PropTypes.string,
+};
+SearchBar.defaultProps = {
+  placeholder: "Search",
+};
 
 const createStyles = ({ theme }) =>
   StyleSheet.create({

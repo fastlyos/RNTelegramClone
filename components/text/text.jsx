@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { StyleSheet, Text as RNText } from "react-native";
+import { Text as RNText } from "react-native";
 import { iOSColors, iOSUIKit } from "react-native-typography";
 
 const COLORS = {

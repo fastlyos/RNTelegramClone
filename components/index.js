@@ -1,10 +1,6 @@
-export { StyleSheet } from "react-native";
 export * from "./icons";
-export { default as SearchBar } from "./search-bar/search-bar";
-export * from "./list-item";
-export * from "./list-header";
-export * from "./text";
-export * from "./view";
-export * from "./text-input";
-export * from "./check-box";
 export * from "./image";
+export * from "./input-bar";
+export * from "./text";
+export * from "./text-input";
+export * from "./view";

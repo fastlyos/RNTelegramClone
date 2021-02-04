@@ -5,7 +5,8 @@ module.exports = {
     node: true,
   },
   parser: "@babel/eslint-parser",
-  extends: ["plugin:react/recommended", "plugin:react-hooks/recommended", "airbnb"],
+  // parser: "@typescript-eslint/parser",
+  extends: ["plugin:react/recommended", "plugin:react-hooks/recommended", "airbnb", "eslint:recommended"],
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -13,13 +14,14 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: "module",
   },
-  plugins: ["react"],
+  plugins: ["react", "@typescript-eslint"],
   rules: {
     eqeqeq: [2, "smart"],
     quotes: ["error", "double"],
     "no-unused-vars": "off",
-    "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx"] }],
+    "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx", ".ts", ".tsx"] }],
     "arrow-body-style": "off",
+    "import/newline-after-import": "off",
     "react/prop-types": "off",
     "react/jsx-props-no-spreading": "off",
     "no-use-before-define": "off",
@@ -44,6 +46,8 @@ module.exports = {
     "prefer-destructuring": ["error", { object: true, array: false }],
     "no-unused-expressions": ["error", { allowShortCircuit: true }],
     indent: "off",
+    "@typescript-eslint/no-var-requires": "off",
+    "@typescript-eslint/no-unused-vars": "off",
   },
   globals: {
     arguments: true,
@@ -57,7 +61,7 @@ module.exports = {
     "import/resolver": {
       alias: {
         map: [["@app/*", "./"]],
-        extensions: [".ts", ".js", ".jsx", ".json", ".png", ".svg"],
+        extensions: [".ts", ".tsx", ".js", ".jsx", ".json", ".png", ".svg"],
       },
     },
   },

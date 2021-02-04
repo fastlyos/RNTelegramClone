@@ -12,7 +12,7 @@ const CHAT_DATA = CHATS.items.map((chat) => ({
   lastMessage: MESSAGES.lastMessageByIds[chat.id],
 }));
 
-const VirtualizedList = Animated.createAnimatedComponent(RNVirtualizedList);
+// const Virtualizedist = Animated.createAnimatedComponent(RNVirtualizedList);
 
 function MainChatScreen({ navigation }) {
   const searchRef = useRef(null);

@@ -6,7 +6,7 @@
  *
  */
 import { Animated, GestureResponderHandlers } from "react-native";
-import { Position } from "../@types";
+import { Position } from "./@types";
 declare type Props = {
   initialScale: number;
   initialTranslate: Position;

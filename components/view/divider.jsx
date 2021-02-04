@@ -1,19 +1,15 @@
-import React, { memo } from "react";
-import PropTypes from "prop-types";
-import { StyleSheet, useWindowDimensions } from "react-native";
+import React from "react";
+import { StyleSheet, useWindowDimensions, View } from "react-native";
 import { useTheme } from "@react-navigation/native";
-import View from "./view";
 
-function Divider({ style }) {
+function Divider({ style, ...props }) {
   const theme = useTheme();
   const { width, height } = useWindowDimensions();
   const styles = createStyles({ theme, width, height });
-  return <View style={[styles.divider, style]} />;
+  return <View style={[styles.divider, style]} {...props} />;
 }
 
-Divider.propTypes = {};
-export default memo(Divider);
-
+export default Divider;
 const createStyles = ({ theme }) =>
   StyleSheet.create({
     divider: {

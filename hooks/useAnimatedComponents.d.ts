@@ -6,9 +6,14 @@
  *
  */
 import { Animated } from "react-native";
-declare const useAnimatedComponents: () => readonly [{
+
+declare const useAnimatedComponents: () => readonly [
+  {
     [key: string]: Animated.Value;
-}[], {
+  }[],
+  {
     [key: string]: Animated.Value;
-}[], (isVisible: boolean) => void];
+  }[],
+  (isVisible: boolean) => void,
+];
 export default useAnimatedComponents;

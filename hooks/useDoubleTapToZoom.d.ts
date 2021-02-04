@@ -7,7 +7,7 @@
  */
 import React from "react";
 import { ScrollView, NativeTouchEvent, NativeSyntheticEvent } from "react-native";
-import { Dimensions } from "../@types";
+import { Dimensions } from "./@types";
 /**
  * This is iOS only.
  * Same functionality for Android implemented inside usePanResponder hook.

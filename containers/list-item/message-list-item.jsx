@@ -9,7 +9,7 @@ import CURRENT_USER from "@app/fixtures/currentUser";
 import { RectButton } from "react-native-gesture-handler";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 //
-import { Text } from "../text";
+import { Text } from "@app/components";
 
 const renderLeftActions = (progress, dragX) => {
   // const theme = useTheme();
