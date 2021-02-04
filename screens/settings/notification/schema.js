@@ -226,7 +226,9 @@ export const notificationList = [
   },
   {
     id: faker.random.uuid(),
-    footerTitle: [`Display names in notifications when the device is locked. To disable, make sure that "Show Previews" is also set to "When Unlocked" or "Never" in iOS Settings > Notifications.`],
+    footerTitle: [
+      `Display names in notifications when the device is locked. To disable, make sure that "Show Previews" is also set to "When Unlocked" or "Never" in iOS Settings > Notifications.`,
+    ],
     data: [
       {
         id: faker.random.uuid(),

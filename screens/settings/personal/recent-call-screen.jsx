@@ -1,11 +1,12 @@
-<<<<<<< HEAD
 import React, { memo, useState, useEffect } from "react";
 import { StyleSheet, View, TouchableOpacity, SectionList, Switch } from "react-native";
 import { useTheme, useNavigation } from "@react-navigation/native";
 import PropTypes from "prop-types";
 import { iOSColors } from "react-native-typography";
+import { Divider, Text } from "@app/components";
+import { CommonListItem } from "@app/containers";
+import { SCREEN_HEIGHT, SCREEN_WIDTH } from "@app/constants/Layout";
 import { recentCalls } from "./schema";
-import { CommonListItem, Divider, Text } from "@app/components";
 
 function SwitchComponent() {
   const [value, setValue] = useState(false);
@@ -38,16 +39,6 @@ function RecentCallScreen({}) {
     return () => {};
   }, []);
 
-=======
-import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import randomString from "random-string";
-import PropTypes from "prop-types";
-import { iOSColors } from "react-native-typography";
-
-export default function ExampleScreen({ navigation }) {
-  const goto = () => navigation && navigation.navigate("NewContact");
->>>>>>> origin/main
   return (
     <View style={styles.container}>
       <View style={styles.content}>
@@ -80,7 +71,6 @@ RecentCallScreen.propTypes = {};
 RecentCallScreen.defaultProps = {};
 export default memo(RecentCallScreen);
 
-<<<<<<< HEAD
 const createStyles = ({ theme }) => {
   const { dimemsions = {} } = theme;
   const { width, height } = dimemsions;
@@ -93,8 +83,8 @@ const createStyles = ({ theme }) => {
       position: "absolute",
       top: 0,
       left: 0,
-      width: width,
-      height: height,
+      width: SCREEN_WIDTH,
+      height: SCREEN_HEIGHT,
       justifyContent: "center",
       alignItems: "center",
     },
@@ -109,27 +99,11 @@ const createStyles = ({ theme }) => {
     },
     footerView: {
       paddingVertical: 5,
-      paddingHorizontal: 10
-    }
+      paddingHorizontal: 10,
+    },
     // button: {
     //   padding: 16,
     //   backgroundColor: iOSColors.purple,
     // },
   });
 };
-=======
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  content: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  button: {
-    padding: 16,
-    backgroundColor: iOSColors.purple,
-  },
-});
->>>>>>> origin/main

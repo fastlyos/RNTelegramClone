@@ -1,14 +1,8 @@
 import React, { useState, useEffect, useCallback, forwardRef, useRef, memo } from "react";
 import { StyleSheet, Text, View, Animated } from "react-native";
-<<<<<<< HEAD:components/list-header/main-chat-header.jsx
-import SearchBar from "../search-bar/search-bar";
-import { useTheme } from "@react-navigation/native";
-import PropTypes from "prop-types";
-=======
 import { useTheme } from "@react-navigation/native";
 import PropTypes from "prop-types";
 import SearchBar from "../search-bar/search-bar";
->>>>>>> origin/main:containers/list-header/main-chat-header.jsx
 
 const ChatHeader = memo(({ searchBarRef, placeholder }) => {
   //

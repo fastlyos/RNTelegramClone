@@ -1,4 +1,3 @@
-//
 module.exports = {
   env: {
     browser: true,
@@ -18,7 +17,7 @@ module.exports = {
   plugins: ["react", "@typescript-eslint"],
   rules: {
     eqeqeq: [2, "smart"],
-    quotes: ["error", "double"],
+    quotes: ["error", "double", { avoidEscape: true, allowTemplateLiterals: true }],
     "no-unused-vars": "off",
     "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx", ".ts", ".tsx"] }],
     "arrow-body-style": "off",
@@ -32,10 +31,6 @@ module.exports = {
     "no-param-reassign": "off",
     "no-console": "off",
     "no-alert": "off",
-    "import/no-named-as-default-member": "off",
-    "import/no-named-as-default": "off",
-    "consistent-return": "off",
-    "max-len": [2, 300, 4],
     "import/no-named-as-default-member": ["off"],
     "import/no-named-as-default": ["off"],
     "import/prefer-default-export": ["off"],

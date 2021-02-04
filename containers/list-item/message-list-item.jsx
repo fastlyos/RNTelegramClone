@@ -1,13 +1,6 @@
-<<<<<<< HEAD:components/list-item/message-list-item.jsx
-import React, { memo } from "react";
-import moment from "moment";
-import { StyleSheet, View, Animated } from "react-native";
-import { Text } from "../text";
-=======
 import React, { memo, useEffect, useRef } from "react";
 import moment from "moment";
 import { StyleSheet, View, Animated, Image } from "react-native";
->>>>>>> origin/main:containers/list-item/message-list-item.jsx
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import PropTypes from "prop-types";
 import { useTheme } from "@react-navigation/native";
@@ -15,11 +8,8 @@ import { iOSColors } from "react-native-typography";
 import CURRENT_USER from "@app/fixtures/currentUser";
 import { RectButton } from "react-native-gesture-handler";
 import Swipeable from "react-native-gesture-handler/Swipeable";
-<<<<<<< HEAD:components/list-item/message-list-item.jsx
-=======
 //
 import { Text } from "@app/components";
->>>>>>> origin/main:containers/list-item/message-list-item.jsx
 
 const renderLeftActions = (progress, dragX) => {
   // const theme = useTheme();

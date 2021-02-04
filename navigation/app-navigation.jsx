@@ -1,8 +1,5 @@
 import React from "react";
-<<<<<<< HEAD
-=======
 import { Text } from "react-native";
->>>>>>> origin/main
 import { NavigationContainer } from "@react-navigation/native";
 // import {} from '@react-navigation/core';
 import {
@@ -15,27 +12,12 @@ import {
 } from "@react-navigation/stack";
 import themes from "@app/themes";
 
-<<<<<<< HEAD
-import BottomTabNavigator from "./bottom-tab-navigator";
-import LinkingConfiguration from "./linking-configuration";
-import NotFoundScreen from "@app/screens/not-found-screen";
-import OtherScreen from "@app/screens/other-screen";
-
-// settings
-// personal
-import RecentCallScreen from "@app/screens/settings/personal/recent-call-screen";
-import FoldersScreen from "@app/screens/settings/personal/folders-screen";
-import MainMessagesScreen from "@app/screens/chats/main-messages-screen";
-// notification
-import NotificationAndSoundScreen from "@app/screens/settings/notification/notification-and-sound-screen";
-=======
 // screens
-import { OtherScreen, MainMessagesScreen, NotFoundScreen, PinLocationScreen, DevsScreen, IntroScreen } from "@app/screens/routes";
+import { OtherScreen, NotFoundScreen, PinLocationScreen, DevsScreen } from "@app/screens";
 
 // navigations
 import BottomTabNavigator from "./bottom-tab-navigator";
 import LinkingConfiguration from "./linking-configuration";
->>>>>>> origin/main
 
 export default function AppNavigation({ colorScheme }) {
   return (
@@ -64,28 +46,18 @@ function RootNavigator() {
           headerShown: false,
         }}
       />
-      <Stack.Screen
+      {/* <Stack.Screen
         name="IntroScreen"
         component={IntroScreen}
         options={{
           headerShown: false,
         }}
-      />
+      /> */}
       <Stack.Screen name="OtherScreen" component={OtherScreen} />
       <Stack.Screen name="OtherScreen2" component={OtherScreen} />
       <Stack.Screen name="OtherScreen3" component={OtherScreen} />
       {/* Messages */}
-      <Stack.Screen name="MainMessagesScreen" component={MainMessagesScreen} />
-<<<<<<< HEAD
-
-      {/* Settings */}
-      {/* personal */}
-      <Stack.Screen name="RecentCallScreen" component={RecentCallScreen} />
-      <Stack.Screen name="FoldersScreen" component={FoldersScreen} options={{ title: "Folders" }} />
-      {/*  notification */}
-      <Stack.Screen name="NotificationAndSoundScreen" component={NotificationAndSoundScreen} options={{ title: "Notifications" }} />
-
-=======
+      {/* <Stack.Screen name="MainMessagesScreen" component={MainMessagesScreen} /> */}
       <Stack.Screen name="DevsScreen" component={DevsScreen} />
       <Stack.Screen
         name="PinLocationScreen"
@@ -100,7 +72,6 @@ function RootNavigator() {
       />
 
       {/* others */}
->>>>>>> origin/main
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: "Oops!" }} />
     </Stack.Navigator>
   );

@@ -1,8 +1,4 @@
 import _ from "lodash";
-<<<<<<< HEAD
-import React, { memo, useCallback, useMemo, useState, useEffect } from "react";
-import PropTypes from "prop-types";
-=======
 import React, { memo, useCallback, useMemo, useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import moment from "moment";
@@ -12,7 +8,6 @@ import * as ImagePicker from "expo-image-picker";
 import Constants from "expo-constants";
 import { Camera } from "expo-camera";
 
->>>>>>> origin/main
 // components
 import {
   StyleSheet,
@@ -29,13 +24,6 @@ import {
   ImageBackground,
   TouchableOpacity,
   useWindowDimensions,
-<<<<<<< HEAD
-} from "react-native";
-import { ContactListItem, ChatListItem, Divider, Text, MessageListItem, MessageTyping } from "@app/components";
-// theme
-import { useTheme } from "@react-navigation/native";
-import { iOSColors } from "react-native-typography";
-=======
   useColorScheme,
   Image,
 } from "react-native";
@@ -44,8 +32,8 @@ import * as Animatable from "react-native-animatable";
 import Animated from "react-native-reanimated";
 import BottomSheet from "reanimated-bottom-sheet";
 
-import { ContactListItem, ChatListItem, Divider, Text, MessageListItem, MessageTyping, SearchListHeader, CircleSelect } from "@app/components";
->>>>>>> origin/main
+import { Divider, Text } from "@app/components";
+import { ContactListItem, ChatListItem, MessageListItem, MessageTyping, SearchListHeader, CircleSelect } from "@app/containers";
 
 // theme
 import { useTheme } from "@react-navigation/native";
@@ -54,10 +42,6 @@ import { iOSColors, iOSUIKit } from "react-native-typography";
 import CHATS from "@app/fixtures/chats";
 import MESSAGES from "@app/fixtures/messages";
 import CONTACTS from "@app/fixtures/contacts";
-<<<<<<< HEAD
-
-const keyboardVerticalOffset = Platform.OS === "ios" ? 95 : 0;
-=======
 
 // containers
 import AttachmentBottomSheet from "./containers/attachment-bottom-sheet";
@@ -142,7 +126,6 @@ function FooterComponent() {
     </SafeAreaView>
   );
 }
->>>>>>> origin/main
 
 function MainMessagesScreen({ navigation, route }) {
   const sheetRef = useRef(null);

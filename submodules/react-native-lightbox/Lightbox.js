@@ -47,10 +47,7 @@ export default class Lightbox extends Component {
     if (this.props.renderContent) {
       return this.props.renderContent();
     } else if (this.props.activeProps) {
-      return cloneElement(
-        Children.only(this.props.children),
-        this.props.activeProps
-      );
+      return cloneElement(Children.only(this.props.children), this.props.activeProps);
     }
     return this.props.children;
   };
@@ -101,15 +98,13 @@ export default class Lightbox extends Component {
           setTimeout(() => {
             this._root && this.state.layoutOpacity.setValue(0);
           });
-        }
+        },
       );
     });
   };
 
   close = () => {
-    throw new Error(
-      "Lightbox.close method is deprecated. Use renderHeader(close) prop instead."
-    );
+    throw new Error("Lightbox.close method is deprecated. Use renderHeader(close) prop instead.");
   };
 
   onClose = () => {
@@ -118,7 +113,7 @@ export default class Lightbox extends Component {
       {
         isOpen: false,
       },
-      this.props.onClose
+      this.props.onClose,
     );
     if (this.props.navigator) {
       const routes = this.props.navigator.getCurrentRoutes();
@@ -130,25 +125,13 @@ export default class Lightbox extends Component {
   render() {
     // measure will not return anything useful if we dont attach a onLayout handler on android
     return (
-      <View
-        ref={(component) => (this._root = component)}
-        style={this.props.style}
-        onLayout={() => {}}
-      >
+      <View ref={(component) => (this._root = component)} style={this.props.style} onLayout={() => {}}>
         <Animated.View style={{ opacity: this.state.layoutOpacity }}>
-          <TouchableHighlight
-            underlayColor={this.props.underlayColor}
-            onPress={this.open}
-            onLongPress={this.props.onLongPress}
-          >
+          <TouchableHighlight underlayColor={this.props.underlayColor} onPress={this.open} onLongPress={this.props.onLongPress}>
             {this.props.children}
           </TouchableHighlight>
         </Animated.View>
-        {this.props.navigator ? (
-          false
-        ) : (
-          <LightboxOverlay {...this.getOverlayProps()} />
-        )}
+        {this.props.navigator ? false : <LightboxOverlay {...this.getOverlayProps()} />}
       </View>
     );
   }

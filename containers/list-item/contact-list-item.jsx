@@ -8,13 +8,8 @@ import Image from "@app/components/image/image";
 import { useTheme } from "@react-navigation/native";
 
 function ContactListItem({ id, avatar, type, firstName, lastName, status, lastSeen, onPress, navigation }) {
-<<<<<<< HEAD:components/list-item/contact-list-item.jsx
-  const name = firstName + " " + lastName;
-  const statusText = status === "online" ? status : "last seen " + moment(lastSeen).fromNow();
-=======
   const name = `${firstName} ${lastName}`;
   const statusText = status === "online" ? status : `last seen ${moment(lastSeen).fromNow()}`;
->>>>>>> origin/main:containers/list-item/contact-list-item.jsx
   const theme = useTheme();
   const styles = createStyles({ theme });
   // const borderStyle = {

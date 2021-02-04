@@ -24,7 +24,10 @@ export class ModalViewTest1 extends React.PureComponent {
     const currentPresentationStyle = availablePresentationStyles[currentIndex];
 
     return (
-      <ModalView containerStyle={sharedStyles.modalContainer} modalPresentationStyle={currentPresentationStyle} ref={(r) => (this.modalRef = r)}>
+      <ModalView
+        containerStyle={sharedStyles.modalContainer}
+        modalPresentationStyle={currentPresentationStyle}
+        ref={(r) => (this.modalRef = r)}>
         <>
           <View style={sharedStyles.titleContainer}>
             <Text style={sharedStyles.textEmoji}>{"😊"}</Text>

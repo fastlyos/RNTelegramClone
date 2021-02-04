@@ -40,7 +40,7 @@ export const COLORS = {
   Moss: "#addfad",
   Azure: "#315ba1",
   Blue: "#0000ff",
-  Cobalt: "#0047ab",  
+  Cobalt: "#0047ab",
   Indigo: "#4f69c6",
   Lagoon: "#017987",
   Aquamarine: "#71d9e2",
@@ -97,5 +97,5 @@ export const COLORS = {
   Melon: "#febaad",
   Mulberry: "#c54b8c",
   Opal: "#a9c6c2",
-  Blue: "#54a5f8",
+  // Blue: "#54a5f8",
 };

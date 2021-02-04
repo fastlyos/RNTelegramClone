@@ -6,17 +6,12 @@
     "web": "expo start --web",
     "start": "react-native start",
     "test": "jest",
-<<<<<<< HEAD
-    "storybook": "start-storybook -p 7007",
-    "format": "prettier --write ."
-=======
     "install": "yarn podinstall",
     "podinstall": "npx pod-install",
     "storybook": "start-storybook -p 7007",
     "format": "prettier --write .",
     "lint": "eslint .",
     "clean": "rm -rf node_modules/ && cd ios/ && rm -rf Pods/ && cd .."
->>>>>>> origin/main
   },
   "dependencies": {
     "@expo/metro-config": "^0.1.48",
@@ -80,21 +75,10 @@
   },
   "devDependencies": {
     "@babel/core": "~7.9.0",
-<<<<<<< HEAD
-    "prettier": "2.2.1",
-    "@storybook/addon-actions": "^6.0.28",
-    "@storybook/addon-knobs": "^6.0.28",
-    "@storybook/addon-links": "^5.3",
-    "@storybook/addon-ondevice-actions": "^5.3.23",
-    "@storybook/addon-ondevice-knobs": "^5.3.23",
-    "@storybook/react-native": "^5.3.23",
-    "@storybook/react-native-server": "^5.3.23",
-=======
     "@babel/eslint-parser": "^7.12.1",
     "@typescript-eslint/eslint-plugin": "^4.14.2",
     "@typescript-eslint/parser": "^4.14.2",
     "babel-jest": "~25.2.6",
->>>>>>> origin/main
     "babel-loader": "^8.1.0",
     "eslint": "^7.19.0",
     "eslint-config-airbnb": "18.2.1",

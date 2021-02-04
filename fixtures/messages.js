@@ -4,10 +4,6 @@ import chats from "./chats";
 import contacts from "./contacts";
 import groups, { GROUP_MEMBER_LENGTH } from "./groups";
 import currentUser from "./currentUser";
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/main
 const byIds = {};
 
 function defaultMessage() {

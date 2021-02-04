@@ -1,8 +1,5 @@
 import React, { memo, useRef, useState, useEffect } from "react";
-<<<<<<< HEAD:components/search-bar/search-bar.jsx
-=======
 import PropTypes from "prop-types";
->>>>>>> origin/main:containers/search-bar/search-bar.jsx
 import { Ionicons } from "@expo/vector-icons";
 import { StyleSheet, Text, View, TextInput, Animated, Easing, TouchableWithoutFeedback } from "react-native";
 import { useTheme } from "@react-navigation/native";

@@ -16,7 +16,15 @@ const SWIPE_CLOSE_VELOCITY = 1;
 const SCREEN = Dimensions.get("window");
 const SCREEN_WIDTH = SCREEN.width;
 const SCREEN_HEIGHT = SCREEN.height;
-const ImageItem = ({ imageSrc, onZoom, onRequestClose, onLongPress, delayLongPress, swipeToCloseEnabled = true, doubleTapToZoomEnabled = true }) => {
+const ImageItem = ({
+  imageSrc,
+  onZoom,
+  onRequestClose,
+  onLongPress,
+  delayLongPress,
+  swipeToCloseEnabled = true,
+  doubleTapToZoomEnabled = true,
+}) => {
   const imageContainer = React.createRef();
   const imageDimensions = useImageDimensions(imageSrc);
   const [translate, scale] = getImageTransform(imageDimensions, SCREEN);

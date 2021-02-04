@@ -3,3 +3,4 @@ _test_/
 android/
 ios/
 **/node_modules/**
+submodules/

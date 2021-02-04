@@ -8,31 +8,31 @@
 import React from "react";
 import { View, StyleSheet, StatusBar } from "react-native";
 import useBackHandler from "../../hooks/useBackHandler";
-const Modal = ({ visible, children, presentationStyle, onRequestClose, }) => {
-    const statusBarHidden = presentationStyle === "overFullScreen";
-    const statusBarStateStyle = presentationStyle === "overFullScreen"
-        ? styles.overFullscreen
-        : styles.defaultStyle;
-    useBackHandler(visible, onRequestClose);
-    if (!visible) {
-        return null;
-    }
-    return (<>
-      {statusBarHidden && <StatusBar hidden/>}
+const Modal = ({ visible, children, presentationStyle, onRequestClose }) => {
+  const statusBarHidden = presentationStyle === "overFullScreen";
+  const statusBarStateStyle = presentationStyle === "overFullScreen" ? styles.overFullscreen : styles.defaultStyle;
+  useBackHandler(visible, onRequestClose);
+  if (!visible) {
+    return null;
+  }
+  return (
+    <>
+      {statusBarHidden && <StatusBar hidden />}
       <View style={[styles.root, statusBarStateStyle]}>{children}</View>
-    </>);
+    </>
+  );
 };
 const styles = StyleSheet.create({
-    root: {
-        ...StyleSheet.absoluteFillObject,
-        zIndex: 1000,
-        backgroundColor: "transparent",
-    },
-    overFullscreen: {
-        top: 0,
-    },
-    defaultStyle: {
-        top: StatusBar.currentHeight,
-    },
+  root: {
+    ...StyleSheet.absoluteFillObject,
+    zIndex: 1000,
+    backgroundColor: "transparent",
+  },
+  overFullscreen: {
+    top: 0,
+  },
+  defaultStyle: {
+    top: StatusBar.currentHeight,
+  },
 });
 export default Modal;

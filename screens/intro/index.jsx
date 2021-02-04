@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-=======
 import React, { useCallback, useEffect, useState, memo, useMemo, useRef } from "react";
 import _ from "lodash";
 import { StyleSheet, View, SafeAreaView, FlatList, Dimensions, Image, TouchableOpacity } from "react-native";
@@ -18,7 +14,6 @@ import { CONTENT, TOP_CONFIG } from "./schema";
 function renderContentItem({ item, index }) {
   const contentLines = item.content.map((line) => findCharStyle(line, "<bold>", "</bold>"));
   const styles = itemStyle;
->>>>>>> origin/main
 
   return (
     <View style={{ width: SCREEN_WIDTH, alignItems: "center", flex: 1 }}>

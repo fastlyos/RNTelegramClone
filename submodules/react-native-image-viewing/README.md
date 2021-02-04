@@ -48,12 +48,7 @@ const images = [
 
 const [visible, setIsVisible] = useState(false);
 
-<ImageView
-  images={images}
-  imageIndex={0}
-  visible={visible}
-  onRequestClose={() => setIsVisible(false)}
-/>;
+<ImageView images={images} imageIndex={0} visible={visible} onRequestClose={() => setIsVisible(false)} />;
 ```
 
 #### [See Example](https://github.com/jobtoday/react-native-image-viewing/blob/master/example/App.tsx#L62-L80)

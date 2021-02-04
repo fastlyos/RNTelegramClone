@@ -31,9 +31,7 @@ For android support you must pass a reference to a `Navigator` since it does not
 const renderScene = (route, navigator) => {
   const Component = route.component;
 
-  return (
-    <Component navigator={navigator} route={route} {...route.passProps} />
-  );
+  return <Component navigator={navigator} route={route} {...route.passProps} />;
 };
 
 const MyApp = () => (
@@ -50,19 +48,19 @@ const MyApp = () => (
 
 ## Properties
 
-| Prop | Type | Description |
-|---|---|---|
-|**`activeProps`**|`object`|Optional set of props applied to the content component when in lightbox mode. Usable for applying custom styles or higher resolution image source.|
-|**`renderHeader(close)`**|`function`|Custom header instead of default with X button|
-|**`renderContent`**|`function`|Custom lightbox content instead of default child content|
-|**`willClose`**|`function`|Triggered before lightbox is closed|
-|**`onClose`**|`function`|Triggered when lightbox is closed|
-|**`onOpen`**|`function`|Triggered when lightbox is opened|
-|**`didOpen`**|`function`|Triggered after lightbox is opened|
-|**`underlayColor`**|`string`|Color of touchable background, defaults to `black`|
-|**`backgroundColor`**|`string`|Color of lightbox background, defaults to `black`|
-|**`swipeToDismiss`**|`bool`|Enables gestures to dismiss the fullscreen mode by swiping up or down, defaults to `true`.|
-|**`springConfig`**|`object`|[`Animated.spring`](https://facebook.github.io/react-native/docs/animations.html) configuration, defaults to `{ tension: 30, friction: 7 }`.|
+| Prop                      | Type       | Description                                                                                                                                        |
+| ------------------------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`activeProps`**         | `object`   | Optional set of props applied to the content component when in lightbox mode. Usable for applying custom styles or higher resolution image source. |
+| **`renderHeader(close)`** | `function` | Custom header instead of default with X button                                                                                                     |
+| **`renderContent`**       | `function` | Custom lightbox content instead of default child content                                                                                           |
+| **`willClose`**           | `function` | Triggered before lightbox is closed                                                                                                                |
+| **`onClose`**             | `function` | Triggered when lightbox is closed                                                                                                                  |
+| **`onOpen`**              | `function` | Triggered when lightbox is opened                                                                                                                  |
+| **`didOpen`**             | `function` | Triggered after lightbox is opened                                                                                                                 |
+| **`underlayColor`**       | `string`   | Color of touchable background, defaults to `black`                                                                                                 |
+| **`backgroundColor`**     | `string`   | Color of lightbox background, defaults to `black`                                                                                                  |
+| **`swipeToDismiss`**      | `bool`     | Enables gestures to dismiss the fullscreen mode by swiping up or down, defaults to `true`.                                                         |
+| **`springConfig`**        | `object`   | [`Animated.spring`](https://facebook.github.io/react-native/docs/animations.html) configuration, defaults to `{ tension: 30, friction: 7 }`.       |
 
 ## Demo
 

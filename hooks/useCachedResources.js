@@ -1,14 +1,16 @@
-<<<<<<< HEAD
-import React, { useState } from "react";
-import * as SplashScreen from "expo-splash-screen";
-import * as Font from "expo-font";
-import { Ionicons } from "@expo/vector-icons";
-=======
 import { useState, useEffect } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import * as Font from "expo-font";
-import { Ionicons, AntDesign, MaterialCommunityIcons, MaterialIcons, Entypo, Feather, FontAwesome, SimpleLineIcons } from "@expo/vector-icons";
->>>>>>> origin/main
+import {
+  Ionicons,
+  AntDesign,
+  MaterialCommunityIcons,
+  MaterialIcons,
+  Entypo,
+  Feather,
+  FontAwesome,
+  SimpleLineIcons,
+} from "@expo/vector-icons";
 
 export default function useCachedResources() {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
