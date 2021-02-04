@@ -12,9 +12,10 @@ export function Ionicons(props) {
   return <RNIonicons {...props} />;
 }
 
-export function PngIcons({ name, style, ...props }) {
+export function PngIcons({ name, size = DEFAULT_SIZE, style, ...props }) {
   const source = PNG_ICON_SOURCES[name];
-  return <Image {...props} source={source} style={[{ width: DEFAULT_SIZE, height: DEFAULT_SIZE }, style]} />;
+  const sizeStyle = { width: size, height: size };
+  return <Image {...props} source={source} style={[sizeStyle, style]} />;
 }
 
 export function SvgIcons({ name, backgroundColor, containerStyle, tintColor, ...props }) {

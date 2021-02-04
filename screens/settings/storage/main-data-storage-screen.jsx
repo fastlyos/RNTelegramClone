@@ -4,7 +4,7 @@ import randomString from "random-string";
 import PropTypes from "prop-types";
 import { iOSColors } from "react-native-typography";
 
-export default function ExampleScreen({ navigation }) {
+export default function MainDataStorageScreen({ navigation }) {
   const goto = () => navigation && navigation.navigate("NewContact");
   return (
     <View style={styles.container}>
@@ -18,7 +18,8 @@ export default function ExampleScreen({ navigation }) {
   );
 }
 
-ExampleScreen.propTypes = {};
+MainDataStorageScreen.propTypes = {};
+MainDataStorageScreen.defaultProps = {};
 
 const styles = StyleSheet.create({
   container: {

@@ -13,7 +13,7 @@ export default Divider;
 const createStyles = ({ theme }) =>
   StyleSheet.create({
     divider: {
-      borderBottomWidth: 1,
+      borderBottomWidth: 0.8,
       borderBottomColor: theme.colors.border,
     },
   });

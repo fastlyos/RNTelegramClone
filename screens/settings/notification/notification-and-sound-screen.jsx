@@ -4,8 +4,9 @@ import { useHeaderHeight } from "@react-navigation/stack";
 import { useTheme } from "@react-navigation/native";
 import PropTypes from "prop-types";
 import { iOSColors } from "react-native-typography";
+import { CommonListItem } from "@app/containers";
+import { Divider } from "@app/components";
 import { notificationList } from "./schema";
-import { CommonListItem, Divider } from "@app/components";
 
 export default function NotificationAndSoundScreen({ navigation }) {
   const theme = useTheme();
@@ -37,6 +38,7 @@ export default function NotificationAndSoundScreen({ navigation }) {
 }
 
 NotificationAndSoundScreen.propTypes = {};
+NotificationAndSoundScreen.defaultProps = {};
 
 const createStyles = ({ theme }) =>
   StyleSheet.create({

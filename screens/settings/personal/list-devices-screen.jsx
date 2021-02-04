@@ -1,10 +1,13 @@
 import React, { memo, useState, useEffect } from "react";
 import { StyleSheet, View, TouchableOpacity, SectionList, Switch } from "react-native";
 import { useTheme, useNavigation } from "@react-navigation/native";
+import { Divider, Text } from "@app/components";
+import { CommonListItem } from "@app/containers";
+import { SCREEN_HEIGHT, SCREEN_WIDTH } from "@app/constants/Layout";
+
 import PropTypes from "prop-types";
 import { iOSColors } from "react-native-typography";
-import { recentCalls } from "@app/constants/schema";
-import { CommonListItem, Divider, Text } from "@app/components";
+import { recentCalls } from "./schema";
 
 function SwitchComponent() {
   const [value, setValue] = useState(false);
@@ -23,7 +26,7 @@ const SECTIONLIST_DATA = recentCalls.map((s) => ({
   })),
 }));
 
-function ListDevicesScreen({}) {
+function ListDevicesScreen() {
   const navigation = useNavigation();
   // const goto = () => navigation && navigation.navigate('');
   const theme = useTheme();
@@ -67,7 +70,7 @@ function ListDevicesScreen({}) {
 
 ListDevicesScreen.propTypes = {};
 ListDevicesScreen.defaultProps = {};
-export default memo(ListDevicesScreen);
+export default ListDevicesScreen;
 
 const createStyles = ({ theme }) => {
   const { dimemsions = {} } = theme;
@@ -81,8 +84,8 @@ const createStyles = ({ theme }) => {
       position: "absolute",
       top: 0,
       left: 0,
-      width: width,
-      height: height,
+      width: SCREEN_WIDTH,
+      height: SCREEN_HEIGHT,
       justifyContent: "center",
       alignItems: "center",
     },

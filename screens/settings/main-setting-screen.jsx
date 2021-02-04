@@ -1,30 +1,36 @@
 import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import { useHeaderHeight } from "@react-navigation/stack";
 import PropTypes from "prop-types";
-import { iOSColors } from "react-native-typography";
+import { StyleSheet, TouchableOpacity, SectionList, SafeAreaView } from "react-native";
 
-export default function MainSettingScreen({ navigation }) {
-  const gotoOther = () => navigation && navigation.navigate("OtherScreen");
+import { Divider, View, Text } from "@app/components";
+import { CommonListItem } from "@app/containers";
+
+import { iOSColors } from "react-native-typography";
+import { useTheme, useNavigation } from "@react-navigation/native";
+import { settingList } from "./schema";
+
+const COLORS = {
+  gray: "rgb(160, 160, 160)",
+  padding: "rgb(240, 240, 240)",
+};
+
+export default function MainSettingScreen() {
+  const navigation = useNavigation();
+  const theme = useTheme();
+  const styles = createStyles({ theme });
   return (
     <View style={styles.container}>
       <View style={styles.content}>
         <SectionList
+          showsVerticalScrollIndicator={false}
+          ListHeaderComponent={<View style={styles.header} />}
           sections={settingList}
-          // sections={() => <></>}
+          contentContainerStyle={styles.contentContainerStyle}
           keyExtractor={(item, index) => item + index}
+          initialNumToRender={50}
           renderItem={({ item }) => <CommonListItem {...item} onPress={() => item.onPress && item.onPress({ navigation })} />}
-          ItemSeparatorComponent={() => (
-            <View style={styles.bgSeparator}>
-              <Divider style={styles.marginLeft} />
-            </View>
-          )}
           SectionSeparatorComponent={() => <Divider />}
-          renderSectionHeader={({ section: { title } }) => (
-            <View style={styles.header} backgroundColor="card">
-              {/* <Text type="footnoteEmphasized">{title}</Text> */}
-            </View>
-          )}
+          renderSectionHeader={({ section: { title } }) => <View style={styles.sectionHeader} />}
         />
       </View>
     </View>
@@ -39,7 +45,17 @@ const createStyles = ({ theme }) =>
       flex: 1,
     },
     header: {
-      height: 30,
+      height: 220,
+      backgroundColor: "white",
+    },
+    sectionHeader: {
+      height: 20,
+      width: "100%",
+      backgroundColor: COLORS.padding,
+    },
+    contentContainerStyle: {
+      backgroundColor: COLORS.white,
+      paddingBottom: 180,
     },
     button: {
       padding: 16,
@@ -47,14 +63,12 @@ const createStyles = ({ theme }) =>
     },
     content: {
       flex: 1,
+      backgroundColor: COLORS.padding,
     },
     bottom: {
       paddingVertical: 10,
     },
-    bgSeparator: {
-      backgroundColor: "white",
-    },
     marginLeft: {
-      marginLeft: 62,
+      marginLeft: 0,
     },
   });

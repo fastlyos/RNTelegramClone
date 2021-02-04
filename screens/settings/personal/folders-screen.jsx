@@ -3,15 +3,16 @@ import { StyleSheet, View, TouchableOpacity, SectionList, Switch } from "react-n
 import { useTheme, useNavigation } from "@react-navigation/native";
 import PropTypes from "prop-types";
 import { iOSColors } from "react-native-typography";
+import { Divider, Text } from "@app/components";
+import { CommonListItem } from "@app/containers";
 import { chatFolders } from "./schema";
-import { CommonListItem, Divider, Text } from "@app/components";
 
 function SwitchComponent() {
   const [value, setValue] = useState(false);
   return <Switch value={value} onValueChange={setValue} />;
 }
 
-function FoldersScreen({}) {
+function FoldersScreen() {
   const navigation = useNavigation();
   // const goto = () => navigation && navigation.navigate('');
   const theme = useTheme();
@@ -56,7 +57,7 @@ function FoldersScreen({}) {
 
 FoldersScreen.propTypes = {};
 FoldersScreen.defaultProps = {};
-export default memo(FoldersScreen);
+export default FoldersScreen;
 
 const createStyles = ({ theme }) => {
   const { dimemsions = {} } = theme;

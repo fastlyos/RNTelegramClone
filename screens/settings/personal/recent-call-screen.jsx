@@ -25,7 +25,7 @@ const SECTIONLIST_DATA = recentCalls.map((s) => ({
   })),
 }));
 
-function RecentCallScreen({}) {
+function RecentCallScreen() {
   const navigation = useNavigation();
   // const goto = () => navigation && navigation.navigate('');
   const theme = useTheme();
@@ -69,7 +69,7 @@ function RecentCallScreen({}) {
 
 RecentCallScreen.propTypes = {};
 RecentCallScreen.defaultProps = {};
-export default memo(RecentCallScreen);
+export default RecentCallScreen;
 
 const createStyles = ({ theme }) => {
   const { dimemsions = {} } = theme;

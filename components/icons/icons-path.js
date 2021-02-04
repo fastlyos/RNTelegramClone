@@ -17,6 +17,22 @@ export const PNG_ICON_SOURCES = {
   EditAvatarIcon: require("@app/assets/images/main/Images.xcassets/Avatar/EditAvatarIcon/SettingsCameraIcon.png"),
   // CallList
   AlertIcon: require("@app/assets/images/main/Images.xcassets/CallList/AlertIcon/CallsTabBarInfo.png"),
+
+  // Settings/MenuIcons
+  Appearance: require("@app/assets/images/main/Images.xcassets/Settings/MenuIcons/Appearance/Appearance.png"),
+  DataAndStorage: require("@app/assets/images/main/Images.xcassets/Settings/MenuIcons/DataAndStorage/DataAndStorage.png"),
+  Faq: require("@app/assets/images/main/Images.xcassets/Settings/MenuIcons/Faq/Faq.png"),
+  Language: require("@app/assets/images/main/Images.xcassets/Settings/MenuIcons/Language/Language.png"),
+  Notifications: require("@app/assets/images/main/Images.xcassets/Settings/MenuIcons/Notifications/Notifications.png"),
+  Passport: require("@app/assets/images/main/Images.xcassets/Settings/MenuIcons/Passport/Passport.png"),
+  SettingsProxyIcon: require("@app/assets/images/main/Images.xcassets/Settings/MenuIcons/SettingsProxyIcon/SettingsProxyIcon.png"),
+  RecentCalls: require("@app/assets/images/main/Images.xcassets/Settings/MenuIcons/RecentCalls/RecentCalls.png"),
+  SavedMessages: require("@app/assets/images/main/Images.xcassets/Settings/MenuIcons/SavedMessages/SavedMessages.png"),
+  Security: require("@app/assets/images/main/Images.xcassets/Settings/MenuIcons/Security/Security.png"),
+  Stickers: require("@app/assets/images/main/Images.xcassets/Settings/MenuIcons/Stickers/Stickers.png"),
+  Support: require("@app/assets/images/main/Images.xcassets/Settings/MenuIcons/Support/Support.png"),
+  SettingsWatchIcon: require("@app/assets/images/main/Images.xcassets/Settings/MenuIcons/SettingsWatchIcon/SettingsWatchIcon.png"),
+  Websites: require("@app/assets/images/main/Images.xcassets/Settings/MenuIcons/Websites/Websites.png"),
 };
 
 export const SVG_ICON_SOURCES = {
@@ -114,4 +130,20 @@ export const SVG_ICON_SOURCES = {
   ic_videocallchat: require("@app/assets/images/main/Images.xcassets/Chat/Info/ic_videocallchat.svg").default,
   Members: require("@app/assets/images/main/Images.xcassets/Chat/Info/Members.svg").default,
   Permissions: require("@app/assets/images/main/Images.xcassets/Chat/Info/Permissions.svg").default,
+
+  // Settings/MenuIcons
+  TwoStep: require("@app/assets/images/main/Images.xcassets/Settings/MenuIcons/TwoStep.svg").default,
+  AddAcc: require("@app/assets/images/main/Images.xcassets/Settings/MenuIcons/AddAcc.svg").default,
+  blocked: require("@app/assets/images/main/Images.xcassets/Settings/MenuIcons/blocked.svg").default,
+  Cache: require("@app/assets/images/main/Images.xcassets/Settings/MenuIcons/Cache.svg").default,
+  faceid: require("@app/assets/images/main/Images.xcassets/Settings/MenuIcons/faceid.svg").default,
+  chat_folders: require("@app/assets/images/main/Images.xcassets/Settings/MenuIcons/chat_folders.svg").default,
+  ic_wallet: require("@app/assets/images/main/Images.xcassets/Settings/MenuIcons/ic_wallet.svg").default,
+  Passcode: require("@app/assets/images/main/Images.xcassets/Settings/MenuIcons/Passcode.svg").default,
+  sessions: require("@app/assets/images/main/Images.xcassets/Settings/MenuIcons/sessions.svg").default,
+  Sim: require("@app/assets/images/main/Images.xcassets/Settings/MenuIcons/Sim.svg").default,
+  touchid: require("@app/assets/images/main/Images.xcassets/Settings/MenuIcons/touchid.svg").default,
+
+  // ItemList
+  ic_open: require("@app/assets/images/main/Images.xcassets/ItemList/ic_open.svg").default,
 };

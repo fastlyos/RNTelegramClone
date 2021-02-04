@@ -4,14 +4,7 @@ import { Ionicons, FontAwesome } from "@expo/vector-icons";
 import { StyleSheet } from "react-native";
 import { BlurView } from "expo-blur";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import {
-  createStackNavigator,
-  HeaderStyleInterpolators,
-  CardStyleInterpolators,
-  TransitionSpecs,
-  useHeaderHeight,
-  HeaderTitle,
-} from "@react-navigation/stack";
+import { createStackNavigator, HeaderStyleInterpolators, CardStyleInterpolators, TransitionSpecs, useHeaderHeight, HeaderTitle } from "@react-navigation/stack";
 import useColorScheme from "@app/hooks/useColorScheme";
 // styles
 import Colors from "@app/constants/Colors";
@@ -21,13 +14,7 @@ import { Image } from "@app/components";
 import { SearchListHeader } from "@app/containers";
 
 // screens
-import {
-  ExampleScreen,
-  MainContactScreen,
-  // MainChatScreen,
-  // MainSettingScreen,
-  // NewContactScreen
-} from "@app/screens";
+import { ExampleScreen, MainContactScreen, MainChatScreen, MainSettingScreen, NewContactScreen } from "@app/screens";
 
 function TabBarIcon({ name, color, reverse }) {
   return <Ionicons size={32} style={{ marginBottom: -3, transform: reverse && [{ rotateY: "180deg" }] }} name={name} color={color} />;
@@ -66,7 +53,7 @@ const TabChatsStack = createStackNavigator();
 function TabChatsNavigator() {
   return (
     <TabChatsStack.Navigator>
-      {/* <TabChatsStack.Screen
+      <TabChatsStack.Screen
         name="TabChatsScreen"
         component={MainChatScreen}
         options={{
@@ -76,7 +63,7 @@ function TabChatsNavigator() {
             shadowOpacity: 0,
           },
         }}
-      /> */}
+      />
     </TabChatsStack.Navigator>
   );
 }
@@ -98,7 +85,7 @@ function LogoTitle() {
 function TabSettingsNavigator() {
   return (
     <TabSettingsStack.Navigator>
-      {/* <TabSettingsStack.Screen
+      <TabSettingsStack.Screen
         name="TabSettingsScreen"
         component={MainSettingScreen}
         options={{
@@ -112,7 +99,7 @@ function TabSettingsNavigator() {
           headerStyleInterpolator: HeaderStyleInterpolators.forSlideLeft,
           headerBackTitle: "Back",
         }}
-      /> */}
+      />
     </TabSettingsStack.Navigator>
   );
 }

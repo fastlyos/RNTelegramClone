@@ -13,7 +13,20 @@ import {
 import themes from "@app/themes";
 
 // screens
-import { OtherScreen, NotFoundScreen, PinLocationScreen, DevsScreen } from "@app/screens";
+import {
+  OtherScreen,
+  NotFoundScreen,
+  PinLocationScreen,
+  DevsScreen,
+  SavedMessagesScreen,
+  RecentCallScreen,
+  ListDevicesScreen,
+  ScanCodeScreen,
+  FoldersScreen,
+  NotificationAndSoundScreen,
+  PrivacyAndSecurityScreen,
+  MainDataStorageScreen,
+} from "@app/screens";
 
 // navigations
 import BottomTabNavigator from "./bottom-tab-navigator";
@@ -70,6 +83,19 @@ function RootNavigator() {
           // cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
         }}
       />
+
+      {/* Settings/personal */}
+      <Stack.Screen name="SavedMessagesScreen" component={SavedMessagesScreen} />
+      <Stack.Screen name="RecentCallScreen" component={RecentCallScreen} />
+      <Stack.Screen name="ListDevicesScreen" component={ListDevicesScreen} />
+      <Stack.Screen name="ScanCodeScreen" component={ScanCodeScreen} />
+      <Stack.Screen name="FoldersScreen" component={FoldersScreen} />
+      {/* Settings/notification */}
+      <Stack.Screen name="NotificationAndSoundScreen" component={NotificationAndSoundScreen} />
+      {/* Settings/privacy */}
+      <Stack.Screen name="PrivacyAndSecurityScreen" component={PrivacyAndSecurityScreen} />
+      {/* Settings/storage */}
+      <Stack.Screen name="MainDataStorageScreen" component={MainDataStorageScreen} />
 
       {/* others */}
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: "Oops!" }} />

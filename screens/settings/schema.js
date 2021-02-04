@@ -20,16 +20,19 @@ export const settingList = [
       {
         id: faker.random.uuid(),
         left: {
-          icon: require("@app/assets/images/main/Images.xcassets/Settings/MenuIcons/SavedMessages.imageset/ic_savedmessages.png"),
+          iconName: "SavedMessages",
+          type: "png",
         },
         title: "Saved Messages",
         right: {},
+        onPress: ({ navigation }) => navigation && navigation.navigate("SavedMessagesScreen"),
       },
       {
         id: faker.random.uuid(),
         title: "Recent Calls",
         left: {
-          icon: require("@app/assets/images/main/Images.xcassets/Settings/MenuIcons/RecentCalls.imageset/ic_recentcalls.png"),
+          iconName: "RecentCalls",
+          type: "png",
         },
         right: {},
         onPress: ({ navigation }) => navigation && navigation.navigate("RecentCallScreen"),
@@ -37,17 +40,20 @@ export const settingList = [
       {
         id: faker.random.uuid(),
         left: {
-          iconBackgroundColor: "rgb(250, 130, 7)",
+          iconName: "sessions",
+          type: "svg",
         },
         title: "Devices",
         right: {
           text: "8",
         },
+        onPress: ({ navigation }) => navigation && navigation.navigate("ListDevicesScreen"),
       },
       {
         id: faker.random.uuid(),
         left: {
-          iconBackgroundColor: "rgb(44, 152, 210)",
+          iconName: "chat_folders",
+          type: "svg",
         },
         title: "Chat Folders",
         right: {},
@@ -62,7 +68,8 @@ export const settingList = [
       {
         id: faker.random.uuid(),
         left: {
-          iconBackgroundColor: "rgb(251, 30, 34)",
+          iconName: "Notifications",
+          type: "png",
         },
         title: "Notifications and Sounds",
         right: {},
@@ -71,26 +78,29 @@ export const settingList = [
       {
         id: faker.random.uuid(),
         left: {
-          iconBackgroundColor: "rgb(122, 122, 128)",
+          iconName: "Security",
+          type: "png",
         },
         title: "Privacy and Security",
         right: {},
+        onPress: ({ navigation }) => navigation && navigation.navigate("PrivacyAndSecurityScreen"),
       },
       {
         id: faker.random.uuid(),
         left: {
-          icon: require("@app/assets/images/main/Images.xcassets/Settings/MenuIcons/DataAndStorage.imageset/ic_data.png"),
-          iconBackgroundColor: "rgb(66, 206, 78)",
+          iconName: "DataAndStorage",
+          type: "png",
         },
         title: "Data and Storage",
         right: {},
+        onPress: ({ navigation }) => navigation && navigation.navigate("MainDataStorageScreen"),
       },
       {
         id: faker.random.uuid(),
         title: "Appearance",
         left: {
-          icon: "",
-          iconBackgroundColor: "rgb(44, 147, 201)",
+          iconName: "Appearance",
+          type: "png",
         },
         right: {},
       },
@@ -98,6 +108,8 @@ export const settingList = [
         id: faker.random.uuid(),
         left: {
           iconBackgroundColor: "rgb(185, 85, 211)",
+          iconName: "Language",
+          type: "png",
         },
         right: {
           text: "English",
@@ -107,7 +119,8 @@ export const settingList = [
       {
         id: faker.random.uuid(),
         left: {
-          iconBackgroundColor: "rgb(185, 85, 211)",
+          iconName: "Stickers",
+          type: "png",
         },
         title: "Stickers",
         right: {
@@ -123,8 +136,8 @@ export const settingList = [
       {
         id: faker.random.uuid(),
         left: {
-          icon: "",
-          iconBackgroundColor: "rgb(239, 122, 9)",
+          iconName: "Support",
+          type: "png",
         },
         title: "Ask a Question",
         right: {},
@@ -132,8 +145,8 @@ export const settingList = [
       {
         id: faker.random.uuid(),
         left: {
-          icon: "",
-          iconBackgroundColor: "rgb(44, 147, 201)",
+          iconName: "Faq",
+          type: "png",
         },
         title: "Telegram FAQ",
         right: {},
