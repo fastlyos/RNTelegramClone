@@ -13,7 +13,7 @@ const COLORS = {
   touch: "rgb(230,230,230)",
 };
 
-function CommonListItem({ title, left, right, onPress }) {
+function CommonListItem({ title, left, right, onPress, disabled, containerStyle, hasBottomDivider = true }) {
   const { iconName = "", type, invisible: invisibleLeft } = left;
   const invisibleRight = right.invisible;
   const { hideChevronRight = false, isRoundText, isCustomComponent, component: RightComponent, text: rightText } = right;
@@ -21,8 +21,8 @@ function CommonListItem({ title, left, right, onPress }) {
   const theme = useTheme();
   const styles = createStyles({ theme });
   return (
-    <TouchableHighlight onPress={onPress}>
-      <View style={styles.container}>
+    <TouchableHighlight onPress={onPress} disabled={disabled}>
+      <View style={[styles.container, containerStyle]}>
         <View style={styles.content}>
           {/* left */}
           <View style={styles.leftItem}>
@@ -41,13 +41,13 @@ function CommonListItem({ title, left, right, onPress }) {
                     {rightText}
                   </Text>
                 </View>
-                {!hideChevronRight && <SvgIcons name="ic_open" tintColor={COLORS.gray} />}
+                {!hideChevronRight && <SvgIcons name="ic_open" tintColor={COLORS.gray} size={22} />}
               </>
             )}
             {isCustomComponent && <RightComponent />}
           </View>
         </View>
-        <Divider style={styles.marginLeft} />
+        {hasBottomDivider && <Divider marginLeft={50} />}
       </View>
     </TouchableHighlight>
   );
@@ -61,13 +61,11 @@ function CommonListItem({ title, left, right, onPress }) {
 // rightText: PropTypes.string.isRequired,
 // isRoundText: ViewPropTypes.style,
 // };
-// CommonListItem.defaultProps = {
-//   left: {},
-//   right: {},
-// icon: false,
-// iconBackgroundColor: 'transparent',
-// rightText: '',
-// };
+CommonListItem.defaultProps = {
+  left: {},
+  right: {},
+  onPress: () => {},
+};
 export default CommonListItem;
 
 const createStyles = ({ theme }) =>
@@ -104,7 +102,7 @@ const createStyles = ({ theme }) =>
       paddingHorizontal: 4,
       borderRadius: 999,
     },
-    marginLeft: {
-      marginLeft: 50,
-    },
+    // marginLeft: {
+    //   marginLeft: 50,
+    // },
   });

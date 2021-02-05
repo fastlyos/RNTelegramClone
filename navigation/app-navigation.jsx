@@ -22,15 +22,24 @@ import {
   RecentCallScreen,
   ListDevicesScreen,
   ScanCodeScreen,
-  FoldersScreen,
+  ChatFoldersScreen,
   NotificationAndSoundScreen,
   PrivacyAndSecurityScreen,
   MainDataStorageScreen,
+  MainAppearanceScreen,
+  LanguageScreen,
+  ListStickersScreen,
+  AskAQuestionScreen,
+  FAQScreen,
 } from "@app/screens";
 
 // navigations
 import BottomTabNavigator from "./bottom-tab-navigator";
 import LinkingConfiguration from "./linking-configuration";
+
+const COLORS = {
+  border: "rgb(223,221,226)",
+};
 
 export default function AppNavigation({ colorScheme }) {
   return (
@@ -39,6 +48,13 @@ export default function AppNavigation({ colorScheme }) {
     </NavigationContainer>
   );
 }
+
+const DEFAULT_OPTIONS = {
+  headerStyle: {
+    borderBottomColor: COLORS.border,
+    borderBottomWidth: 1,
+  },
+};
 
 const Stack = createStackNavigator();
 function RootNavigator() {
@@ -51,6 +67,7 @@ function RootNavigator() {
         headerStyleInterpolator: HeaderStyleInterpolators.forUIKit,
         cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
         headerBackTitle: "Back",
+        headerStyle: DEFAULT_OPTIONS.headerStyle,
       }}>
       <Stack.Screen
         name="Root"
@@ -84,18 +101,26 @@ function RootNavigator() {
         }}
       />
 
+      {/* Settings */}
+      <Stack.Screen name="LanguageScreen" component={LanguageScreen} />
+      <Stack.Screen name="FAQScreen" component={FAQScreen} />
+      <Stack.Screen name="AskAQuestionScreen" component={AskAQuestionScreen} />
       {/* Settings/personal */}
       <Stack.Screen name="SavedMessagesScreen" component={SavedMessagesScreen} />
       <Stack.Screen name="RecentCallScreen" component={RecentCallScreen} />
       <Stack.Screen name="ListDevicesScreen" component={ListDevicesScreen} />
       <Stack.Screen name="ScanCodeScreen" component={ScanCodeScreen} />
-      <Stack.Screen name="FoldersScreen" component={FoldersScreen} />
+      <Stack.Screen name="ChatFoldersScreen" component={ChatFoldersScreen} options={{ title: "Folders" }} />
       {/* Settings/notification */}
       <Stack.Screen name="NotificationAndSoundScreen" component={NotificationAndSoundScreen} />
       {/* Settings/privacy */}
       <Stack.Screen name="PrivacyAndSecurityScreen" component={PrivacyAndSecurityScreen} />
       {/* Settings/storage */}
       <Stack.Screen name="MainDataStorageScreen" component={MainDataStorageScreen} />
+      {/* Settings/appearance */}
+      <Stack.Screen name="MainAppearanceScreen" component={MainAppearanceScreen} />
+      {/* Settings/stickers */}
+      <Stack.Screen name="ListStickersScreen" component={ListStickersScreen} />
 
       {/* others */}
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: "Oops!" }} />

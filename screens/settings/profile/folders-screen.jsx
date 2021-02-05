@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useCallback, useEffect, useState, memo, useMemo } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import randomString from "random-string";
 import PropTypes from "prop-types";
+import { useNavigation, useTheme } from "@react-navigation/native";
 import { iOSColors } from "react-native-typography";
 
-export default function ExampleScreen({ navigation }) {
-  const goto = () => navigation && navigation.navigate("NewContact");
+export default function ExampleScreen() {
+  const navigation = useNavigation();
+  const goto = (routeName) => navigation.navigate(routeName);
+  const theme = useTheme();
+  const styles = createStyles({ theme });
+
+  useEffect(() => {
+    return () => {};
+  }, []);
+
   return (
     <View style={styles.container}>
       <View style={styles.content}>
@@ -20,17 +29,18 @@ export default function ExampleScreen({ navigation }) {
 
 ExampleScreen.propTypes = {};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  content: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  button: {
-    padding: 16,
-    backgroundColor: iOSColors.purple,
-  },
-});
+const createStyles = ({ theme }) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+    },
+    content: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    button: {
+      padding: 16,
+      backgroundColor: iOSColors.purple,
+    },
+  });

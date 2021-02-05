@@ -28,7 +28,7 @@ export default function MainSettingScreen() {
           contentContainerStyle={styles.contentContainerStyle}
           keyExtractor={(item, index) => item + index}
           initialNumToRender={50}
-          renderItem={({ item }) => <CommonListItem {...item} onPress={() => item.onPress && item.onPress({ navigation })} />}
+          renderItem={({ item, index }) => <CommonListItem {...item} hasBottomDivider onPress={() => item.onPress({ navigation })} />}
           SectionSeparatorComponent={() => <Divider />}
           renderSectionHeader={({ section: { title } }) => <View style={styles.sectionHeader} />}
         />

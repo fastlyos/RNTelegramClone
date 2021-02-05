@@ -18,13 +18,13 @@ export function PngIcons({ name, size = DEFAULT_SIZE, style, ...props }) {
   return <Image {...props} source={source} style={[sizeStyle, style]} />;
 }
 
-export function SvgIcons({ name, backgroundColor, containerStyle, tintColor, ...props }) {
+export function SvgIcons({ name, backgroundColor, size = DEFAULT_SIZE, containerStyle, tintColor, ...props }) {
   if (!name) return null;
   const SvgImage = SVG_ICON_SOURCES[name];
   if (!SvgImage) return null;
   return (
     <View style={[containerStyle, { backgroundColor: backgroundColor || "transparent" }]}>
-      <SvgImage width={DEFAULT_SIZE} fill={tintColor || "black"} {...props} />
+      <SvgImage width={size} fill={tintColor || "black"} {...props} />
     </View>
   );
 }

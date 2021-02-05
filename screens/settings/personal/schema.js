@@ -15,6 +15,7 @@ const structure = {
     isRoundText: true,
   },
   footerTitle: "footerTitle",
+  disabled: false,
 };
 
 export const recentCalls = [
@@ -31,6 +32,7 @@ export const recentCalls = [
           hideChevronRight: true,
           isCustomComponent: true,
         },
+        disabled: true,
       },
     ],
     footerTitle: "A call icon will appear in the tab bar",

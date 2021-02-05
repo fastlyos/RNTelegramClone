@@ -57,7 +57,7 @@ export const settingList = [
         },
         title: "Chat Folders",
         right: {},
-        onPress: ({ navigation }) => navigation && navigation.navigate("FoldersScreen"),
+        onPress: ({ navigation }) => navigation && navigation.navigate("ChatFoldersScreen"),
       },
     ],
   },
@@ -103,17 +103,18 @@ export const settingList = [
           type: "png",
         },
         right: {},
+        onPress: ({ navigation }) => navigation && navigation.navigate("MainAppearanceScreen"),
       },
       {
         id: faker.random.uuid(),
         left: {
-          iconBackgroundColor: "rgb(185, 85, 211)",
           iconName: "Language",
           type: "png",
         },
         right: {
           text: "English",
         },
+        onPress: ({ navigation }) => navigation && navigation.navigate("LanguageScreen"),
         title: "Language",
       },
       {
@@ -127,6 +128,7 @@ export const settingList = [
           text: "12",
           isRoundText: true,
         },
+        onPress: ({ navigation }) => navigation && navigation.navigate("ListStickersScreen"),
       },
     ],
   },
@@ -141,6 +143,7 @@ export const settingList = [
         },
         title: "Ask a Question",
         right: {},
+        onPress: ({ navigation }) => navigation && navigation.navigate("AskAQuestionScreen"),
       },
       {
         id: faker.random.uuid(),
@@ -150,6 +153,7 @@ export const settingList = [
         },
         title: "Telegram FAQ",
         right: {},
+        onPress: ({ navigation }) => navigation && navigation.navigate("FAQScreen"),
       },
     ],
     // footerTitle: ""
