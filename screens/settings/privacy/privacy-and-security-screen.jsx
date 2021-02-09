@@ -1,19 +1,63 @@
-import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import randomString from "random-string";
+import React, { useCallback, useEffect, useState, memo, useMemo, useRef } from "react";
+import { StyleSheet, View, TouchableOpacity, SectionList, Switch } from "react-native";
+import { useTheme, useNavigation } from "@react-navigation/native";
+import { Divider, Text } from "@app/components";
+import { CommonListItem } from "@app/containers";
+import { SCREEN_HEIGHT, SCREEN_WIDTH } from "@app/constants/Layout";
+
 import PropTypes from "prop-types";
 import { iOSColors } from "react-native-typography";
+import { privacyList } from "./schema";
 
-function PrivacyAndSecurityScreen({ navigation }) {
-  const goto = () => {}
+const COLORS = {
+  blue: "blue",
+  title: "rgb(120,120,120)",
+  background: "rgb(240,240,244)",
+};
+
+function PrivacyAndSecurityScreen() {
+  const navigation = useNavigation();
+  const theme = useTheme();
+  const styles = createStyles({ theme });
+
+  // effect
+  useEffect(() => {
+    navigation.setOptions({
+      headerShown: true,
+    });
+    return () => {};
+  }, []);
+
   return (
     <View style={styles.container}>
       <View style={styles.content}>
-        <Text>MainContact</Text>
+        <SectionList
+          stickySectionHeadersEnabled={false}
+          showsVerticalScrollIndicator={false}
+          sections={privacyList}
+          keyExtractor={(item) => item.id}
+          contentContainerStyle={styles.flatlistContent}
+          SectionSeparatorComponent={() => <Divider />}
+          // ListHeaderComponent={() => ()}
+          renderSectionHeader={({ section: { title } }) => (
+            <View style={styles.header} backgroundColor="card">
+              <Text type="caption2Emphasized" color={COLORS.title}>
+                {title}
+              </Text>
+            </View>
+          )}
+          renderItem={({ item, index }) => <CommonListItem {...item} onPress={() => item.onPress && item.onPress({ navigation })} />}
+          renderSectionFooter={({ section: { footerTitle } }) => (
+            <View style={styles.footerView}>
+              {!!footerTitle && (
+                <Text type="caption2" color={COLORS.title}>
+                  {footerTitle}
+                </Text>
+              )}
+            </View>
+          )}
+        />
       </View>
-      <TouchableOpacity style={styles.button} onPress={goto}>
-        <Text style={{ color: iOSColors.white, fontSize: 20 }}>New Contact</Text>
-      </TouchableOpacity>
     </View>
   );
 }
@@ -22,17 +66,25 @@ PrivacyAndSecurityScreen.propTypes = {};
 PrivacyAndSecurityScreen.defaultProps = {};
 export default PrivacyAndSecurityScreen;
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  content: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  button: {
-    padding: 16,
-    backgroundColor: iOSColors.purple,
-  },
-});
+const createStyles = ({ theme }) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: COLORS.background,
+    },
+    content: {
+      flex: 1,
+    },
+    header: {
+      paddingHorizontal: 8,
+      paddingVertical: 6,
+    },
+    flatlistContent: {
+      paddingVertical: 20,
+    },
+    footerView: {
+      paddingVertical: 4,
+      paddingHorizontal: 10,
+      marginBottom: 20,
+    },
+  });

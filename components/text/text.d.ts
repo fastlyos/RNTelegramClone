@@ -1,5 +1,5 @@
 import React from "react";
-import { TextProps as RNTextProps } from "react-native";
+import { TextProps as RNTextProps, TextStyle } from "react-native";
 
 type TYPES =
   | "largeTitleEmphasized"
@@ -19,7 +19,7 @@ type TYPES =
 type COLORS = "main" | undefined;
 
 interface TextProps extends RNTextProps {
-  style: ViewStyle;
+  style: TextStyle;
   color: COLORS;
   type: TYPES;
 }

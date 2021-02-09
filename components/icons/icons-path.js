@@ -33,6 +33,11 @@ export const PNG_ICON_SOURCES = {
   Support: require("@app/assets/images/main/Images.xcassets/Settings/MenuIcons/Support/Support.png"),
   SettingsWatchIcon: require("@app/assets/images/main/Images.xcassets/Settings/MenuIcons/SettingsWatchIcon/SettingsWatchIcon.png"),
   Websites: require("@app/assets/images/main/Images.xcassets/Settings/MenuIcons/Websites/Websites.png"),
+  // Settings
+  themebubble: require("@app/assets/images/main/Images.xcassets/Settings/ThemeBubble/themebubble.png"),
+
+  // ListMenu/
+  ModernMenuCheck: require("@app/assets/images/main/Images.xcassets/ListMenu/ModernMenuCheck/ModernMenuCheck.png"),
 };
 
 export const SVG_ICON_SOURCES = {
@@ -130,6 +135,21 @@ export const SVG_ICON_SOURCES = {
   ic_videocallchat: require("@app/assets/images/main/Images.xcassets/Chat/Info/ic_videocallchat.svg").default,
   Members: require("@app/assets/images/main/Images.xcassets/Chat/Info/Members.svg").default,
   Permissions: require("@app/assets/images/main/Images.xcassets/Chat/Info/Permissions.svg").default,
+  // Chat/Input
+  ic_forward: require("@app/assets/images/main/Images.xcassets/Chat/Input/AccessoryPanels/ic_forward.svg").default,
+  ic_delete: require("@app/assets/images/main/Images.xcassets/Chat/Input/AccessoryPanels/ic_delete.svg").default,
+  ic_report: require("@app/assets/images/main/Images.xcassets/Chat/Input/AccessoryPanels/ic_report.svg").default,
+  ic_share: require("@app/assets/images/main/Images.xcassets/Chat/Input/AccessoryPanels/ic_share.svg").default,
+  // PeerInfo
+  ic_pf_addmember: require("@app/assets/images/main/Images.xcassets/PeerInfo/ic_pf_addmember.svg").default,
+  ic_pf_call: require("@app/assets/images/main/Images.xcassets/PeerInfo/ic_pf_call.svg").default,
+  ic_pf_leave: require("@app/assets/images/main/Images.xcassets/PeerInfo/ic_pf_leave.svg").default,
+  ic_pf_message: require("@app/assets/images/main/Images.xcassets/PeerInfo/ic_pf_message.svg").default,
+  ic_pf_more: require("@app/assets/images/main/Images.xcassets/PeerInfo/ic_pf_more.svg").default,
+  ic_pf_mute: require("@app/assets/images/main/Images.xcassets/PeerInfo/ic_pf_mute.svg").default,
+  ic_pf_unmute: require("@app/assets/images/main/Images.xcassets/PeerInfo/ic_pf_unmute.svg").default,
+  ic_verify_big: require("@app/assets/images/main/Images.xcassets/PeerInfo/ic_verify_big.svg").default,
+  Video: require("@app/assets/images/main/Images.xcassets/PeerInfo/Video.svg").default,
 
   // Settings/MenuIcons
   TwoStep: require("@app/assets/images/main/Images.xcassets/Settings/MenuIcons/TwoStep.svg").default,

@@ -1,30 +1,24 @@
-import React, { memo, useState, useEffect } from "react";
+import React, { useCallback, useEffect, useState, memo, useMemo } from "react";
 import { StyleSheet, View, TouchableOpacity, SectionList, Switch } from "react-native";
 import { useTheme, useNavigation } from "@react-navigation/native";
 import { Divider, Text } from "@app/components";
-import { CommonListItem } from "@app/containers";
+import { SessionListItem } from "@app/containers";
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from "@app/constants/Layout";
 
 import PropTypes from "prop-types";
 import { iOSColors } from "react-native-typography";
-import { recentCalls } from "./schema";
+import { sessionsInDevices } from "./schema";
+
+const COLORS = {
+  blue: "blue",
+  title: "rgb(120,120,120)",
+  background: "rgb(240,240,244)",
+};
 
 function SwitchComponent() {
   const [value, setValue] = useState(false);
   return <Switch value={value} onValueChange={setValue} />;
 }
-
-const SECTIONLIST_DATA = recentCalls.map((s) => ({
-  ...s,
-  data: s.data.map((i) => ({
-    ...i,
-    right: {
-      ...i.right,
-      isCustomComponent: true,
-      component: memo(SwitchComponent),
-    },
-  })),
-}));
 
 function ListDevicesScreen() {
   const navigation = useNavigation();
@@ -36,6 +30,16 @@ function ListDevicesScreen() {
   useEffect(() => {
     navigation.setOptions({
       headerShown: true,
+      headerRightContainerStyle: {
+        paddingRight: 12,
+      },
+      headerRight: () => (
+        <TouchableOpacity onPress={() => {}}>
+          <Text type="body" color={COLORS.blue}>
+            Edit
+          </Text>
+        </TouchableOpacity>
+      ),
     });
     return () => {};
   }, []);
@@ -43,27 +47,31 @@ function ListDevicesScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.content}>
-        <Text type="body">Your recent calls will appear here</Text>
+        <SectionList
+          stickySectionHeadersEnabled={false}
+          showsVerticalScrollIndicator={false}
+          sections={sessionsInDevices}
+          keyExtractor={(item) => item.id}
+          contentContainerStyle={styles.flatlistContent}
+          SectionSeparatorComponent={() => <Divider />}
+          ListHeaderComponent={() => <></>}
+          renderSectionHeader={({ section: { title } }) => (
+            <View style={styles.header} backgroundColor="card">
+              <Text type="caption2Emphasized" color={COLORS.title}>
+                {title}
+              </Text>
+            </View>
+          )}
+          renderItem={({ item, index }) => <SessionListItem {...item} onPress={() => item.onPress && item.onPress({ navigation })} />}
+          renderSectionFooter={({ section: { footerTitle } }) => (
+            <View style={styles.footerView}>
+              <Text type="caption2" color={COLORS.title}>
+                {footerTitle}
+              </Text>
+            </View>
+          )}
+        />
       </View>
-      <SectionList
-        sections={SECTIONLIST_DATA}
-        keyExtractor={(item) => item.id}
-        contentContainerStyle={styles.flatlistContent}
-        // ItemSeparatorComponent={() => <Divider />}
-        SectionSeparatorComponent={() => <Divider />}
-        ListHeaderComponent={() => <></>}
-        renderSectionHeader={({ section: { title } }) => (
-          <View style={styles.header} backgroundColor="card">
-            {/* <Text type="footnoteEmphasized">{title}</Text> */}
-          </View>
-        )}
-        renderItem={({ item, index }) => <CommonListItem {...item} onPress={() => item.onPress && item.onPress({ navigation })} />}
-        renderSectionFooter={({ section: { footerTitle } }) => (
-          <View style={styles.footerView}>
-            <Text>{footerTitle}</Text>
-          </View>
-        )}
-      />
     </View>
   );
 }
@@ -78,33 +86,25 @@ const createStyles = ({ theme }) => {
   return StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: theme.colors.card,
+      backgroundColor: COLORS.background,
     },
     content: {
-      position: "absolute",
-      top: 0,
-      left: 0,
-      width: SCREEN_WIDTH,
-      height: SCREEN_HEIGHT,
-      justifyContent: "center",
-      alignItems: "center",
+      flex: 1,
+    },
+    header: {
+      paddingHorizontal: 8,
+      paddingVertical: 6,
     },
     flatlistContent: {
       marginVertical: 20,
-      // ...theme.applicationStyles.divider,
-      // borderWidth: 1,
-      // borderColor: theme.colors.border,
     },
-    columnWrapperStyle: {
-      ...theme.applicationStyles.divider,
-    },
-    footerView: {
-      paddingVertical: 5,
-      paddingHorizontal: 10,
-    },
-    // button: {
-    //   padding: 16,
-    //   backgroundColor: iOSColors.purple,
+    // columnWrapperStyle: {
+    //   ...theme.applicationStyles.divider,
     // },
+    footerView: {
+      paddingVertical: 4,
+      paddingHorizontal: 10,
+      marginBottom: 20,
+    },
   });
 };

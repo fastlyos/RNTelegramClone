@@ -37,6 +37,7 @@ export const notificationList = [
           invisible: false,
           isSwitch: true,
           switchDefaultValue: false,
+          onSwitchChangeValue: () => {},
         },
       },
       {
@@ -223,6 +224,7 @@ export const notificationList = [
         },
       },
     ],
+    // footerTitle: [""],
   },
   {
     id: faker.random.uuid(),

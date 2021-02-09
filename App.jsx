@@ -3,7 +3,8 @@ import React from "react";
 import { StyleSheet, Text, View, StatusBar, LogBox } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import AppNavigation from "@app/navigation/app-navigation";
-import { MainSettingScreen } from "@app/screens";
+import DevsAnimationScreen from "@app/screens/devs-animation-screen";
+import { MainSettingScreen, DevsScreen } from "@app/screens";
 // import DevsAnimationScreen from "@app/screens/devs-animation-screen";
 
 import useColorScheme from "./hooks/useColorScheme";
@@ -16,7 +17,6 @@ function App() {
   if (!isLoadingComplete) return null;
   return (
     <SafeAreaProvider>
-      <StatusBar barStyle="default" />
       {/* <MainSettingScreen colorScheme={colorScheme} /> */}
       <AppNavigation colorScheme={colorScheme} />
     </SafeAreaProvider>

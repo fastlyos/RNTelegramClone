@@ -5,7 +5,7 @@ const structure = {
   left: {
     invisible: false,
     icon: "",
-    iconBackgroundColor: "rgb(239, 122, 9)",
+    type: "svg",
   },
   title: "title",
   titleType: "",
@@ -30,8 +30,8 @@ export const privacyList = [
       {
         id: faker.random.uuid(),
         left: {
-          icon: "",
-          iconBackgroundColor: "rgb(239, 122, 9)",
+          iconName: "blocked",
+          type: "svg",
         },
         title: "Blocked Users",
         right: {
@@ -43,8 +43,8 @@ export const privacyList = [
       {
         id: faker.random.uuid(),
         left: {
-          icon: "",
-          iconBackgroundColor: "rgb(239, 122, 9)",
+          iconName: "touchid",
+          type: "svg",
         },
         title: "Passcode & Touch ID",
         right: {
@@ -56,8 +56,8 @@ export const privacyList = [
       {
         id: faker.random.uuid(),
         left: {
-          icon: "",
-          iconBackgroundColor: "rgb(239, 122, 9)",
+          iconName: "TwoStep",
+          type: "svg",
         },
         title: "Two-Step Verification",
         right: {

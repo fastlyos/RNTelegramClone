@@ -48,6 +48,7 @@ module.exports = {
     indent: "off",
     "@typescript-eslint/no-var-requires": "off",
     "@typescript-eslint/no-unused-vars": "off",
+    "operator-linebreak": ["error", "after"],
   },
   globals: {
     arguments: true,

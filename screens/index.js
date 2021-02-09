@@ -8,7 +8,6 @@ export { default as PinLocationScreen } from "./chats/pin-location-screen";
 
 // settings
 export { default as LanguageScreen } from "./settings/language-screen";
-export { default as AskAQuestionScreen } from "./settings/ask-a-question-screen";
 export { default as FAQScreen } from "./settings/faq-screen";
 // settings/personal
 export { default as MainSettingScreen } from "./settings/main-setting-screen";

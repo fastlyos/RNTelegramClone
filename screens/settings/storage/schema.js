@@ -127,25 +127,11 @@ export const dataAndStorageList = [
         left: {
           invisible: true,
         },
-        title: "GIFs",
-        right: {
-          invisible: false,
-          isSwitch: true,
-          switchDefaultValue: true,
-        },
-      },
-      {
-        id: faker.random.uuid(),
-        left: {
-          invisible: true,
-        },
         title: "Use Less Data",
         right: {
           invisible: false,
           text: "Never",
           hideChevronRight: false,
-          isSwitch: true,
-          switchDefaultValue: true,
         },
       },
     ],
@@ -230,6 +216,19 @@ export const dataAndStorageList = [
           invisible: false,
           text: "None",
           hideChevronRight: false,
+        },
+      },
+      {
+        id: faker.random.uuid(),
+        left: {
+          invisible: true,
+        },
+        title: "Display Sensitive Content",
+        right: {
+          invisible: false,
+          hideChevronRight: false,
+          isSwitch: true,
+          switchDefaultValue: false,
         },
       },
     ],

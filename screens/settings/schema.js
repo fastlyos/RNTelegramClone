@@ -1,15 +1,41 @@
 import faker from "faker";
+import { iOSColors } from "react-native-typography";
 
 export const languageList = [
   {
-    id: faker.random.uuid(),
-    title: "English",
-    subTitle: "English",
-  },
-  {
-    id: faker.random.uuid(),
-    title: "Uzbek",
-    subTitle: "O'zbek",
+    title: "",
+    data: [
+      {
+        id: faker.random.uuid(),
+        title: "English",
+        subtitle: "English",
+        subtitleStyle: {
+          color: iOSColors.black,
+        },
+        onPress: () => {},
+        right: {
+          invisible: false,
+          isSelect: true,
+          hideChevronRight: true,
+          defaultSelectValue: false,
+        },
+      },
+      {
+        id: faker.random.uuid(),
+        title: "Uzbek",
+        subtitle: "O'zbek",
+        subtitleStyle: {
+          color: iOSColors.black,
+        },
+        onPress: () => {},
+        right: {
+          invisible: false,
+          hideChevronRight: true,
+          isSelect: true,
+          defaultSelectValue: false,
+        },
+      },
+    ],
   },
 ];
 
@@ -136,14 +162,14 @@ export const settingList = [
     title: "",
     data: [
       {
-        id: faker.random.uuid(),
+        id: "Ask-a-Question",
         left: {
           iconName: "Support",
           type: "png",
         },
         title: "Ask a Question",
         right: {},
-        onPress: ({ navigation }) => navigation && navigation.navigate("AskAQuestionScreen"),
+        onPress: ({ callback }) => callback && callback(),
       },
       {
         id: faker.random.uuid(),

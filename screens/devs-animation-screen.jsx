@@ -5,7 +5,7 @@ import LottieView from "lottie-react-native";
 export default function DevsAnimationScreen() {
   return (
     <View style={{ flex: 1 }}>
-      <LottieView source={require("@app/assets/animations/anim_success.json")} autoPlay loop />
+      <LottieView source={require("@app/assets/animations/ChatListFolders.json")} autoPlay loop />
     </View>
   );
 }

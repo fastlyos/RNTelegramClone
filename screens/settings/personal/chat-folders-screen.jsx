@@ -1,57 +1,76 @@
-import React, { memo, useState, useEffect } from "react";
+import React, { useCallback, useEffect, useState, memo, useMemo, useRef } from "react";
 import { StyleSheet, View, TouchableOpacity, SectionList, Switch } from "react-native";
 import { useTheme, useNavigation } from "@react-navigation/native";
-import PropTypes from "prop-types";
-import { iOSColors } from "react-native-typography";
 import { Divider, Text } from "@app/components";
 import { CommonListItem } from "@app/containers";
+import LottieView from "lottie-react-native";
+import { SCREEN_HEIGHT, SCREEN_WIDTH } from "@app/constants/Layout";
+
+import PropTypes from "prop-types";
+import { iOSColors } from "react-native-typography";
 import { chatFolders } from "./schema";
 
-function SwitchComponent() {
-  const [value, setValue] = useState(false);
-  return <Switch value={value} onValueChange={setValue} />;
-}
+const COLORS = {
+  blue: "blue",
+  title: "rgb(120,120,120)",
+  background: "rgb(240,240,244)",
+};
 
 function ChatFoldersScreen() {
   const navigation = useNavigation();
-  // const goto = () => navigation && navigation.navigate('');
   const theme = useTheme();
   const styles = createStyles({ theme });
-  const goto = (routeName) => navigation.navigate(routeName);
+  const imageRef = useRef(null);
 
+  const handlePressImage = useCallback(() => {
+    imageRef?.current?.play();
+  }, []);
   // effect
   useEffect(() => {
     navigation.setOptions({
       headerShown: true,
     });
-    return () => {};
+    return () => {
+    };
   }, []);
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Text type="footnote" style={{ textAlign: "center" }}>
-          Create folders for different groups of chats and quickly switch between them.
-        </Text>
+      <View style={styles.content}>
+        <SectionList
+          stickySectionHeadersEnabled={false}
+          showsVerticalScrollIndicator={false}
+          sections={chatFolders}
+          keyExtractor={(item) => item.id}
+          contentContainerStyle={styles.flatlistContent}
+          SectionSeparatorComponent={() => <Divider />}
+          ListHeaderComponent={() => (
+            <View style={{ flex: 1, alignItems: "center", paddingHorizontal: 20, paddingVertical: 10 }}>
+              <TouchableOpacity style={{ height: 90, width: 100 }} onPress={handlePressImage} activeOpacity={1}>
+                <LottieView ref={imageRef} source={require("@app/assets/animations/ChatListFolders.json")} autoPlay loop={false} />
+              </TouchableOpacity>
+              <Text type="footnote" color={COLORS.title} style={{ textAlign: "center", paddingVertical: 10 }}>
+                Create folders for different groups of chats and quickly switch between them.
+              </Text>
+            </View>
+          )}
+          renderSectionHeader={({ section: { title } }) => (
+            <View style={styles.header} backgroundColor="card">
+              <Text type="caption2Emphasized" color={COLORS.title}>
+                {title}
+              </Text>
+            </View>
+          )}
+          renderItem={({ item, index }) => <CommonListItem {...item} onPress={() => item.onPress && item.onPress({ navigation })} />}
+          renderSectionFooter={({ section: { footerTitle } }) => (
+            <View style={styles.footerView}>
+              <Text type="caption2" color={COLORS.title}>
+                {footerTitle}
+              </Text>
+            </View>
+          )}
+        />
       </View>
-      <SectionList
-        sections={chatFolders}
-        keyExtractor={(item) => item.id}
-        contentContainerStyle={styles.contentList}
-        SectionSeparatorComponent={() => <Divider />}
-        ListHeaderComponent={() => <></>}
-        renderSectionHeader={({ section: { title } }) => (
-          <View style={styles.headerList} backgroundColor="card">
-            <Text type="footnoteEmphasized">{title}</Text>
-          </View>
-        )}
-        renderItem={({ item, index }) => <CommonListItem {...item} onPress={() => item.onPress && item.onPress({ navigation })} />}
-        renderSectionFooter={({ section: { footerTitle } }) => (
-          <View style={styles.footerView}>
-            <Text>{footerTitle}</Text>
-          </View>
-        )}
-      />
     </View>
   );
 }
@@ -65,25 +84,22 @@ const createStyles = ({ theme }) => {
   return StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: theme.colors.card,
+      backgroundColor: COLORS.background,
+    },
+    content: {
+      flex: 1,
     },
     header: {
-      // justifyContent: "center",
-      alignItems: "center",
-      paddingHorizontal: 30,
+      paddingHorizontal: 8,
+      paddingVertical: 6,
     },
-    headerList: {
-      paddingHorizontal: 20,
-    },
-    contentList: {
+    flatlistContent: {
       marginVertical: 20,
     },
-    columnWrapperStyle: {
-      ...theme.applicationStyles.divider,
-    },
     footerView: {
-      paddingVertical: 5,
+      paddingVertical: 4,
       paddingHorizontal: 10,
+      marginBottom: 20,
     },
   });
 };

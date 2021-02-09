@@ -1,5 +1,8 @@
 import faker from "faker";
 
+import currentUser from "@app/fixtures/currentUser";
+import anotherUser from "@app/fixtures/anotherUser";
+
 // STRUCTURE
 const structure = {
   left: {
@@ -21,13 +24,7 @@ const structure = {
   footerTitle: ["footerTitle"],
 };
 
-export const privacyList = [
-  {
-    id: faker.random.uuid(),
-    title: "COLOR THEME",
-    footerTitle: "",
-    data: [],
-  },
+export const appearanceList = [
   {
     id: faker.random.uuid(),
     title: "",
@@ -83,12 +80,6 @@ export const privacyList = [
   },
   {
     id: faker.random.uuid(),
-    title: "APP ICON",
-    footerTitle: "",
-    data: [],
-  },
-  {
-    id: faker.random.uuid(),
     title: "OTHER",
     footerTitle: "Disable animations in message bubbles and in the chat list",
     data: [
@@ -117,5 +108,85 @@ export const privacyList = [
         },
       },
     ],
+  },
+];
+
+export const sampleMessages = [
+  {
+    id: faker.random.uuid(),
+    body: "Do you know what time is it?",
+    chatId: faker.random.uuid(),
+    isEdit: false,
+    createdAt: faker.date.recent().toISOString(),
+    createBy: anotherUser.id,
+  },
+  {
+    id: faker.random.uuid(),
+    body: "It's morning in Tokyo 😅",
+    chatId: faker.random.uuid(),
+    isEdit: false,
+    createdAt: faker.date.recent().toISOString(),
+    createBy: currentUser.id,
+  },
+];
+
+export const themeBubbles = [
+  {
+    id: faker.random.uuid(),
+    type: "classic",
+  },
+  {
+    id: faker.random.uuid(),
+    type: "day",
+  },
+  {
+    id: faker.random.uuid(),
+    type: "night",
+  },
+  {
+    id: faker.random.uuid(),
+    type: "tintedNight",
+  },
+  {
+    id: faker.random.uuid(),
+    type: "ultraBlue",
+  },
+];
+export const appIcons = [
+  {
+    id: faker.random.uuid(),
+    type: "default",
+    title: "Default",
+    imageName: "IconDefault",
+  },
+  {
+    id: faker.random.uuid(),
+    type: "defaultX",
+    title: "Default X",
+    imageName: "BlackClassicIcon",
+  },
+  {
+    id: faker.random.uuid(),
+    type: "classic",
+    title: "Classic",
+    imageName: "BlueClassicIcon",
+  },
+  {
+    id: faker.random.uuid(),
+    type: "classicX",
+    title: "Classic X",
+    imageName: "BlackClassicIconIpad",
+  },
+  {
+    id: faker.random.uuid(),
+    type: "filled",
+    title: "Filled",
+    imageName: "BlueFilledIconIpad",
+  },
+  {
+    id: faker.random.uuid(),
+    type: "filled",
+    title: "Filled X",
+    imageName: "BlackFilledIcon",
   },
 ];

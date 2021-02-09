@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useState } from "react";
 import PropTypes from "prop-types";
 import { StyleSheet, TouchableHighlight, ViewPropTypes, Switch } from "react-native";
 import { Entypo } from "@expo/vector-icons";
@@ -11,43 +11,91 @@ const COLORS = {
   padding: "rgb(240, 240, 240)",
   blue: "rgb(55,124,222)",
   touch: "rgb(230,230,230)",
+  border: "rgb(232,232,232)",
+  text: "rgb(24,24,24)",
 };
 
-function CommonListItem({ title, left, right, onPress, disabled, containerStyle, hasBottomDivider = true }) {
+function SwitchComponent({ switchDefaultValue, onValueChange }) {
+  const [value, setValue] = useState(switchDefaultValue || false);
+  return (
+    <Switch
+      value={value}
+      onValueChange={(val) => {
+        onValueChange(val);
+        setValue(val);
+      }}
+      style={{ marginHorizontal: 10 }}
+    />
+  );
+}
+
+function CommonListItem({
+  title,
+  titleStyle,
+  subtitle,
+  subtitleStyle,
+  left,
+  right,
+  onPress,
+  disabled,
+  containerStyle,
+  hasBottomDivider = true,
+  isSelected,
+}) {
   const { iconName = "", type, invisible: invisibleLeft } = left;
-  const invisibleRight = right.invisible;
-  const { hideChevronRight = false, isRoundText, isCustomComponent, component: RightComponent, text: rightText } = right;
+  const {
+    invisible: invisibleRight,
+    hideChevronRight = false,
+    isRoundText,
+    component: RightComponent,
+    text: rightText,
+    isSwitch,
+    isSelect,
+    switchDefaultValue = false,
+    onSwitchChangeValue = () => {},
+  } = right;
 
   const theme = useTheme();
   const styles = createStyles({ theme });
   return (
-    <TouchableHighlight onPress={onPress} disabled={disabled}>
+    <TouchableHighlight onPress={onPress} disabled={disabled || isSwitch}>
       <View style={[styles.container, containerStyle]}>
         <View style={styles.content}>
           {/* left */}
-          <View style={styles.leftItem}>
-            {!invisibleLeft && <>{type === "png" ? <PngIcons name={iconName} size={26} /> : <SvgIcons name={iconName} />}</>}
-          </View>
+          {!invisibleLeft && type && iconName && (
+            <View style={styles.leftItem}>{type === "png" ? <PngIcons name={iconName} size={26} /> : <SvgIcons name={iconName} />}</View>
+          )}
           {/* content */}
-          <View style={styles.body}>
-            <Text type="body">{title}</Text>
+          <View style={[styles.body, hasBottomDivider && styles.borderBottom]}>
+            <View style={styles.bodyTextBox}>
+              <Text type="subheadShort" style={titleStyle}>
+                {title}
+              </Text>
+              {!!subtitle && (
+                <Text type="footnote" style={[styles.subtitle, subtitleStyle]}>
+                  {subtitle}
+                </Text>
+              )}
+            </View>
+            <View style={styles.rightItem}>
+              {!invisibleRight && !isSwitch && (
+                <>
+                  <View style={isRoundText && styles.rightTextView}>
+                    {!!rightText && (
+                      <Text type="callout" color={isRoundText ? "white" : COLORS.gray}>
+                        {rightText}
+                      </Text>
+                    )}
+                  </View>
+                  {!hideChevronRight && <SvgIcons name="ic_open" tintColor={COLORS.gray} size={22} />}
+                </>
+              )}
+              {isSwitch && <SwitchComponent onValueChange={onSwitchChangeValue} switchDefaultValue={switchDefaultValue} />}
+              {isSelect && isSelected && <PngIcons name="ModernMenuCheck" size={10} style={{ marginHorizontal: 10 }} />}
+            </View>
           </View>
           {/* right */}
-          <View style={styles.rightItem}>
-            {!invisibleRight && !isCustomComponent && (
-              <>
-                <View style={isRoundText && styles.rightTextView}>
-                  <Text type="subheadShort" color={isRoundText ? "white" : COLORS.gray}>
-                    {rightText}
-                  </Text>
-                </View>
-                {!hideChevronRight && <SvgIcons name="ic_open" tintColor={COLORS.gray} size={22} />}
-              </>
-            )}
-            {isCustomComponent && <RightComponent />}
-          </View>
         </View>
-        {hasBottomDivider && <Divider marginLeft={50} />}
       </View>
     </TouchableHighlight>
   );
@@ -66,7 +114,7 @@ CommonListItem.defaultProps = {
   right: {},
   onPress: () => {},
 };
-export default CommonListItem;
+export default memo(CommonListItem);
 
 const createStyles = ({ theme }) =>
   StyleSheet.create({
@@ -78,28 +126,46 @@ const createStyles = ({ theme }) =>
       backgroundColor: "white",
       alignItems: "center",
       flexDirection: "row",
-      paddingVertical: 4,
-      paddingHorizontal: 2,
     },
     tempIcon: {
       height: 30,
       width: 30,
     },
     leftItem: {
-      paddingHorizontal: 12,
+      // paddingHorizontal: 12,
+      paddingLeft: 12,
     },
     body: {
       flex: 1,
-      paddingHorizontal: 2,
-    },
-    rightItem: {
       flexDirection: "row",
       alignItems: "center",
-      paddingHorizontal: 2,
+      justifyContent: "space-between",
+      paddingVertical: 4,
+      minHeight: 40,
+      marginLeft: 12,
+    },
+    bodyTextBox: {
+      justifyContent: "center",
+      paddingVertical: 4,
+    },
+    subtitle: {
+      paddingVertical: 4,
+      color: COLORS.gray,
+    },
+    borderBottom: {
+      borderBottomColor: COLORS.border,
+      borderBottomWidth: 1,
+    },
+    rightItem: {
+      paddingRight: 4,
+      flexDirection: "row",
+      alignItems: "center",
     },
     rightTextView: {
       backgroundColor: COLORS.blue,
-      paddingHorizontal: 4,
+      paddingHorizontal: 5,
+      alignItems: "center",
+      justifyContent: "center",
       borderRadius: 999,
     },
     // marginLeft: {

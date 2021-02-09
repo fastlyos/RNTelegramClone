@@ -29,7 +29,6 @@ import {
   MainAppearanceScreen,
   LanguageScreen,
   ListStickersScreen,
-  AskAQuestionScreen,
   FAQScreen,
 } from "@app/screens";
 
@@ -102,13 +101,28 @@ function RootNavigator() {
       />
 
       {/* Settings */}
-      <Stack.Screen name="LanguageScreen" component={LanguageScreen} />
-      <Stack.Screen name="FAQScreen" component={FAQScreen} />
-      <Stack.Screen name="AskAQuestionScreen" component={AskAQuestionScreen} />
+      <Stack.Screen name="LanguageScreen" component={LanguageScreen} options={{ title: "Language" }} />
+      <Stack.Screen
+        name="FAQScreen"
+        component={FAQScreen}
+        options={{
+          animationEnabled: true,
+          gestureEnabled: true,
+          detachPreviousScreen: true,
+          title: "Telegram",
+          headerTintColor: "white",
+          headerStyle: {
+            backgroundColor: "black",
+          },
+          headerBackTitleStyle: {
+            color: "black",
+          },
+        }}
+      />
       {/* Settings/personal */}
       <Stack.Screen name="SavedMessagesScreen" component={SavedMessagesScreen} />
       <Stack.Screen name="RecentCallScreen" component={RecentCallScreen} />
-      <Stack.Screen name="ListDevicesScreen" component={ListDevicesScreen} />
+      <Stack.Screen name="ListDevicesScreen" component={ListDevicesScreen} options={{ title: "Devices" }} />
       <Stack.Screen name="ScanCodeScreen" component={ScanCodeScreen} />
       <Stack.Screen name="ChatFoldersScreen" component={ChatFoldersScreen} options={{ title: "Folders" }} />
       {/* Settings/notification */}
@@ -116,9 +130,9 @@ function RootNavigator() {
       {/* Settings/privacy */}
       <Stack.Screen name="PrivacyAndSecurityScreen" component={PrivacyAndSecurityScreen} />
       {/* Settings/storage */}
-      <Stack.Screen name="MainDataStorageScreen" component={MainDataStorageScreen} />
+      <Stack.Screen name="MainDataStorageScreen" component={MainDataStorageScreen} options={{ title: "Data and Storage" }} />
       {/* Settings/appearance */}
-      <Stack.Screen name="MainAppearanceScreen" component={MainAppearanceScreen} />
+      <Stack.Screen name="MainAppearanceScreen" component={MainAppearanceScreen} options={{ title: "Appearance" }} />
       {/* Settings/stickers */}
       <Stack.Screen name="ListStickersScreen" component={ListStickersScreen} />
 

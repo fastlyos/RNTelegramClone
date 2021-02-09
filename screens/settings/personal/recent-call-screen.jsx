@@ -16,26 +16,9 @@ const COLORS = {
   text: "rgb(115,115,115)",
 };
 
-function SwitchComponent() {
-  const [value, setValue] = useState(false);
-  return <Switch value={value} onValueChange={setValue} style={{ marginHorizontal: 10 }} />;
-}
-
 function HeaderTitle({ values = [], selectedIndex = 0, onChange = () => {} }) {
   return <SegmentedControl style={{ width: 150 }} values={values} selectedIndex={selectedIndex} onChange={onChange} />;
 }
-
-const SECTIONLIST_DATA = recentCalls.map((s) => ({
-  ...s,
-  data: s.data.map((i) => ({
-    ...i,
-    right: {
-      ...i.right,
-      isCustomComponent: true,
-      component: memo(SwitchComponent),
-    },
-  })),
-}));
 
 function RecentCallScreen({ navigation }) {
   // const navigation = useNavigation();
@@ -69,7 +52,9 @@ function RecentCallScreen({ navigation }) {
         </Text>
       </View>
       <SectionList
-        sections={SECTIONLIST_DATA}
+        stickySectionHeadersEnabled={false}
+        showsVerticalScrollIndicator={false}
+        sections={recentCalls}
         keyExtractor={(item) => item.id}
         contentContainerStyle={styles.flatlistContent}
         SectionSeparatorComponent={() => <Divider />}
@@ -84,7 +69,11 @@ function RecentCallScreen({ navigation }) {
         )}
         renderSectionFooter={({ section: { footerTitle } }) => (
           <View style={styles.footerView}>
-            <Text color={COLORS.text}>{footerTitle}</Text>
+            {!!footerTitle && (
+              <Text type="caption2" color={COLORS.title}>
+                {footerTitle}
+              </Text>
+            )}
           </View>
         )}
       />

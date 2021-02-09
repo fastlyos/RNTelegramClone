@@ -133,9 +133,9 @@ export default function BottomTabNavigator() {
         name="TabSettings"
         component={TabSettingsNavigator}
         options={{
-          title: "Settings",
+          title: "",
           tabBarIcon: ({ color }) => <TabBarIcon name="ios-cog" color={color} />,
-          tabBarBadge: "!",
+          // tabBarBadge: "!",
         }}
       />
     </BottomTab.Navigator>

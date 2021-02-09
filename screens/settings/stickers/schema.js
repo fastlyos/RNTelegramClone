@@ -47,7 +47,7 @@ export const stickerList = [
         title: "Tending Stickers",
         right: {
           invisible: false,
-          text: "24",
+          text: "12",
           isRoundText: true,
         },
       },
@@ -81,7 +81,8 @@ export const stickerList = [
   {
     title: "STICKER SETS",
     footerTitle: [
-      "Aritsts are welcome to add their own sticker sets using our @tickers bot.",
+      "Aritsts are welcome to add their own sticker sets using our @stickers bot.",
+      "\n",
       "Tap on a sitkcer to view and add the whole set.",
     ],
     data: [
@@ -90,10 +91,48 @@ export const stickerList = [
         left: {
           invisible: false,
           icon: "",
-          iconBackgroundColor: "rgb(239, 122, 9)",
         },
-        title: "Belfort",
-        subtitle: "30 stickers",
+        title: "Lovely Peachy",
+        subtitle: "15 stickers",
+        titleType: "",
+        right: {
+          invisible: true,
+        },
+      },
+      {
+        id: faker.random.uuid(),
+        left: {
+          invisible: false,
+          icon: "",
+        },
+        title: "Lovely Peachy",
+        subtitle: "15 stickers",
+        titleType: "",
+        right: {
+          invisible: true,
+        },
+      },
+      {
+        id: faker.random.uuid(),
+        left: {
+          invisible: false,
+          icon: "",
+        },
+        title: "Uni",
+        subtitle: "25 stickers",
+        titleType: "",
+        right: {
+          invisible: true,
+        },
+      },
+      {
+        id: faker.random.uuid(),
+        left: {
+          invisible: false,
+          icon: "",
+        },
+        title: "Loving Mice",
+        subtitle: "12 stickers",
         titleType: "",
         right: {
           invisible: true,
