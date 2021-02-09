@@ -3,7 +3,6 @@ import faker from "faker";
 import contacts from "./contacts";
 import currentUser from "./currentUser";
 import groups from "./groups";
-
 const byIds = {};
 
 const CHAT_TYPES = ["group", "direct", "other"];

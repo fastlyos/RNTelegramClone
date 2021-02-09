@@ -8,3 +8,5 @@ coverage
 node_modules/
 .expo/
 .expo-shared/
+assets/
+submodules/

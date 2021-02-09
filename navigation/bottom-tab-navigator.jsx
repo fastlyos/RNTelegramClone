@@ -10,16 +10,11 @@ import useColorScheme from "@app/hooks/useColorScheme";
 import Colors from "@app/constants/Colors";
 
 // components
-import { Image, SearchListHeader } from "@app/components";
+import { Image } from "@app/components";
+import { SearchListHeader } from "@app/containers";
 
 // screens
-import {
-  ExampleScreen,
-  MainContactScreen,
-  MainChatScreen,
-  MainSettingScreen,
-  // NewContactScreen
-} from "@app/screens/routes";
+import { ExampleScreen, MainContactScreen, MainChatScreen, MainSettingScreen, NewContactScreen } from "@app/screens";
 
 function TabBarIcon({ name, color, reverse }) {
   return <Ionicons size={32} style={{ marginBottom: -3, transform: reverse && [{ rotateY: "180deg" }] }} name={name} color={color} />;
@@ -112,10 +107,9 @@ function TabSettingsNavigator() {
 const BottomTab = createBottomTabNavigator();
 export default function BottomTabNavigator() {
   const colorScheme = useColorScheme();
-
   return (
     <BottomTab.Navigator
-      initialRouteName="TabChats"
+      initialRouteName="TabSettings"
       tabBarOptions={{
         activeTintColor: Colors[colorScheme].tint,
       }}>
@@ -139,9 +133,9 @@ export default function BottomTabNavigator() {
         name="TabSettings"
         component={TabSettingsNavigator}
         options={{
-          title: "Settings",
+          title: "",
           tabBarIcon: ({ color }) => <TabBarIcon name="ios-cog" color={color} />,
-          tabBarBadge: "!",
+          // tabBarBadge: "!",
         }}
       />
     </BottomTab.Navigator>

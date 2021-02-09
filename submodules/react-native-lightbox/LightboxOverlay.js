@@ -1,18 +1,6 @@
 import React, { Component, useRef, useState } from "react";
 import PropTypes from "prop-types";
-import {
-  Animated,
-  Dimensions,
-  Modal,
-  PanResponder,
-  Platform,
-  StatusBar,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  ScrollView,
-  View,
-} from "react-native";
+import { Animated, Dimensions, Modal, PanResponder, Platform, StatusBar, StyleSheet, Text, TouchableOpacity, ScrollView, View } from "react-native";
 import useDoubleTapToZoom from "./useDoubleTapToZoom";
 
 const SCREEN = Dimensions.get("window");
@@ -104,14 +92,10 @@ export default class LightboxOverlay extends Component {
     };
     this._panResponder = PanResponder.create({
       // Ask to be the responder:
-      onStartShouldSetPanResponder: (evt, gestureState) =>
-        !this.state.isAnimating,
-      onStartShouldSetPanResponderCapture: (evt, gestureState) =>
-        !this.state.isAnimating,
-      onMoveShouldSetPanResponder: (evt, gestureState) =>
-        !this.state.isAnimating,
-      onMoveShouldSetPanResponderCapture: (evt, gestureState) =>
-        !this.state.isAnimating,
+      onStartShouldSetPanResponder: (evt, gestureState) => !this.state.isAnimating,
+      onStartShouldSetPanResponderCapture: (evt, gestureState) => !this.state.isAnimating,
+      onMoveShouldSetPanResponder: (evt, gestureState) => !this.state.isAnimating,
+      onMoveShouldSetPanResponderCapture: (evt, gestureState) => !this.state.isAnimating,
 
       onPanResponderGrant: (evt, gestureState) => {
         this.state.pan.setValue(0);
@@ -200,13 +184,7 @@ export default class LightboxOverlay extends Component {
   }
 
   render() {
-    const {
-      isOpen,
-      renderHeader,
-      swipeToDismiss,
-      origin,
-      backgroundColor,
-    } = this.props;
+    const { isOpen, renderHeader, swipeToDismiss, origin, backgroundColor } = this.props;
 
     const { isPanning, isAnimating, openVal, target } = this.state;
 
@@ -242,10 +220,7 @@ export default class LightboxOverlay extends Component {
         }),
         top: openVal.interpolate({
           inputRange: [0, 1],
-          outputRange: [
-            origin.y + STATUS_BAR_OFFSET,
-            target.y + STATUS_BAR_OFFSET,
-          ],
+          outputRange: [origin.y + STATUS_BAR_OFFSET, target.y + STATUS_BAR_OFFSET],
         }),
         width: openVal.interpolate({
           inputRange: [0, 1],
@@ -258,15 +233,7 @@ export default class LightboxOverlay extends Component {
       },
     ];
 
-    const background = (
-      <Animated.View
-        style={[
-          styles.background,
-          { backgroundColor: backgroundColor },
-          lightboxOpacityStyle,
-        ]}
-      ></Animated.View>
-    );
+    const background = <Animated.View style={[styles.background, { backgroundColor: backgroundColor }, lightboxOpacityStyle]}></Animated.View>;
     const header = (
       <Animated.View style={[styles.header, lightboxOpacityStyle]}>
         {renderHeader ? (
@@ -278,14 +245,7 @@ export default class LightboxOverlay extends Component {
         )}
       </Animated.View>
     );
-    const content = (
-      <ContentComponent
-        dragStyle={dragStyle}
-        openStyle={openStyle}
-        handlers={handlers}
-        children={this.props.children}
-      />
-    );
+    const content = <ContentComponent dragStyle={dragStyle} openStyle={openStyle} handlers={handlers} children={this.props.children} />;
 
     if (this.props.navigator) {
       return (
@@ -298,11 +258,7 @@ export default class LightboxOverlay extends Component {
     }
 
     return (
-      <Modal
-        visible={isOpen}
-        transparent={true}
-        onRequestClose={() => this.close()}
-      >
+      <Modal visible={isOpen} transparent={true} onRequestClose={() => this.close()}>
         {background}
         {content}
         {header}
@@ -315,12 +271,7 @@ function ContentComponent({ openStyle, dragStyle, handlers, children }) {
   const scrollViewRef = useRef(null);
   const [zoomScale, setZoomScale] = useState(1);
   const [scaled, setScaled] = useState(false);
-  const handleDoubleTap = useDoubleTapToZoom(
-    scrollViewRef,
-    scaled,
-    SCREEN,
-    setScaled
-  );
+  const handleDoubleTap = useDoubleTapToZoom(scrollViewRef, scaled, SCREEN, setScaled);
   return (
     <ScrollView
       ref={scrollViewRef}
@@ -332,15 +283,13 @@ function ContentComponent({ openStyle, dragStyle, handlers, children }) {
       maximumZoomScale={2}
       contentContainerStyle={styles.imageScrollContainer}
       // onScrollEndDrag={onScrollEndDrag}
-      scrollEventThrottle={1}
-    >
+      scrollEventThrottle={1}>
       <Animated.View
         style={[openStyle, dragStyle]}
         {...handlers}
         onTouchEndCapture={(e) => {
           handleDoubleTap(e);
-        }}
-      >
+        }}>
         {children}
       </Animated.View>
     </ScrollView>

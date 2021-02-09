@@ -1,5 +1,4 @@
 import { iOSColors } from "react-native-typography";
-
 export default {
   light: {
     // primary: 'rgb(255, 45, 85)',
@@ -7,7 +6,7 @@ export default {
     background: "rgb(255, 255, 255)",
     // card: 'rgb(255, 255, 255)',
     // text: 'rgb(28, 28, 30)',
-    border: iOSColors.lightGray,
+    border: "rgb(245,245,245)",
     backgroundCenter: iOSColors.customGray,
     iOSColors,
     typography: {
@@ -19,7 +18,7 @@ export default {
     // background: 'rgb(242, 242, 242)',
     // card: 'rgb(255, 255, 255)',
     // text: 'rgb(28, 28, 30)',
-    border: iOSColors.lightGray,
+    border: "rgb(245,245,245)",
     backgroundCenter: iOSColors.customGray,
     iOSColors,
     // notification: 'rgb(255, 69, 58)',

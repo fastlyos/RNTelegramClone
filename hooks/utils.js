@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  *
  */
+
+/* eslint-disable */
 import { Animated, PanResponder } from "react-native";
 export const createCache = (cacheSize) => ({
   _storage: [],

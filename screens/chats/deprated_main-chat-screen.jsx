@@ -1,8 +1,19 @@
 import React, { useRef, memo, useCallback, useState, useEffect, createRef } from "react";
-import { StyleSheet, SafeAreaView, View, FlatList, Text, Animated, ScrollView, VirtualizedList as RNVirtualizedList, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  SafeAreaView,
+  View,
+  FlatList,
+  Text,
+  Animated,
+  ScrollView,
+  VirtualizedList as RNVirtualizedList,
+  TouchableOpacity,
+} from "react-native";
 import { useTheme } from "@react-navigation/native";
 import PropTypes from "prop-types";
-import { ContactListItem, MainChatHeader, ChatListItem, Divider } from "@app/components";
+import { Divider } from "@app/components";
+import { ContactListItem, MainChatHeader, ChatListItem } from "@app/containers";
 import { iOSColors } from "react-native-typography";
 import CHATS from "@app/fixtures/chats";
 import MESSAGES from "@app/fixtures/messages";

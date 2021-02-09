@@ -166,8 +166,14 @@ function GiftComponent() {
             height: "100%",
             justifyContent: "center",
           }}>
-          <Image source={require("@app/assets/images/intro/knot_up1.png")} style={[knotUpDimension, { tintColor: materialColors.whitePrimary }]} />
-          <Image source={require("@app/assets/images/intro/knot_down.png")} style={[knotDownDimension, { tintColor: materialColors.whitePrimary }]} />
+          <Image
+            source={require("@app/assets/images/intro/knot_up1.png")}
+            style={[knotUpDimension, { tintColor: materialColors.whitePrimary }]}
+          />
+          <Image
+            source={require("@app/assets/images/intro/knot_down.png")}
+            style={[knotDownDimension, { tintColor: materialColors.whitePrimary }]}
+          />
         </View>
         <View
           style={{
@@ -177,10 +183,16 @@ function GiftComponent() {
             justifyContent: "center",
           }}>
           <View style={{ transform: [{ scaleX: -1 }] }}>
-            <Image source={require("@app/assets/images/intro/knot_up1.png")} style={[knotUpDimension, { tintColor: materialColors.whitePrimary }]} />
+            <Image
+              source={require("@app/assets/images/intro/knot_up1.png")}
+              style={[knotUpDimension, { tintColor: materialColors.whitePrimary }]}
+            />
           </View>
           <View style={{ transform: [{ scaleX: -1 }] }}>
-            <Image source={require("@app/assets/images/intro/knot_down.png")} style={[knotDownDimension, { tintColor: materialColors.whitePrimary }]} />
+            <Image
+              source={require("@app/assets/images/intro/knot_down.png")}
+              style={[knotDownDimension, { tintColor: materialColors.whitePrimary }]}
+            />
           </View>
         </View>
         {/* line */}

@@ -15,7 +15,8 @@ import {
 import { useTheme } from "@react-navigation/native";
 import { HeaderStyleInterpolators } from "@react-navigation/stack";
 // components
-import { Text, ContactListItem, ContactListHeader, SearchBar } from "@app/components";
+import { Text } from "@app/components";
+import { ContactListItem, ContactListHeader, SearchBar } from "@app/containers";
 import { iOSColors } from "react-native-typography";
 // data
 import contacts from "@app/fixtures/contacts";

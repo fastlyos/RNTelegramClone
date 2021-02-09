@@ -12,18 +12,19 @@ export function Ionicons(props) {
   return <RNIonicons {...props} />;
 }
 
-export function PngIcons({ name, style, ...props }) {
+export function PngIcons({ name, noSize = false, size = DEFAULT_SIZE, style, ...props }) {
   const source = PNG_ICON_SOURCES[name];
-  return <Image {...props} source={source} style={[{ width: DEFAULT_SIZE, height: DEFAULT_SIZE }, style]} />;
+  const sizeStyle = noSize ? {} : { width: size, height: size };
+  return <Image {...props} source={source} style={[sizeStyle, style]} />;
 }
 
-export function SvgIcons({ name, backgroundColor, containerStyle, tintColor, ...props }) {
+export function SvgIcons({ name, backgroundColor, size = DEFAULT_SIZE, containerStyle, tintColor, ...props }) {
   if (!name) return null;
   const SvgImage = SVG_ICON_SOURCES[name];
   if (!SvgImage) return null;
   return (
     <View style={[containerStyle, { backgroundColor: backgroundColor || "transparent" }]}>
-      <SvgImage width={DEFAULT_SIZE} fill={tintColor || "black"} {...props} />
+      <SvgImage width={size} fill={tintColor || "black"} {...props} />
     </View>
   );
 }

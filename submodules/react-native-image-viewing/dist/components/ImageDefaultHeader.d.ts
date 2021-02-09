@@ -6,7 +6,7 @@
  *
  */
 declare type Props = {
-    onRequestClose: () => void;
+  onRequestClose: () => void;
 };
 declare const ImageDefaultHeader: ({ onRequestClose }: Props) => JSX.Element;
 export default ImageDefaultHeader;

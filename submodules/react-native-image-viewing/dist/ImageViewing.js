@@ -38,14 +38,13 @@ function ImageViewing({
   const [opacity, onRequestCloseEnhanced] = useRequestClose(onRequestClose);
   const [currentImageIndex, onScroll] = useImageIndexChange(imageIndex, SCREEN);
   const [headerTransform, footerTransform, toggleBarsVisible] = useAnimatedComponents();
-  console.log("DebugLog ~ file: ImageViewing.js ~ line 41 ~ footerTransform", footerTransform)
+  console.log("DebugLog ~ file: ImageViewing.js ~ line 41 ~ footerTransform", footerTransform);
   useEffect(() => {
     if (onImageIndexChange) {
       onImageIndexChange(currentImageIndex);
     }
   }, [currentImageIndex]);
-  useEffect(() => {
-  }, []);
+  useEffect(() => {}, []);
   const onZoom = useCallback(
     (isScaled) => {
       let _a, _b;

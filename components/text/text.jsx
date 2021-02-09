@@ -28,7 +28,7 @@ const TYPES = {
 
 function Text({ type, color, children, style, ...otherProps }) {
   const typeStyle = TYPES[type];
-  const colorStyle = { color: COLORS[color] };
+  const colorStyle = { color: COLORS[color] || color };
   return (
     <RNText allowFontScaling style={[typeStyle, colorStyle, style]} {...otherProps}>
       {children}

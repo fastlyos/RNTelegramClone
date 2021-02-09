@@ -2,19 +2,31 @@ import React from "react";
 import { StyleSheet, useWindowDimensions, View } from "react-native";
 import { useTheme } from "@react-navigation/native";
 
-function Divider({ style, ...props }) {
+const COLORS = {
+  border: "rgb(232,232,232)",
+};
+
+function Divider({ marginLeft = 0, style, ...props }) {
   const theme = useTheme();
-  const { width, height } = useWindowDimensions();
-  const styles = createStyles({ theme, width, height });
-  return <View style={[styles.divider, style]} {...props} />;
+  const styles = createStyles({ theme, marginLeft });
+  return (
+    <View style={[styles.container, style]} {...props}>
+      <View style={styles.divider} />
+    </View>
+  );
 }
 
 export default Divider;
-const createStyles = ({ theme }) =>
+const createStyles = ({ theme, marginLeft }) =>
   StyleSheet.create({
+    container: {
+      height: 1,
+      paddingLeft: marginLeft,
+      backgroundColor: marginLeft > 0 ? "white" : "transparent",
+    },
     divider: {
-      // marginLeft: 60,
+      // height: 2,
       borderBottomWidth: 1,
-      borderBottomColor: theme.colors.border,
+      borderBottomColor: COLORS.border,
     },
   });

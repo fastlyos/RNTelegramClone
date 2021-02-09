@@ -1,1 +1,1 @@
-export * from "./message-typing";
+export { default as MessageTyping } from "./message-typing";

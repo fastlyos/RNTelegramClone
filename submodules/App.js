@@ -1,6 +1,16 @@
 import React, { Component, useState, useRef } from "react";
 
-import { AppRegistry, Dimensions, Image, ScrollView, StyleSheet, Text, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
+import {
+  AppRegistry,
+  Dimensions,
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
 // import useDoubleTapToZoom from "./useDoubleTapToZoom";
 
 import Lightbox from "./react-native-lightbox";
@@ -35,7 +45,9 @@ export default () => {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.text}>
-        <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </Text>
+        <Text>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.{" "}
+        </Text>
       </View>
       <Lightbox
         springConfig={{ tension: 15, friction: 7 }}
@@ -51,7 +63,9 @@ export default () => {
         />
       </Lightbox>
       <View style={styles.text}>
-        <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </Text>
+        <Text>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.{" "}
+        </Text>
       </View>
       <Lightbox
         renderHeader={(close) => (
@@ -64,7 +78,9 @@ export default () => {
         </View>
       </Lightbox>
       <View style={styles.text}>
-        <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </Text>
+        <Text>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.{" "}
+        </Text>
       </View>
       <View style={styles.row}>
         <Lightbox style={styles.col}>
@@ -79,7 +95,9 @@ export default () => {
         </Lightbox>
       </View>
       <View style={styles.text}>
-        <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </Text>
+        <Text>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.{" "}
+        </Text>
       </View>
     </ScrollView>
   );

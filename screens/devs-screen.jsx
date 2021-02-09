@@ -7,6 +7,7 @@ import { useTheme } from "@react-navigation/native";
 import { BlurView } from "expo-blur";
 import * as Animatable from "react-native-animatable";
 import { SvgIcons, Text, Image } from "@app/components";
+import { ThemeBubbleImageItem } from "@app/containers";
 import { iOSColors } from "react-native-typography";
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from "@app/constants/Layout";
 
@@ -35,7 +36,7 @@ function DevsScreen() {
   const styles = createStyles({ theme });
   return (
     <View style={[styles.container]}>
-      <Text>1234</Text>
+      <ThemeBubbleImageItem />
     </View>
   );
 }
@@ -47,6 +48,9 @@ const createStyles = ({ theme }) => {
   return StyleSheet.create({
     container: {
       flex: 1,
+      backgroundColor: "white",
+      alignItems: "center",
+      justifyContent: "center",
     },
   });
 };

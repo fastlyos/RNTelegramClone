@@ -32,7 +32,8 @@ import * as Animatable from "react-native-animatable";
 import Animated from "react-native-reanimated";
 import BottomSheet from "reanimated-bottom-sheet";
 
-import { ContactListItem, ChatListItem, Divider, Text, MessageListItem, MessageTyping, SearchListHeader, CircleSelect } from "@app/components";
+import { Divider, Text } from "@app/components";
+import { ContactListItem, ChatListItem, MessageListItem, MessageTyping, SearchListHeader, CircleSelect } from "@app/containers";
 
 // theme
 import { useTheme } from "@react-navigation/native";

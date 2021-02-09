@@ -13,6 +13,8 @@ let lastTapTS = null;
  * This is iOS only.
  * Same functionality for Android implemented inside usePanResponder hook.
  */
+
+/* eslint-disable */
 function useDoubleTapToZoom(scrollViewRef, scaled, screen) {
   const handleDoubleTap = useCallback(
     (event) => {

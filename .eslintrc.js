@@ -17,7 +17,7 @@ module.exports = {
   plugins: ["react", "@typescript-eslint"],
   rules: {
     eqeqeq: [2, "smart"],
-    quotes: ["error", "double"],
+    quotes: ["error", "double", { avoidEscape: true, allowTemplateLiterals: true }],
     "no-unused-vars": "off",
     "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx", ".ts", ".tsx"] }],
     "arrow-body-style": "off",
@@ -48,6 +48,7 @@ module.exports = {
     indent: "off",
     "@typescript-eslint/no-var-requires": "off",
     "@typescript-eslint/no-unused-vars": "off",
+    "operator-linebreak": ["error", "after"],
   },
   globals: {
     arguments: true,

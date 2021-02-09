@@ -1,5 +1,5 @@
 import React from "react";
-import { ViewProps as RNViewProps } from "react-native";
+import { ViewProps as RNViewProps, ViewStyle } from "react-native";
 
 interface ViewProps extends RNViewProps {
   backgroundColor: string | undefined;

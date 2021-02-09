@@ -2,7 +2,6 @@ import _ from "lodash";
 import faker from "faker";
 import contacts from "./contacts";
 import currentUser from "./currentUser";
-
 const byIds = {};
 
 export const GROUP_MEMBER_LENGTH = 4;

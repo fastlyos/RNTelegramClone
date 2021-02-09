@@ -82,7 +82,7 @@ const ImageItem = ({
   );
   const onScrollBeginDrag = useCallback(({ nativeEvent }) => {
     // console.log(nativeEvent);
-    console.log("DebugLog ~ file: ImageItem.ios.js ~ line 92 ~ onScrollBeginDrag ~ toggleBarsVisible")
+    console.log("DebugLog ~ file: ImageItem.ios.js ~ line 92 ~ onScrollBeginDrag ~ toggleBarsVisible");
     toggleBarsVisible(false);
   }, []);
 

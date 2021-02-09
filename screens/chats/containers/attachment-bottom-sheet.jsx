@@ -1,7 +1,17 @@
 import React, { useCallback, useEffect, useState, memo, useMemo } from "react";
 import PropTypes from "prop-types";
 import _ from "lodash";
-import { StyleSheet, View, TouchableHighlight, FlatList, ImageBackground, TouchableOpacity, useWindowDimensions, useColorScheme, Image } from "react-native";
+import {
+  StyleSheet,
+  View,
+  TouchableHighlight,
+  FlatList,
+  ImageBackground,
+  TouchableOpacity,
+  useWindowDimensions,
+  useColorScheme,
+  Image,
+} from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { iOSColors } from "react-native-typography";
 import { Camera } from "expo-camera";
@@ -38,7 +48,15 @@ export const ACTION_AFTER_SELECT_ELEMENTS = [
   },
 ];
 
-function AttachmentBottomSheet({ visible, assetsList, selectArray, setAssetsList, setCloseSheet, handlePressItemImage, handleSelectImage }) {
+function AttachmentBottomSheet({
+  visible,
+  assetsList,
+  selectArray,
+  setAssetsList,
+  setCloseSheet,
+  handlePressItemImage,
+  handleSelectImage,
+}) {
   // states
   const theme = useTheme();
   const styles = createStyles({ theme });
