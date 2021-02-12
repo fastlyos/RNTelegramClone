@@ -64,6 +64,7 @@ function MainAppearanceScreen() {
         {/*  */}
         <SectionList
           scrollEnabled={false}
+          nestedScrollEnabled
           stickySectionHeadersEnabled={false}
           showsVerticalScrollIndicator={false}
           sections={[appearanceList[0]]}
@@ -123,6 +124,7 @@ function MainAppearanceScreen() {
         {/* Other */}
         <SectionList
           scrollEnabled={false}
+          nestedScrollEnabled
           stickySectionHeadersEnabled={false}
           showsVerticalScrollIndicator={false}
           sections={[appearanceList[1]]}
