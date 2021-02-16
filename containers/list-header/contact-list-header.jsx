@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useCallback, useEffect, useState, memo, useMemo } from "react";
 import { StyleSheet, TouchableOpacity, TouchableHighlight } from "react-native";
 import { AntDesign, FontAwesome5, Feather } from "@expo/vector-icons";
-import { View } from "@app/components/view";
-import { Text } from "@app/components/text";
-import PropTypes from "prop-types";
 import { useTheme } from "@react-navigation/native";
+import { View, Text } from "@app/components";
+import PropTypes from "prop-types";
 
 export default function ContactListHeader({ title, onPress }) {
   const theme = useTheme();
@@ -16,9 +15,7 @@ export default function ContactListHeader({ title, onPress }) {
     <View style={styles.container}>
       <TouchableOpacity onPress={onPress}>
         <View style={[styles.content, { padding: 10 }]}>
-          <Text type="subheadEmphasized" color="">
-            {title}
-          </Text>
+          <Text type="subheadEmphasized">{title}</Text>
           <FontAwesome5 name="caret-down" size={17} color={theme.colors.text} style={{ paddingLeft: 5 }} />
         </View>
       </TouchableOpacity>

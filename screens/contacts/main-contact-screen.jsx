@@ -15,8 +15,8 @@ import {
 import { useTheme } from "@react-navigation/native";
 import { HeaderStyleInterpolators } from "@react-navigation/stack";
 // components
-import { Text } from "@app/components";
-import { ContactListItem, ContactListHeader, SearchBar } from "@app/containers";
+import { Text, SearchBar } from "@app/components";
+import { ContactListItem, ContactListHeader } from "@app/containers";
 import { iOSColors } from "react-native-typography";
 // data
 import contacts from "@app/fixtures/contacts";
@@ -28,6 +28,7 @@ export default function MainContactScreen({ navigation }) {
   const { width, height } = useWindowDimensions();
   const styles = createStyles({ theme, width, height });
   const listRef = useRef();
+  // const searchBarRef = useRef(null);
   const goto = () => navigation && navigation.navigate("NewContact");
   const [sortedBy, setSortedBy] = useState(1);
   const [headerShown, setheaderShown] = useState(true);
@@ -53,6 +54,13 @@ export default function MainContactScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
+        <SearchBar
+          // ref={searchBarRef}
+          placeholder="Search"
+          onChangeText={() => {}}
+          onSearchButtonPress={() => {}}
+          onCancelButtonPress={() => {}}
+        />
         {sortedBy === 0 && (
           <SectionList
             ref={listRef}

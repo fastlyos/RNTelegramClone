@@ -1,5 +1,5 @@
 import React from "react";
-import { ImageProps, ImageStyle } from "react-native";
+import { ImageProps, ImageStyle, ViewStyle } from "react-native";
 
 interface PngIconsProps extends ImageProps {
   name: string;
@@ -9,3 +9,14 @@ interface PngIconsProps extends ImageProps {
 }
 
 export declare const PngIcons: (props: PngIconsProps) => React.ReactNode;
+interface SvgIconsProps {
+  name: string;
+  size: number;
+  backgroundColor: string;
+  noSize: boolean;
+  style: ImageStyle;
+  containerStyle: ViewStyle;
+  tintColor: string;
+}
+
+export declare const SvgIcons: (props: SvgIconsProps) => React.ReactNode;
