@@ -2,10 +2,17 @@ import React, { useCallback, useEffect, useState, memo, useMemo } from "react";
 import { StyleSheet, TouchableOpacity, TouchableHighlight } from "react-native";
 import { AntDesign, FontAwesome5, Feather } from "@expo/vector-icons";
 import { useTheme } from "@react-navigation/native";
-import { View, Text } from "@app/components";
+import { View, Text, SvgIcons } from "@app/components";
 import PropTypes from "prop-types";
+import { iOSColors } from "react-native-typography";
 
-export default function ContactListHeader({ title, onPress }) {
+const COLORS = {
+  header: "rgb(247,247,247)",
+  blue: iOSColors.blue,
+  subtitle: "rgb(247,247,247)",
+};
+
+function ContactListHeader({ title, onPress }) {
   const theme = useTheme();
   const borderStyle = {
     borderBottomWidth: 0.75,
@@ -15,18 +22,22 @@ export default function ContactListHeader({ title, onPress }) {
     <View style={styles.container}>
       <TouchableOpacity onPress={onPress}>
         <View style={[styles.content, { padding: 10 }]}>
-          <Text type="subheadEmphasized">{title}</Text>
-          <FontAwesome5 name="caret-down" size={17} color={theme.colors.text} style={{ paddingLeft: 5 }} />
+          <Text type="subhead" color={COLORS.blue}>
+            {title}
+          </Text>
+          <FontAwesome5 name="caret-down" size={17} color={COLORS.blue} style={{ paddingLeft: 5 }} />
         </View>
       </TouchableOpacity>
       {/* find people nearby */}
       <TouchableHighlight style={styles.container} onPress={() => {}} activeOpacity={1} underlayColor={theme.colors.backgroundCenter}>
         <View style={styles.content}>
           <View style={styles.image}>
-            <Feather name="map-pin" size={24} />
+            <SvgIcons name="ic_location" size={28} tintColor={COLORS.blue} />
           </View>
           <View style={[styles.text, borderStyle]}>
-            <Text type="subheadEmphasized">{"Find People Nearby"}</Text>
+            <Text type="subhead" color={COLORS.blue}>
+              {"Find People Nearby"}
+            </Text>
           </View>
         </View>
       </TouchableHighlight>
@@ -34,10 +45,12 @@ export default function ContactListHeader({ title, onPress }) {
       <TouchableHighlight style={styles.container} onPress={() => {}} activeOpacity={1} underlayColor={theme.colors.backgroundCenter}>
         <View style={styles.content}>
           <View style={styles.image}>
-            <AntDesign name="adduser" size={24} color="black" />
+            <SvgIcons name="ic_addmember" size={28} tintColor={COLORS.blue} />
           </View>
           <View style={[styles.text, borderStyle]}>
-            <Text type="subheadEmphasized">{"Invite Friends"}</Text>
+            <Text type="subhead" color={COLORS.blue}>
+              {"Invite Friends"}
+            </Text>
           </View>
         </View>
       </TouchableHighlight>
@@ -46,6 +59,8 @@ export default function ContactListHeader({ title, onPress }) {
 }
 
 ContactListHeader.propTypes = {};
+ContactListHeader.defaultProps = {};
+export default memo(ContactListHeader);
 
 const styles = StyleSheet.create({
   container: {},

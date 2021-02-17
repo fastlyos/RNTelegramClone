@@ -4,7 +4,15 @@ import { Ionicons, FontAwesome } from "@expo/vector-icons";
 import { StyleSheet } from "react-native";
 import { BlurView } from "expo-blur";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { createStackNavigator, HeaderStyleInterpolators, CardStyleInterpolators, TransitionSpecs, useHeaderHeight, HeaderTitle } from "@react-navigation/stack";
+import {
+  createStackNavigator,
+  HeaderStyleInterpolators,
+  CardStyleInterpolators,
+  TransitionSpecs,
+  useHeaderHeight,
+  HeaderTitle,
+  Header,
+} from "@react-navigation/stack";
 import useColorScheme from "@app/hooks/useColorScheme";
 // styles
 import Colors from "@app/constants/Colors";
@@ -34,8 +42,7 @@ function TabContactNavigator() {
         name="TabContactsScreen"
         component={MainContactScreen}
         options={{
-          // header: () => <SearchListHeader />,
-          headerTitle: "Contacts",
+          title: "Contacts",
           // animationEnabled: true,
           headerRight: () => <Ionicons name="ios-add" size={30} color="red" />,
           headerRightContainerStyle: {
@@ -109,7 +116,8 @@ export default function BottomTabNavigator() {
   const colorScheme = useColorScheme();
   return (
     <BottomTab.Navigator
-      initialRouteName="TabSettings"
+      initialRouteName="TabContacts"
+      lazy={true}
       tabBarOptions={{
         activeTintColor: Colors[colorScheme].tint,
       }}>

@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useRef, useCallback, memo } from "react";
+import React, { useState, useMemo, useRef, useCallback, memo, useEffect } from "react";
 import _ from "lodash";
 import PropTypes from "prop-types";
 import {
@@ -9,61 +9,121 @@ import {
   SafeAreaView,
   useWindowDimensions,
   View,
+  Animated,
+  LayoutAnimation,
+  ScrollView,
   TouchableOpacity,
   TouchableWithoutFeedback,
 } from "react-native";
-import { useTheme } from "@react-navigation/native";
+import { useTheme, useScrollToTop } from "@react-navigation/native";
 import { HeaderStyleInterpolators } from "@react-navigation/stack";
 // components
 import { Text, SearchBar } from "@app/components";
 import { ContactListItem, ContactListHeader } from "@app/containers";
 import { iOSColors } from "react-native-typography";
+import { SCREEN_HEIGHT, SCREEN_WIDTH } from "@app/constants/Layout";
 // data
 import contacts from "@app/fixtures/contacts";
 
-const SORTS = ["Name", "Last Seen Time"];
+const SORTS = {
+  name: "Name",
+  lastSeen: "Last Seen Time",
+};
 
-export default function MainContactScreen({ navigation }) {
+const COLORS = {
+  header: "rgb(247,247,247)",
+  blue: "rgb(62, 120,238)",
+  subtitle: "rgb(247,247,247)",
+};
+
+function MainContactScreen({ navigation }) {
+  // states
+  const listRef = useRef(null);
+  useScrollToTop(listRef);
+  const searchBarRef = useRef(null);
+  const scrollViewValue = useRef(new Animated.Value(0)).current;
+  const contactsTitle = useMemo(() => contacts.groupByContacts.map((i) => i.title), [contacts.groupByContacts]);
+  const [sortedBy, setSortedBy] = useState("name");
+  const [headerShown, setheaderShown] = useState(true);
+
+  // callbacks
+  const goto = useCallback(() => navigation && navigation.navigate("NewContact"), [navigation]);
+  const onPressSort = useCallback(
+    () =>
+      ActionSheetIOS.showActionSheetWithOptions(
+        {
+          options: ["Cancel", SORTS.name, SORTS.lastSeen],
+          cancelButtonIndex: 0,
+        },
+        (buttonIndex) => {
+          if (buttonIndex === 0) {
+            // cancel action
+          } else if (buttonIndex === 1) {
+            setSortedBy("name");
+          } else if (buttonIndex === 2) {
+            setSortedBy("lastSeen");
+          }
+        },
+      ),
+    [],
+  );
+  const onScrollView = Animated.event(
+    [
+      {
+        nativeEvent: {
+          contentOffset: {
+            y: scrollViewValue,
+          },
+        },
+      },
+    ],
+    {
+      useNativeDriver: false,
+    },
+  );
+  const handleScrollEndDrag = useCallback(() => searchBarRef.current?.handleScrollEndDrag(), []);
+  const handleSearchbarOnFocus = useCallback(() => {
+    navigation.setOptions({
+      headerShown: false,
+      headerStyleInterpolator: HeaderStyleInterpolators.forSlideUp,
+    });
+  }, []);
+  const handleSearchbarOnCancel = useCallback(() => {
+    navigation.setOptions({
+      headerShown: true,
+      headerStyleInterpolator: HeaderStyleInterpolators.forSlideUp,
+    });
+  }, []);
+
+  useEffect(() => {
+    return () => {};
+  }, []);
+
+  // styles
   const theme = useTheme();
   const { width, height } = useWindowDimensions();
   const styles = createStyles({ theme, width, height });
-  const listRef = useRef();
-  // const searchBarRef = useRef(null);
-  const goto = () => navigation && navigation.navigate("NewContact");
-  const [sortedBy, setSortedBy] = useState(1);
-  const [headerShown, setheaderShown] = useState(true);
-  const contactsTitle = useMemo(() => contacts.groupByContacts.map((i) => i.title), [contacts.groupByContacts]);
-
-  const onPressSort = () =>
-    ActionSheetIOS.showActionSheetWithOptions(
-      {
-        options: ["Cancel", ...SORTS],
-        cancelButtonIndex: 0,
-      },
-      (buttonIndex) => {
-        if (buttonIndex === 0) {
-          // cancel action
-        } else if (buttonIndex === 1) {
-          setSortedBy(0);
-        } else if (buttonIndex === 2) {
-          setSortedBy(1);
-        }
-      },
-    );
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
         <SearchBar
-          // ref={searchBarRef}
+          backgroundColor={COLORS.header}
+          ref={searchBarRef}
+          scrollViewRef={listRef}
+          callbackNode={scrollViewValue}
           placeholder="Search"
           onChangeText={() => {}}
           onSearchButtonPress={() => {}}
-          onCancelButtonPress={() => {}}
+          onCancel={handleSearchbarOnCancel}
+          onFocus={handleSearchbarOnFocus}
         />
-        {sortedBy === 0 && (
+        {sortedBy === "name" && (
           <SectionList
             ref={listRef}
+            onScroll={onScrollView}
+            scrollEventThrottle={1}
+            onScrollEndDrag={handleScrollEndDrag}
             ListHeaderComponent={() => <ContactListHeader title={`Sorted by ${SORTS[sortedBy]}`} onPress={onPressSort} />}
             sections={contacts.groupByContacts}
             keyExtractor={(item, index) => item + index}
@@ -76,9 +136,12 @@ export default function MainContactScreen({ navigation }) {
             )}
           />
         )}
-        {sortedBy === 1 && (
+        {sortedBy === "lastSeen" && (
           <FlatList
             ref={listRef}
+            onScroll={onScrollView}
+            scrollEventThrottle={1}
+            onScrollEndDrag={handleScrollEndDrag}
             initialNumToRender={10}
             ItemSeparatorComponent={() => <View style={styles.divider} />}
             ListHeaderComponent={() => <ContactListHeader title={`Sorted by ${SORTS[sortedBy]}`} onPress={onPressSort} />}
@@ -87,12 +150,12 @@ export default function MainContactScreen({ navigation }) {
             renderItem={({ item, index }) => <ContactListItem {...item} />}
           />
         )}
-        {sortedBy === 0 && (
+        {sortedBy === "name" && (
           <View style={styles.titleView}>
             <View style={styles.titleViewbox}>
-              {contactsTitle.map((title, index) => {
-                return <Item title={title} key={title} length={contactsTitle.length} index={index} listRef={listRef} />;
-              })}
+              {contactsTitle.map((title, index) => (
+                <Item title={title} key={title} length={contactsTitle.length} index={index} listRef={listRef} />
+              ))}
             </View>
           </View>
         )}
@@ -102,8 +165,10 @@ export default function MainContactScreen({ navigation }) {
 }
 
 MainContactScreen.propTypes = {};
+MainContactScreen.defaultProps = {};
+export default MainContactScreen;
 
-const Item = ({ title, index, listRef, length }) => {
+const Item = memo(({ title, index, listRef, length }) => {
   const theme = useTheme();
   const [currentSection, setCurrentSection] = useState(index);
   const { width, height } = useWindowDimensions();
@@ -127,7 +192,6 @@ const Item = ({ title, index, listRef, length }) => {
           animated: false,
           itemIndex: 0,
           sectionIndex: 0,
-
           viewPosition: 100,
         });
       }
@@ -144,16 +208,17 @@ const Item = ({ title, index, listRef, length }) => {
       <Text type={"footnoteEmphasized"}>{String(title)}</Text>
     </View>
   );
-};
+});
 
 // screen styles
-const createStyles = ({ theme, width, height }) =>
+const createStyles = ({ theme }) =>
   StyleSheet.create({
     container: {
       flex: 1,
+      backgroundColor: COLORS.header,
     },
     content: {
-      // flex: 1,
+      flex: 1,
     },
     button: {
       padding: 16,
@@ -177,14 +242,10 @@ const createStyles = ({ theme, width, height }) =>
     titleViewbox: {
       flex: 1,
       justifyContent: "center",
-      // paddingHorizontal: 4,
-      // backgroundColor: 'red',
     },
     textTouch: {
       maxHeight: 18,
       paddingHorizontal: 6,
-      // marginVertical: 2,
       alignItems: "center",
-      // backgroundColor: 'red',
     },
   });
