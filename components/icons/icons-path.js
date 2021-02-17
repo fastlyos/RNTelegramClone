@@ -41,6 +41,8 @@ export const PNG_ICON_SOURCES = {
 };
 
 export const SVG_ICON_SOURCES = {
+  // components
+  ic_search_clear: require("@app/assets/images/main/Images.xcassets/Components/SearchBar/ic_search_clear.svg").default,
   // location
   ic_addgroup: require("@app/assets/images/main/Images.xcassets/Location/ic_addgroup.svg").default,
   ic_chat_share: require("@app/assets/images/main/Images.xcassets/Location/ic_chat_share.svg").default,
