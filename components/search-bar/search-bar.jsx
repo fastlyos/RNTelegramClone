@@ -34,9 +34,10 @@ function SearchBar({ searchBarRef, scrollViewRef, placeholder, callbackNode, ...
   const [text, setText] = useState("");
   const [showCancel, setShowCancel] = useState(false);
   const [cancelButtonWidth, setCancelButtonWidth] = useState(null);
+
   const opacity = callbackNode.interpolate({
-    inputRange: [0, 30, 45, 60],
-    outputRange: [1, 0.9, 0.4, 0],
+    inputRange: [0, 30, 35, 40, 45, 60],
+    outputRange: [1, 0.9, 0.3, 0, 0, 0],
   });
   const maxHeight = callbackNode.interpolate({
     inputRange: [MIN_HEIGHT, MAX_HEIGHT],
