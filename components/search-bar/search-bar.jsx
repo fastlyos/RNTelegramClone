@@ -66,11 +66,9 @@ function SearchBar({ searchBarRef, scrollViewRef, placeholder, callbackNode, ...
   }, [searchBarRef]);
   const handleCollapse = useCallback(() => {
     scrollViewRef?.current?.scrollTo({ animated: true, y: MAX_HEIGHT });
-    console.log("scrollup");
   }, [scrollViewRef]);
   const handleExpand = useCallback(() => {
     scrollViewRef?.current?.scrollTo({ animated: true, y: MIN_HEIGHT });
-    console.log("scrolldown");
   }, [scrollViewRef]);
 
   const handleScrollEndDrag = useCallback(() => {
@@ -80,7 +78,7 @@ function SearchBar({ searchBarRef, scrollViewRef, placeholder, callbackNode, ...
   }, [handleCollapse, handleExpand]);
 
   useEffect(() => {
-    searchBarRef.current.handleScrollEndDrag = handleScrollEndDrag;
+    if (searchBarRef?.current) searchBarRef.current.handleScrollEndDrag = handleScrollEndDrag;
     return () => {};
   }, [searchBarRef, handleScrollEndDrag]);
 
@@ -147,9 +145,14 @@ export default ForwardedSearchBar;
 
 SearchBar.propTypes = {
   placeholder: PropTypes.string,
+  callbackNode: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
 };
 SearchBar.defaultProps = {
   placeholder: "Search",
+  callbackNode: {
+    interpolate: () => 0,
+    _value: 0,
+  },
 };
 
 const createStyles = ({ theme }) => {

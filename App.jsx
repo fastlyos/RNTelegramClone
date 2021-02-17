@@ -3,9 +3,10 @@ import React from "react";
 import { StyleSheet, Text, View, StatusBar, LogBox, Platform, UIManager } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import AppNavigation from "@app/navigation/app-navigation";
-import DevsAnimationScreen from "@app/screens/devs-animation-screen";
-import { MainSettingScreen, DevsScreen } from "@app/screens";
 // import DevsAnimationScreen from "@app/screens/devs-animation-screen";
+import // MainSettingScreen,
+// DevsScreen
+"@app/screens";
 
 import useColorScheme from "./hooks/useColorScheme";
 import useCachedResources from "./hooks/useCachedResources";
@@ -21,9 +22,9 @@ function App() {
   if (!isLoadingComplete) return null;
   return (
     <SafeAreaProvider>
+      <AppNavigation colorScheme={colorScheme} />
       {/* <MainSettingScreen colorScheme={colorScheme} /> */}
-      {/* <AppNavigation colorScheme={colorScheme} /> */}
-      <DevsScreen colorScheme={colorScheme} />
+      {/* <DevsScreen colorScheme={colorScheme} /> */}
     </SafeAreaProvider>
   );
 }

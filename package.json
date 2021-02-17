@@ -11,7 +11,9 @@
     "storybook": "start-storybook -p 7007",
     "format": "prettier --write .",
     "lint": "eslint .",
-    "clean": "rm -rf node_modules/ && cd ios/ && rm -rf Pods/ && cd .."
+    "clean": "rm -rf node_modules/ && cd ios/ && rm -rf Pods/ && cd ..",
+    "prepush": "yarn run lint",
+    "precommit": "yarn run lint"
   },
   "dependencies": {
     "@expo/metro-config": "^0.1.48",
