@@ -29,7 +29,6 @@ module.exports = {
     "react/jsx-no-bind": "off",
     "global-require": "off",
     "no-param-reassign": "off",
-    "no-console": "off",
     "no-alert": "off",
     "import/no-named-as-default-member": ["off"],
     "import/no-named-as-default": ["off"],
@@ -48,7 +47,7 @@ module.exports = {
     indent: "off",
     "@typescript-eslint/no-var-requires": "off",
     "@typescript-eslint/no-unused-vars": "off",
-    "operator-linebreak": ["error", "after"],
+    "operator-linebreak": ["error", "after", { overrides: { "?": "before", ":": "before" } }],
   },
   globals: {
     arguments: true,
