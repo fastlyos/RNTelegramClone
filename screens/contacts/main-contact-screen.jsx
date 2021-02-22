@@ -8,6 +8,7 @@ import {
   SectionList,
   SafeAreaView,
   useWindowDimensions,
+  StatusBar,
   View,
   Animated,
   LayoutAnimation,
@@ -15,8 +16,9 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
 } from "react-native";
-import { useTheme, useScrollToTop } from "@react-navigation/native";
-import { HeaderStyleInterpolators } from "@react-navigation/stack";
+import { useTheme, useScrollToTop, useNavigation } from "@react-navigation/native";
+import { Ionicons, FontAwesome } from "@expo/vector-icons";
+import { HeaderStyleInterpolators, useHeaderHeight } from "@react-navigation/stack";
 // components
 import { Text, SearchBar } from "@app/components";
 import { ContactListItem, ContactListHeader } from "@app/containers";
@@ -34,17 +36,30 @@ const COLORS = {
   header: "rgb(247,247,247)",
   blue: "rgb(62, 120,238)",
   subtitle: "rgb(247,247,247)",
+  border: "rgb(230, 230, 230)",
 };
 
-function MainContactScreen({ navigation }) {
+function MainContactScreen() {
   // states
   const listRef = useRef(null);
+  const navigation = useNavigation();
   useScrollToTop(listRef);
+  const headerHeight = useHeaderHeight();
   const searchBarRef = useRef(null);
   const scrollViewValue = useRef(new Animated.Value(0)).current;
   const contactsTitle = useMemo(() => contacts.groupByContacts.map((i) => i.title), [contacts.groupByContacts]);
   const [sortedBy, setSortedBy] = useState("name");
-  const [headerShown, setheaderShown] = useState(true);
+  const [isFocusSearchBar, setIsFocusSearchBar] = useState(false);
+  const [searchText, setSearchText] = useState("");
+  const filterContacts = useMemo(() => {
+    if (searchText === "") return [];
+    return contacts.groupByContacts
+      .map((element) => {
+        const data = element.data.filter((i) => _.includes(`${i.firstName} ${i.lastName}`, searchText));
+        return { ...element, data };
+      })
+      .filter((element) => element.data.length > 0);
+  }, [searchText]);
 
   // callbacks
   const goto = useCallback(() => navigation && navigation.navigate("NewContact"), [navigation]);
@@ -84,15 +99,15 @@ function MainContactScreen({ navigation }) {
   const handleScrollEndDrag = useCallback(() => searchBarRef.current?.handleScrollEndDrag(), []);
   const handleSearchbarOnFocus = useCallback(() => {
     navigation.setOptions({
-      headerShown: false,
-      headerStyleInterpolator: HeaderStyleInterpolators.forSlideUp,
+      headerStyle: { height: 0 },
     });
+    setIsFocusSearchBar(true);
   }, []);
   const handleSearchbarOnCancel = useCallback(() => {
     navigation.setOptions({
-      headerShown: true,
-      headerStyleInterpolator: HeaderStyleInterpolators.forSlideUp,
+      headerStyle: undefined,
     });
+    setIsFocusSearchBar(false);
   }, []);
 
   useEffect(() => {
@@ -105,62 +120,85 @@ function MainContactScreen({ navigation }) {
   const styles = createStyles({ theme, width, height });
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.content}>
-        <SearchBar
-          backgroundColor={COLORS.header}
-          ref={searchBarRef}
-          scrollViewRef={listRef}
-          callbackNode={scrollViewValue}
-          placeholder="Search"
-          onChangeText={() => {}}
-          onSearchButtonPress={() => {}}
-          onCancel={handleSearchbarOnCancel}
-          onFocus={handleSearchbarOnFocus}
-        />
-        {sortedBy === "name" && (
-          <SectionList
-            ref={listRef}
-            onScroll={onScrollView}
-            scrollEventThrottle={1}
-            onScrollEndDrag={handleScrollEndDrag}
-            ListHeaderComponent={() => <ContactListHeader title={`Sorted by ${SORTS[sortedBy]}`} onPress={onPressSort} />}
-            sections={contacts.groupByContacts}
-            keyExtractor={(item, index) => item + index}
-            renderItem={({ item }) => <ContactListItem {...item} />}
-            ItemSeparatorComponent={() => <View style={styles.divider} />}
-            renderSectionHeader={({ section: { title } }) => (
-              <View style={styles.header} backgroundColor="card">
-                <Text type="footnoteEmphasized">{title}</Text>
+        <View style={styles.searchbarBox}>
+          <SearchBar
+            backgroundColor={COLORS.header}
+            ref={searchBarRef}
+            scrollViewRef={listRef}
+            callbackNode={scrollViewValue}
+            placeholder="Search"
+            onChangeText={setSearchText}
+            onSearchButtonPress={() => {}}
+            onCancel={handleSearchbarOnCancel}
+            onFocus={handleSearchbarOnFocus}
+          />
+        </View>
+        <View style={styles.body}>
+          {sortedBy === "lastSeen" && (
+            <FlatList
+              ref={listRef}
+              onScroll={onScrollView}
+              scrollEventThrottle={1}
+              onScrollEndDrag={handleScrollEndDrag}
+              initialNumToRender={10}
+              ItemSeparatorComponent={() => <View style={styles.divider} />}
+              ListHeaderComponent={() => <ContactListHeader title={`Sorted by ${SORTS[sortedBy]}`} onPress={onPressSort} />}
+              data={contacts.items}
+              keyExtractor={(item) => item.id}
+              renderItem={({ item, index }) => <ContactListItem {...item} />}
+            />
+          )}
+          {sortedBy === "name" && (
+            <SectionList
+              ref={listRef}
+              onScroll={onScrollView}
+              scrollEventThrottle={1}
+              onScrollEndDrag={handleScrollEndDrag}
+              ListHeaderComponent={() => <ContactListHeader title={`Sorted by ${SORTS[sortedBy]}`} onPress={onPressSort} />}
+              sections={contacts.groupByContacts}
+              keyExtractor={(item, index) => item + index}
+              renderItem={({ item }) => <ContactListItem {...item} />}
+              ItemSeparatorComponent={() => <View style={styles.divider} />}
+              renderSectionHeader={({ section: { title } }) => (
+                <View style={[styles.header]} backgroundColor={COLORS.header}>
+                  <Text type="footnoteEmphasized">{title}</Text>
+                </View>
+              )}
+            />
+          )}
+          {sortedBy === "name" && (
+            <View style={styles.titleView}>
+              <View style={styles.titleViewbox}>
+                {contactsTitle.map((title, index) => (
+                  <Item title={title} key={title} length={contactsTitle.length} index={index} listRef={listRef} />
+                ))}
               </View>
-            )}
-          />
-        )}
-        {sortedBy === "lastSeen" && (
-          <FlatList
-            ref={listRef}
-            onScroll={onScrollView}
-            scrollEventThrottle={1}
-            onScrollEndDrag={handleScrollEndDrag}
-            initialNumToRender={10}
-            ItemSeparatorComponent={() => <View style={styles.divider} />}
-            ListHeaderComponent={() => <ContactListHeader title={`Sorted by ${SORTS[sortedBy]}`} onPress={onPressSort} />}
-            data={contacts.items}
-            keyExtractor={(item) => item.id}
-            renderItem={({ item, index }) => <ContactListItem {...item} />}
-          />
-        )}
-        {sortedBy === "name" && (
-          <View style={styles.titleView}>
-            <View style={styles.titleViewbox}>
-              {contactsTitle.map((title, index) => (
-                <Item title={title} key={title} length={contactsTitle.length} index={index} listRef={listRef} />
-              ))}
             </View>
-          </View>
-        )}
+          )}
+          {isFocusSearchBar && (
+            <TouchableWithoutFeedback
+              onPress={searchBarRef.current?.handleOnCancel} // TODO
+            >
+              <View style={[styles.grayContainer, searchText !== "" && styles.whiteContainer]}>
+                <SectionList
+                  sections={filterContacts}
+                  keyExtractor={(item, index) => item + index}
+                  renderItem={({ item }) => <ContactListItem {...item} />}
+                  ItemSeparatorComponent={() => <View style={styles.divider} />}
+                  renderSectionHeader={({ section: { title } }) => (
+                    <View style={styles.header} backgroundColor={COLORS.header}>
+                      <Text type="footnoteEmphasized">{title}</Text>
+                    </View>
+                  )}
+                />
+              </View>
+            </TouchableWithoutFeedback>
+          )}
+        </View>
       </View>
-    </SafeAreaView>
+    </View>
   );
 }
 
@@ -205,7 +243,9 @@ const Item = memo(({ title, index, listRef, length }) => {
       pressRetentionOffset={{ top: 0, bottom: 0, left: 0, right: 0 }}
       style={styles.textTouch}
       onTouchMove={onTouchMove}>
-      <Text type={"footnoteEmphasized"}>{String(title)}</Text>
+      <Text type={"caption2Emphasized"} color={COLORS.blue}>
+        {String(title)}
+      </Text>
     </View>
   );
 });
@@ -218,6 +258,9 @@ const createStyles = ({ theme }) =>
       backgroundColor: COLORS.header,
     },
     content: {
+      flex: 1,
+    },
+    body: {
       flex: 1,
     },
     button: {
@@ -247,5 +290,24 @@ const createStyles = ({ theme }) =>
       maxHeight: 18,
       paddingHorizontal: 6,
       alignItems: "center",
+    },
+    //
+    grayContainer: {
+      flex: 1,
+      position: "absolute",
+      height: "100%",
+      width: "100%",
+      backgroundColor: "black",
+      opacity: 0.4,
+    },
+    whiteContainer: {
+      backgroundColor: "white",
+      opacity: 1,
+    },
+    searchbarBox: {
+      paddingHorizontal: 8,
+      paddingVertical: 8,
+      borderBottomColor: COLORS.border,
+      borderBottomWidth: 1,
     },
   });

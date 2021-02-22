@@ -2,12 +2,22 @@ import { useState, useEffect } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import * as Font from "expo-font";
 import { useAssets } from "expo-asset";
-import { Ionicons, AntDesign, MaterialCommunityIcons, MaterialIcons, Entypo, Feather, FontAwesome, SimpleLineIcons } from "@expo/vector-icons";
+import { Assets as StackAssets } from "@react-navigation/stack";
+import {
+  Ionicons,
+  AntDesign,
+  MaterialCommunityIcons,
+  MaterialIcons,
+  Entypo,
+  Feather,
+  FontAwesome,
+  SimpleLineIcons,
+} from "@expo/vector-icons";
 import { PNG_ICON_SOURCES, SVG_ICON_SOURCES } from "@app/components/icons/icons-path";
 
 export default function useCachedResources() {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
-  const [assets, error] = useAssets([...Object.values(PNG_ICON_SOURCES)]);
+  const [assets, error] = useAssets([...Object.values(PNG_ICON_SOURCES), ...StackAssets]);
 
   // Load any resources or data that we need prior to rendering the app
   useEffect(() => {

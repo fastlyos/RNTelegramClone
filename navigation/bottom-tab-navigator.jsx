@@ -1,14 +1,15 @@
-import React from "react";
-import faker from "faker";
+import React, { useLayoutEffect, useCallback, useRef } from "react";
 import { Ionicons, FontAwesome } from "@expo/vector-icons";
-import { StyleSheet } from "react-native";
+import { StyleSheet, TouchableOpacity, Animated, Easing } from "react-native";
 import { BlurView } from "expo-blur";
+import { SCREEN_HEIGHT } from "@app/constants/Layout";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
   createStackNavigator,
   HeaderStyleInterpolators,
   CardStyleInterpolators,
   TransitionSpecs,
+  TransitionPresets,
   useHeaderHeight,
   HeaderTitle,
   Header,
@@ -18,49 +19,56 @@ import useColorScheme from "@app/hooks/useColorScheme";
 import Colors from "@app/constants/Colors";
 
 // components
-import { Image } from "@app/components";
+import { Image, Text } from "@app/components";
 import { SearchListHeader } from "@app/containers";
+import { iOSUIKit, iOSColors } from "react-native-typography";
 
 // screens
-import { ExampleScreen, MainContactScreen, MainChatScreen, MainSettingScreen, NewContactScreen } from "@app/screens";
+import { ContactSearchScreen, MainContactScreen, MainChatScreen, MainSettingScreen, NewContactScreen } from "@app/screens";
+
+const COLORS = {
+  header: "rgb(247,247,247)",
+  blue: iOSColors.blue,
+  subtitle: "rgb(247,247,247)",
+};
 
 function TabBarIcon({ name, color, reverse }) {
   return <Ionicons size={32} style={{ marginBottom: -3, transform: reverse && [{ rotateY: "180deg" }] }} name={name} color={color} />;
 }
 
-/**
- * Tabstack
- */
+//  * Tabstack
+const TabStack = createStackNavigator();
 
 // Contacts
-const TabContactsStack = createStackNavigator();
-
-function TabContactNavigator() {
+function TabContactNavigator({ navigation }) {
+  const gotoNewContact = useCallback(() => navigation.push("NewContactScreen"), [navigation]);
   return (
-    <TabContactsStack.Navigator>
-      <TabContactsStack.Screen
+    <TabStack.Navigator>
+      <TabStack.Screen
         name="TabContactsScreen"
         component={MainContactScreen}
         options={{
           title: "Contacts",
-          // animationEnabled: true,
-          headerRight: () => <Ionicons name="ios-add" size={30} color="red" />,
+          headerRight: () => (
+            <>
+              <TouchableOpacity onPress={gotoNewContact}>
+                <Ionicons name="ios-add" size={30} color={COLORS.blue} />
+              </TouchableOpacity>
+            </>
+          ),
           headerRightContainerStyle: {
             paddingHorizontal: 16,
           },
         }}
       />
-    </TabContactsStack.Navigator>
+    </TabStack.Navigator>
   );
 }
-
 // Chats
-const TabChatsStack = createStackNavigator();
-
 function TabChatsNavigator() {
   return (
-    <TabChatsStack.Navigator>
-      <TabChatsStack.Screen
+    <TabStack.Navigator>
+      <TabStack.Screen
         name="TabChatsScreen"
         component={MainChatScreen}
         options={{
@@ -71,48 +79,29 @@ function TabChatsNavigator() {
           },
         }}
       />
-    </TabChatsStack.Navigator>
+    </TabStack.Navigator>
   );
 }
-
 // Settings
-const TabSettingsStack = createStackNavigator();
-
-function LogoTitle() {
-  return (
-    <Image
-      style={{ width: 50, height: 50 }}
-      source={{
-        uri: "https://reactnative.dev/img/tiny_logo.png",
-      }}
-    />
-  );
-}
-
 function TabSettingsNavigator() {
   return (
-    <TabSettingsStack.Navigator>
-      <TabSettingsStack.Screen
+    <TabStack.Navigator>
+      <TabStack.Screen
         name="TabSettingsScreen"
         component={MainSettingScreen}
         options={{
           headerTitle: "Settings",
+          // headerTransparent: true,
           cardStyle: { backgroundColor: "transparent" },
           cardOverlayEnabled: true,
-          // header: (props) => {
-          //   return <LogoTitle {...props} />;
-          // },
-          gestureDirection: "horizontal",
-          headerStyleInterpolator: HeaderStyleInterpolators.forSlideLeft,
-          headerBackTitle: "Back",
         }}
       />
-    </TabSettingsStack.Navigator>
+    </TabStack.Navigator>
   );
 }
-
+// BottomTab
 const BottomTab = createBottomTabNavigator();
-export default function BottomTabNavigator() {
+function BottomTabNavigator() {
   const colorScheme = useColorScheme();
   return (
     <BottomTab.Navigator
@@ -127,6 +116,7 @@ export default function BottomTabNavigator() {
         options={{
           title: "Contacts",
           tabBarIcon: ({ color }) => <FontAwesome name="user-circle" size={24} color={color} />,
+          // tabBarVisible: false,
         }}
       />
       <BottomTab.Screen
@@ -143,9 +133,51 @@ export default function BottomTabNavigator() {
         options={{
           title: "Settings",
           tabBarIcon: ({ color }) => <TabBarIcon name="ios-cog" color={color} />,
-          // tabBarBadge: "!",
+          tabBarBadge: "!",
         }}
       />
     </BottomTab.Navigator>
+  );
+}
+
+// MainBottomStack
+const MainBottomStack = createStackNavigator();
+export default function MainBottomTab({ navigation, options }) {
+  useLayoutEffect(() => {
+    navigation.setOptions({ headerShown: false });
+  }, [navigation]);
+  return (
+    <MainBottomStack.Navigator
+      headerMode="screen"
+      mode="modal"
+      screenOptions={({ route, navigation: _navigation }) => ({
+        ...TransitionPresets.ModalPresentationIOS,
+        gestureResponseDistance: {
+          vertical: SCREEN_HEIGHT - 100, // without space on top
+          horizontal: 25,
+        },
+        cardOverlayEnabled: true,
+        gestureEnabled: true,
+        headerStatusBarHeight: _navigation.dangerouslyGetState().routes.findIndex((r) => r.key === route.key) > 0 ? 0 : undefined,
+      })}
+      {...options}>
+      <MainBottomStack.Screen name="BottomTab" component={BottomTabNavigator} options={{ headerShown: false }} />
+      <MainBottomStack.Screen
+        name="NewContactScreen"
+        component={NewContactScreen}
+        options={{
+          headerShown: true,
+          title: "New Contact",
+          headerBackTitle: "Cancel",
+          headerStyle: { height: 50 },
+          headerBackTitleStyle: {
+            paddingHorizontal: 15,
+            ...iOSUIKit.callout,
+            color: iOSColors.blue,
+          },
+          headerBackImage: () => null,
+        }}
+      />
+    </MainBottomStack.Navigator>
   );
 }

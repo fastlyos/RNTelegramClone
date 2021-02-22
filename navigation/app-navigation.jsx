@@ -30,6 +30,7 @@ import {
   LanguageScreen,
   ListStickersScreen,
   FAQScreen,
+  ContactSearchScreen,
 } from "@app/screens";
 
 // navigations
@@ -42,13 +43,18 @@ const COLORS = {
 
 export default function AppNavigation({ colorScheme }) {
   return (
-    <NavigationContainer linking={LinkingConfiguration} theme={colorScheme === "dark" ? themes.dark : themes.light}>
+    <NavigationContainer
+      linking={LinkingConfiguration}
+      theme={colorScheme === "dark" ? themes.dark : themes.light}
+      fallback={<Text>Loading…</Text>}>
       <RootNavigator />
     </NavigationContainer>
   );
 }
 
 const DEFAULT_OPTIONS = {
+  gestureDirection: "horizontal",
+  headerBackTitle: "Back",
   headerStyle: {
     borderBottomColor: COLORS.border,
     borderBottomWidth: 1,
@@ -59,22 +65,12 @@ const Stack = createStackNavigator();
 function RootNavigator() {
   return (
     <Stack.Navigator
-      initialRouteName="Root"
+      initialRouteName="BottomTabNavigator"
       screenOptions={{
-        headerShown: true,
-        gestureDirection: "horizontal",
+        headerShown: false,
         headerStyleInterpolator: HeaderStyleInterpolators.forUIKit,
-        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-        headerBackTitle: "Back",
-        headerStyle: DEFAULT_OPTIONS.headerStyle,
       }}>
-      <Stack.Screen
-        name="Root"
-        component={BottomTabNavigator}
-        options={{
-          headerShown: false,
-        }}
-      />
+      <Stack.Screen name="BottomTabNavigator" component={BottomTabNavigator} />
       {/* <Stack.Screen
         name="IntroScreen"
         component={IntroScreen}
@@ -85,6 +81,8 @@ function RootNavigator() {
       <Stack.Screen name="OtherScreen" component={OtherScreen} />
       <Stack.Screen name="OtherScreen2" component={OtherScreen} />
       <Stack.Screen name="OtherScreen3" component={OtherScreen} />
+      {/* Contact */}
+
       {/* Messages */}
       {/* <Stack.Screen name="MainMessagesScreen" component={MainMessagesScreen} /> */}
       <Stack.Screen name="DevsScreen" component={DevsScreen} />

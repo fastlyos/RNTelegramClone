@@ -5,9 +5,11 @@ import {
   TextInput,
   Animated,
   Easing,
+  SafeAreaView,
   TouchableWithoutFeedback,
   TouchableOpacity,
   TouchableHighlight,
+  StatusBar,
   UIManager,
   LayoutAnimation,
 } from "react-native";
@@ -19,7 +21,7 @@ import { useTheme } from "@react-navigation/native";
 import { iOSColors, iOSUIKit } from "react-native-typography";
 
 const COLORS = {
-  background: "rgb(240, 240, 240)",
+  background: "rgb(233, 233, 233)",
   touch: "rgb(210, 210, 210)",
   text: "rgb(135,135,135)",
   border: "rgb(235, 235,235)",
@@ -30,7 +32,7 @@ const MAX_POINT = 70;
 const MIDDLE_POINT = MIN_POINT + (MAX_POINT - MIN_POINT) * 0.5;
 const QUARTER_POINT = MIN_POINT + (MAX_POINT - MIN_POINT) * 0.25;
 
-function SearchBar({ searchBarRef, backgroundColor, scrollViewRef, placeholder, callbackNode, onFocus, onBlur, onCancel }) {
+function SearchBar({ searchBarRef, backgroundColor, scrollViewRef, placeholder, callbackNode, onFocus, onBlur, onCancel, onChangeText }) {
   // state
   // const searchBarRef = useRef(searchBarForwardRef);
   const [hasFocus, setHasFocus] = useState(false);
@@ -50,7 +52,7 @@ function SearchBar({ searchBarRef, backgroundColor, scrollViewRef, placeholder, 
 
   // callbacks
   const handleOnFocus = useCallback((e) => {
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+    LayoutAnimation.configureNext(LayoutAnimation.create(250, "linear", "opacity"));
     if (!searchBarRef.current?.isFocused()) {
       searchBarRef?.current?.focus();
       return null;
@@ -60,14 +62,14 @@ function SearchBar({ searchBarRef, backgroundColor, scrollViewRef, placeholder, 
     setShowCancel(true);
   }, []);
   const handleOnBlur = useCallback((e) => {
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+    LayoutAnimation.configureNext(LayoutAnimation.create(250, "linear", "opacity"));
     onBlur && onBlur(e);
     setHasFocus(false);
-    setText("");
+    // setText("");
   }, []);
   const handleOnCancel = useCallback(
     (e) => {
-      LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+      LayoutAnimation.configureNext(LayoutAnimation.create(250, "linear", "opacity"));
       onCancel && onCancel(e);
       searchBarRef?.current?.clear();
       searchBarRef?.current?.blur();
@@ -98,17 +100,30 @@ function SearchBar({ searchBarRef, backgroundColor, scrollViewRef, placeholder, 
     if (callbackNode._value >= MIDDLE_POINT && callbackNode._value <= MAX_POINT) handleCollapse();
     if (callbackNode._value >= MIN_POINT && callbackNode._value < MIDDLE_POINT) handleExpand();
   }, [handleCollapse, handleExpand]);
+  const handleOnChangeText = useCallback(
+    (txt) => {
+      onChangeText(txt);
+      setText(txt);
+    },
+    [onChangeText],
+  );
+  const handleClearText = useCallback(() => {
+    onChangeText("");
+    setText("");
+  }, []);
 
   // effect
   useEffect(() => {
     if (searchBarRef?.current) searchBarRef.current.handleScrollEndDrag = handleScrollEndDrag;
+    if (searchBarRef?.current) searchBarRef.current.handleOnCancel = handleOnCancel;
     return () => {};
   }, [searchBarRef, handleScrollEndDrag]);
 
   const theme = useTheme();
   const styles = createStyles({ theme, backgroundColor });
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <StatusBar />
       <View style={styles.wrapper}>
         <TouchableHighlight
           touchSoundDisabled
@@ -122,21 +137,20 @@ function SearchBar({ searchBarRef, backgroundColor, scrollViewRef, placeholder, 
             <SvgIcons name="ic_search" tintColor={COLORS.text} style={{ marginHorizontal: 5, marginTop: 2 }} size={22} />
             <View style={{ flex: showCancel ? 1 : 0 }}>
               <TextInput
-                // editable={hasFocus}
                 placeholderTextColor={COLORS.text}
                 ref={searchBarRef}
                 numberOfLines={1}
                 onFocus={handleOnFocus}
-                onEndEditing={handleOnBlur}
+                onBlur={handleOnBlur}
                 returnKeyType="search"
                 defaultValue={text}
-                onChangeText={(txt) => setText(txt)}
+                onChangeText={handleOnChangeText}
                 placeholder={placeholder}
                 style={iOSUIKit.body}
               />
             </View>
             {text !== "" && (
-              <TouchableOpacity onPress={() => setText("")}>
+              <TouchableOpacity onPress={handleClearText}>
                 <SvgIcons name="ic_search_clear" tintColor={COLORS.text} size={24} style={{ marginHorizontal: 2 }} />
               </TouchableOpacity>
             )}
@@ -159,7 +173,7 @@ function SearchBar({ searchBarRef, backgroundColor, scrollViewRef, placeholder, 
           </TouchableOpacity>
         )}
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -189,14 +203,10 @@ SearchBar.defaultProps = {
 const createStyles = ({ theme, backgroundColor }) => {
   return StyleSheet.create({
     container: {
-      paddingHorizontal: 10,
-      paddingVertical: 6,
       width: "100%",
       alignItems: "center",
       justifyContent: "center",
       backgroundColor,
-      borderBottomColor: COLORS.border,
-      borderBottomWidth: 1,
     },
     wrapper: {
       flexDirection: "row",
@@ -206,17 +216,13 @@ const createStyles = ({ theme, backgroundColor }) => {
       flex: 1,
       flexGrow: 1,
       backgroundColor: COLORS.background,
-      // backgroundColor: 'red',
       borderRadius: 10,
       overflow: "hidden",
     },
     content: {
-      // paddingVertical: 2,
       flexDirection: "row",
       justifyContent: "center",
       alignItems: "center",
-      // opacity: 0.1,
-      // height: 20,
     },
     cancel: {
       paddingLeft: 10,
