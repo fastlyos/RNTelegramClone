@@ -1,5 +1,6 @@
 // contacts
 export { default as MainContactScreen } from "./contacts/main-contact-screen";
+export { default as ContactSearchScreen } from "./contacts/contact-search-screen";
 export { default as NewContactScreen } from "./contacts/new-contact-screen";
 // chats + messages
 export { default as MainChatScreen } from "./chats/main-chat-screen";

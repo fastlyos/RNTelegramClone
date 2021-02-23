@@ -12,11 +12,6 @@ function ContactListItem({ id, avatar, type, firstName, lastName, status, lastSe
   const statusText = status === "online" ? status : `last seen ${moment(lastSeen).fromNow()}`;
   const theme = useTheme();
   const styles = createStyles({ theme });
-  // const borderStyle = {
-  //   borderBottomWidth: 0.75,
-  //   borderBottomColor: theme.colors.border,
-  // };
-  //
   return (
     <TouchableHighlight style={styles.container} onPress={() => {}} activeOpacity={1} underlayColor={theme.colors.backgroundCenter}>
       <View style={styles.container}>

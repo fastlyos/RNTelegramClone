@@ -88,7 +88,7 @@ function DevsScreen() {
                 style={styles.zoomOut}
                 activeOpacity={1}
                 onPressOut={() => {
-                  console.log("onPressOut");
+                  // console.log("onPressOut");
                   handleZoomOut.stop();
                   handleZoomIn.start();
                 }}

@@ -5,115 +5,152 @@ import {
   TextInput,
   Animated,
   Easing,
+  SafeAreaView,
   TouchableWithoutFeedback,
   TouchableOpacity,
   TouchableHighlight,
+  StatusBar,
   UIManager,
-  Platform,
   LayoutAnimation,
 } from "react-native";
 import { SvgIcons } from "@app/components/icons";
 import { View } from "@app/components/view";
 import { Text } from "@app/components/text";
 import { useTheme } from "@react-navigation/native";
+// import { Header } from "@react-navigation/stack";
 import { iOSColors, iOSUIKit } from "react-native-typography";
 
 const COLORS = {
-  background: "rgb(240, 240, 240)",
+  background: "rgb(233, 233, 233)",
   touch: "rgb(210, 210, 210)",
   text: "rgb(135,135,135)",
+  border: "rgb(235, 235,235)",
 };
 
-const MIN_HEIGHT = 30;
-const MAX_HEIGHT = 60;
-const MIDDLE_POINT = (MAX_HEIGHT + MIN_HEIGHT) * 0.5;
+const MIN_POINT = 26;
+const MAX_POINT = 70;
+const MIDDLE_POINT = MIN_POINT + (MAX_POINT - MIN_POINT) * 0.5;
+const QUARTER_POINT = MIN_POINT + (MAX_POINT - MIN_POINT) * 0.25;
 
-function SearchBar({ searchBarRef, scrollViewRef, placeholder, callbackNode, ...props }) {
+function SearchBar({ searchBarRef, backgroundColor, scrollViewRef, placeholder, callbackNode, onFocus, onBlur, onCancel, onChangeText }) {
   // state
+  // const searchBarRef = useRef(searchBarForwardRef);
   const [hasFocus, setHasFocus] = useState(false);
   const [text, setText] = useState("");
   const [showCancel, setShowCancel] = useState(false);
   const [cancelButtonWidth, setCancelButtonWidth] = useState(null);
-
   const opacity = callbackNode.interpolate({
-    inputRange: [0, 30, 35, 40, 45, 60],
-    outputRange: [1, 0.9, 0.3, 0, 0, 0],
+    inputRange: [0, MIN_POINT, QUARTER_POINT, MIDDLE_POINT, MAX_POINT],
+    outputRange: [1, 0.9, 0.3, 0, 0],
   });
   const maxHeight = callbackNode.interpolate({
-    inputRange: [MIN_HEIGHT, MAX_HEIGHT],
-    outputRange: [30, -10],
+    inputRange: [MIN_POINT, MAX_POINT],
+    outputRange: [40, 0],
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
   });
 
   // callbacks
-  const onFocus = useCallback(() => {
-    UIManager.configureNextLayoutAnimation && LayoutAnimation.easeInEaseOut();
-    searchBarRef?.current?.focus();
+  const handleOnFocus = useCallback((e) => {
+    LayoutAnimation.configureNext(LayoutAnimation.create(250, "linear", "opacity"));
+    if (!searchBarRef.current?.isFocused()) {
+      searchBarRef?.current?.focus();
+      return null;
+    }
+    onFocus && onFocus(e);
     setHasFocus(true);
     setShowCancel(true);
   }, []);
-  const onBlur = useCallback(() => {
-    UIManager.configureNextLayoutAnimation && LayoutAnimation.easeInEaseOut();
+  const handleOnBlur = useCallback((e) => {
+    LayoutAnimation.configureNext(LayoutAnimation.create(250, "linear", "opacity"));
+    onBlur && onBlur(e);
     setHasFocus(false);
-    setText("");
+    // setText("");
   }, []);
-  const onCancel = useCallback(() => {
-    UIManager.configureNextLayoutAnimation && LayoutAnimation.easeInEaseOut();
-    setHasFocus(false);
-    setShowCancel(false);
-    searchBarRef?.current?.clear();
-    searchBarRef?.current?.blur();
-    setText("");
-  }, [searchBarRef]);
+  const handleOnCancel = useCallback(
+    (e) => {
+      LayoutAnimation.configureNext(LayoutAnimation.create(250, "linear", "opacity"));
+      onCancel && onCancel(e);
+      searchBarRef?.current?.clear();
+      searchBarRef?.current?.blur();
+      setHasFocus(false);
+      setShowCancel(false);
+      setText("");
+    },
+    [searchBarRef],
+  );
   const handleCollapse = useCallback(() => {
-    scrollViewRef?.current?.scrollTo({ animated: true, y: MAX_HEIGHT });
+    Animated.timing(callbackNode, {
+      toValue: MAX_POINT,
+      duration: 100,
+      easing: Easing.inOut(Easing.ease),
+      useNativeDriver: false,
+    }).start();
   }, [scrollViewRef]);
   const handleExpand = useCallback(() => {
-    scrollViewRef?.current?.scrollTo({ animated: true, y: MIN_HEIGHT });
+    Animated.timing(callbackNode, {
+      toValue: MIN_POINT,
+      duration: 100,
+      easing: Easing.inOut(Easing.ease),
+      useNativeDriver: false,
+    }).start();
   }, [scrollViewRef]);
-
   const handleScrollEndDrag = useCallback(() => {
     if (hasFocus) return null;
-    if (callbackNode._value > MIDDLE_POINT && callbackNode._value < MAX_HEIGHT) handleCollapse();
-    if (callbackNode._value > MIN_HEIGHT && callbackNode._value < MIDDLE_POINT) handleExpand();
+    if (callbackNode._value >= MIDDLE_POINT && callbackNode._value <= MAX_POINT) handleCollapse();
+    if (callbackNode._value >= MIN_POINT && callbackNode._value < MIDDLE_POINT) handleExpand();
   }, [handleCollapse, handleExpand]);
+  const handleOnChangeText = useCallback(
+    (txt) => {
+      onChangeText(txt);
+      setText(txt);
+    },
+    [onChangeText],
+  );
+  const handleClearText = useCallback(() => {
+    onChangeText("");
+    setText("");
+  }, []);
 
+  // effect
   useEffect(() => {
     if (searchBarRef?.current) searchBarRef.current.handleScrollEndDrag = handleScrollEndDrag;
+    if (searchBarRef?.current) searchBarRef.current.handleOnCancel = handleOnCancel;
     return () => {};
   }, [searchBarRef, handleScrollEndDrag]);
 
   const theme = useTheme();
-  const styles = createStyles({ theme });
+  const styles = createStyles({ theme, backgroundColor });
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <StatusBar />
       <View style={styles.wrapper}>
         <TouchableHighlight
           touchSoundDisabled
           disabled={hasFocus}
           style={styles.contentPress}
           underlayColor={COLORS.touch}
-          onPressOut={onFocus}
-          onPress={onFocus}
-          onLongPress={onFocus}
-          delayLongPress={90}>
+          onPressOut={handleOnFocus}
+          onLongPress={handleOnFocus}
+          delayLongPress={100}>
           <Animated.View style={[styles.content, !hasFocus && { maxHeight, opacity }]}>
             <SvgIcons name="ic_search" tintColor={COLORS.text} style={{ marginHorizontal: 5, marginTop: 2 }} size={22} />
             <View style={{ flex: showCancel ? 1 : 0 }}>
               <TextInput
-                // editable={false}
                 placeholderTextColor={COLORS.text}
                 ref={searchBarRef}
-                onFocus={onFocus}
-                onEndEditing={onBlur}
+                numberOfLines={1}
+                onFocus={handleOnFocus}
+                onBlur={handleOnBlur}
                 returnKeyType="search"
                 defaultValue={text}
-                onChangeText={(_text) => setText(_text)}
+                onChangeText={handleOnChangeText}
                 placeholder={placeholder}
                 style={iOSUIKit.body}
               />
             </View>
             {text !== "" && (
-              <TouchableOpacity onPress={() => setText("")}>
+              <TouchableOpacity onPress={handleClearText}>
                 <SvgIcons name="ic_search_clear" tintColor={COLORS.text} size={24} style={{ marginHorizontal: 2 }} />
               </TouchableOpacity>
             )}
@@ -129,14 +166,14 @@ function SearchBar({ searchBarRef, scrollViewRef, placeholder, callbackNode, ...
                 right: showCancel ? 0 : -cancelButtonWidth,
               },
             ]}
-            onPress={onCancel}>
+            onPress={handleOnCancel}>
             <Text type="body" color={iOSColors.blue}>
               Cancel
             </Text>
           </TouchableOpacity>
         )}
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -146,23 +183,30 @@ export default ForwardedSearchBar;
 SearchBar.propTypes = {
   placeholder: PropTypes.string,
   callbackNode: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
+  onFocus: PropTypes.func,
+  onBlur: PropTypes.func,
+  onCancel: PropTypes.func,
+  backgroundColor: PropTypes.string,
 };
 SearchBar.defaultProps = {
   placeholder: "Search",
   callbackNode: {
-    interpolate: () => 0,
+    interpolate: () => null,
     _value: 0,
   },
+  onFocus: () => {},
+  onBlur: () => {},
+  onCancel: () => {},
+  backgroundColor: "white",
 };
 
-const createStyles = ({ theme }) => {
+const createStyles = ({ theme, backgroundColor }) => {
   return StyleSheet.create({
     container: {
-      paddingHorizontal: 10,
-      paddingVertical: 6,
       width: "100%",
       alignItems: "center",
       justifyContent: "center",
+      backgroundColor,
     },
     wrapper: {
       flexDirection: "row",
@@ -176,12 +220,9 @@ const createStyles = ({ theme }) => {
       overflow: "hidden",
     },
     content: {
-      // paddingVertical: 2,
       flexDirection: "row",
       justifyContent: "center",
       alignItems: "center",
-      // opacity: 0.1,
-      // height: 20,
     },
     cancel: {
       paddingLeft: 10,

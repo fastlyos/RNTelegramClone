@@ -168,4 +168,15 @@ export const SVG_ICON_SOURCES = {
 
   // ItemList
   ic_open: require("@app/assets/images/main/Images.xcassets/ItemList/ic_open.svg").default,
+
+  // ContactList
+  ic_addmember: require("@app/assets/images/main/Images.xcassets/ContactList/ic_addmember.svg").default,
+  // ic_channel: require("@app/assets/images/main/Images.xcassets/ContactList/ic_channel.svg").default,
+  // ic_group: require("@app/assets/images/main/Images.xcassets/ContactList/ic_group.svg").default,
+  ic_heart: require("@app/assets/images/main/Images.xcassets/ContactList/ic_heart.svg").default,
+  ic_link: require("@app/assets/images/main/Images.xcassets/ContactList/ic_link.svg").default,
+  ic_location: require("@app/assets/images/main/Images.xcassets/ContactList/ic_location.svg").default,
+  ic_secretchat: require("@app/assets/images/main/Images.xcassets/ContactList/ic_secretchat.svg").default,
+  ic_showme: require("@app/assets/images/main/Images.xcassets/ContactList/ic_showme.svg").default,
+  ic_stopshowme: require("@app/assets/images/main/Images.xcassets/ContactList/ic_stopshowme.svg").default,
 };

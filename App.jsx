@@ -10,7 +10,13 @@ import // MainSettingScreen,
 
 import useColorScheme from "./hooks/useColorScheme";
 import useCachedResources from "./hooks/useCachedResources";
-LogBox.ignoreLogs(["RCTBridge", "Require cycle", "Modal with", "Native splash screen is already hidden"]);
+LogBox.ignoreLogs([
+  "RCTBridge",
+  "Require cycle",
+  "Modal with",
+  "Native splash screen is already hidden",
+  "Sending `onAnimatedValueUpdate` with no listeners registered.",
+]);
 
 if (Platform.OS === "android" && UIManager.setLayoutAnimationEnabledExperimental) {
   UIManager.setLayoutAnimationEnabledExperimental(true);

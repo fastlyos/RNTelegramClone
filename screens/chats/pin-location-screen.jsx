@@ -60,9 +60,7 @@ function PinLocationScreen({ navigation }) {
   const styles = createStyles({ theme, scrollYValue });
 
   // effects
-  useEffect(() => {
-    // scrollYValue.addListener(({ value }) => console.log(value));
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <View style={styles.container}>

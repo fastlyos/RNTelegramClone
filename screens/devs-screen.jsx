@@ -62,7 +62,7 @@ function DevsScreen() {
   const handleScrollEndDrag = () => {
     setCollapse(true);
     console.log("object");
-    searchBarRef.current.handleScrollEndDrag();
+    // searchBarRef.current.handleScrollEndDrag();
     // scrollViewValue._value
   };
 

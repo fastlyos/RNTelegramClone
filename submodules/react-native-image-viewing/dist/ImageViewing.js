@@ -38,7 +38,6 @@ function ImageViewing({
   const [opacity, onRequestCloseEnhanced] = useRequestClose(onRequestClose);
   const [currentImageIndex, onScroll] = useImageIndexChange(imageIndex, SCREEN);
   const [headerTransform, footerTransform, toggleBarsVisible] = useAnimatedComponents();
-  console.log("DebugLog ~ file: ImageViewing.js ~ line 41 ~ footerTransform", footerTransform);
   useEffect(() => {
     if (onImageIndexChange) {
       onImageIndexChange(currentImageIndex);
