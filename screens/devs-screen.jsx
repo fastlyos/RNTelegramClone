@@ -75,25 +75,23 @@ function DevsScreen() {
   const styles = createStyles({ theme });
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.container}>
-        <View style={styles.header}>
-          <SearchBar ref={searchBarRef} callbackNode={scrollViewValue} scrollViewRef={scrollViewRef} />
+      <ScrollView nestedScrollEnabled style={{ backgroundColor: "blue" }} showsVerticalScrollIndicator={false} I>
+        <ScrollView
+          style={{ backgroundColor: "red", marginTop: 200, height: 100 }}
+          disableIntervalMomentum
+          nestedScrollEnabled
+          bounces={false}>
+          <Text> 1235</Text>
+          <Text> 1235</Text>
+          <Text> 1235</Text>
+          <Text> 1235</Text>
+          <Text> 1235</Text>
+          <Text> 1235</Text>
+        </ScrollView>
+        <View style={{ paddingVertical: 300 }}>
+          <Text>1236</Text>
         </View>
-        <Animated.ScrollView ref={scrollViewRef} onScroll={onScrollView} scrollEventThrottle={1} onScrollEndDrag={handleScrollEndDrag}>
-          <View style={{ height: 1000 }}>
-            <Text type="title3">12344</Text>
-          </View>
-          <View style={{ height: 1000 }}>
-            <Text type="title3">12344</Text>
-          </View>
-          <View style={{ height: 1000 }}>
-            <Text type="title3">12344</Text>
-          </View>
-          <View style={{ height: 1000 }}>
-            <Text type="title3">12344</Text>
-          </View>
-        </Animated.ScrollView>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }

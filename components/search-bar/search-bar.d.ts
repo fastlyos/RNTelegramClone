@@ -10,6 +10,8 @@ interface SearchBarProps {
   onBlur: Function;
   onFocus: Function;
   backgroundColor: String;
+  minPoint: number;
+  maxPoint: number;
 }
 
 declare const SearchBar: (props: SearchBarProps) => React.ReactNode;

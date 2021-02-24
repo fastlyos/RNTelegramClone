@@ -16,6 +16,8 @@ PODS:
   - EXConstants (9.3.5):
     - UMConstantsInterface
     - UMCore
+  - EXDevice (2.4.0):
+    - UMCore
   - EXErrorRecovery (1.4.0):
     - UMCore
   - EXFileSystem (9.3.0):
@@ -358,6 +360,7 @@ DEPENDENCIES:
   - EXBlur (from `../node_modules/expo-blur/ios`)
   - EXCamera (from `../node_modules/expo-camera/ios`)
   - EXConstants (from `../node_modules/expo-constants/ios`)
+  - EXDevice (from `../node_modules/expo-device/ios`)
   - EXErrorRecovery (from `../node_modules/expo-error-recovery/ios`)
   - EXFileSystem (from `../node_modules/expo-file-system/ios`)
   - EXFont (from `../node_modules/expo-font/ios`)
@@ -443,6 +446,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/expo-camera/ios"
   EXConstants:
     :path: "../node_modules/expo-constants/ios"
+  EXDevice:
+    :path: "../node_modules/expo-device/ios"
   EXErrorRecovery:
     :path: "../node_modules/expo-error-recovery/ios"
   EXFileSystem:
@@ -585,6 +590,7 @@ SPEC CHECKSUMS:
   EXBlur: 569d38c2b0b7b000866d928bc36acadfdc02ea8e
   EXCamera: 06ece8c6124560cfd71703b2c26eba72128bfa6d
   EXConstants: 54d0bf04319d1692c6c7bc03ca151ef7a71705a4
+  EXDevice: 01f54314f618aa4098893f66cd8f2a8a411f33ee
   EXErrorRecovery: b46af4b91e2b4ec598ab1fa51d2cf088aaf5511f
   EXFileSystem: 0e4974ab77bff04cda68d2886d070cbe64b93a6b
   EXFont: 30c64ed8735a180e3f20046e4fdac4ea074d71d3
@@ -601,8 +607,8 @@ SPEC CHECKSUMS:
   EXUpdates: 28368049118dbe4ceaf4422ec72e0ad5f770df1f
   FBLazyVector: 3bb422f41b18121b71783a905c10e58606f7dc3e
   FBReactNativeSpec: f2c97f2529dd79c083355182cc158c9f98f4bd6e
-  Folly: aeb27d02cdff07ca01f8a8a5a6dd5bcaf6be6f70
-  glog: 2ad46e202fbaa5641fceb4b2af37dcd88fd8762d
+  Folly: b73c3869541e86821df3c387eb0af5f65addfab4
+  glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
   lottie-ios: 48fac6be217c76937e36e340e2d09cf7b10b7f5f
   lottie-react-native: 1fb4ce21d6ad37dab8343eaff8719df76035bd93
   RCTRequired: 082f10cd3f905d6c124597fd1c14f6f2655ff65e

@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import PropTypes from "prop-types";
 import { Divider, SearchBar } from "@app/components";
-import { ContactListItem, MainChatHeader, ChatListItem } from "@app/containers";
+import { ContactListItem, ChatListItem } from "@app/containers";
 import { useTheme, useScrollToTop, useNavigation } from "@react-navigation/native";
 import { iOSColors } from "react-native-typography";
 import CHATS from "@app/fixtures/chats";
@@ -24,6 +24,7 @@ const CHAT_DATA = CHATS.items.map((chat) => ({
 }));
 
 const COLORS = {
+  background: "white",
   header: "rgb(247,247,247)",
   blue: "rgb(62, 120,238)",
   subtitle: "rgb(247,247,247)",
@@ -33,6 +34,7 @@ const COLORS = {
 // const Virtualizedist = Animated.createAnimatedComponent(RNVirtualizedList);
 
 function MainChatScreen() {
+  // states
   const navigation = useNavigation();
   const searchBarRef = useRef(null);
   const listRef = useRef(null);
@@ -43,9 +45,8 @@ function MainChatScreen() {
   const styles = createStyles({ theme });
   const [searchText, setSearchText] = useState("");
 
-  //
-  const goto = (routName, params) => () => navigation && navigation.navigate(routName, { ...params });
-
+  // callbacks
+  const goto = useCallback((routName, params) => () => navigation && navigation.navigate(routName, { ...params }), [navigation]);
   const onScrollFlatlist = Animated.event(
     [
       {
@@ -60,18 +61,24 @@ function MainChatScreen() {
       useNativeDriver: false,
     },
   );
+  const heightSearchBar = scrollViewValue.interpolate({
+    inputRange: [-10, 0, 60],
+    outputRange: [61, 51, 0],
+    extrapolateRight: "clamp",
+  });
 
   const handleSearchbarOnFocus = useCallback(() => {}, []);
   const handleSearchbarOnCancel = useCallback(() => {}, []);
 
   // effect
   useEffect(() => {
+    // scrollViewValue.addListener((v) => console.log(v));
     return () => {};
   }, []);
 
   return (
     <SafeAreaView style={styles.container}>
-      <Animated.View style={styles.header}>
+      <Animated.View style={[styles.header, { height: heightSearchBar }]}>
         <View style={styles.searchbarBox}>
           <SearchBar
             backgroundColor={COLORS.header}
@@ -83,13 +90,15 @@ function MainChatScreen() {
             onSearchButtonPress={() => {}}
             onCancel={handleSearchbarOnCancel}
             onFocus={handleSearchbarOnFocus}
+            minPoint={0}
+            maxPoint={30}
           />
         </View>
       </Animated.View>
       <Animated.FlatList
         ref={listRef}
         scrollEventThrottle={1}
-        onScroll={(e) => searchRef.current?.onScrollEvent(e)}
+        onScroll={onScrollFlatlist}
         data={CHAT_DATA}
         ItemSeparatorComponent={() => <Divider />}
         keyExtractor={(item) => item.id}
@@ -117,18 +126,19 @@ const createStyles = ({ theme }) =>
       width: "100%",
       zIndex: 2,
       backgroundColor: theme.colors.card,
+      paddingHorizontal: 8,
+      borderBottomColor: COLORS.border,
+      borderBottomWidth: 1,
     },
     flatlist: {
       paddingTop: 60,
+      backgroundColor: COLORS.background,
     },
     flatlistContainer: {
       paddingBottom: 60,
     },
     searchbarBox: {
-      paddingHorizontal: 8,
       paddingVertical: 8,
-      borderBottomColor: COLORS.border,
-      borderBottomWidth: 1,
     },
     // content: {
     //   flex: 1,

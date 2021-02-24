@@ -3,9 +3,11 @@ import PropTypes from "prop-types";
 import { StyleSheet, TouchableHighlight, Animated, Alert, I18nManager } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { Text, View, Image } from "@app/components";
+import { ANIMATION_FILEPATHS } from "@app/components/animation-path";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import { RectButton } from "react-native-gesture-handler";
 import CURRENT_USER from "@app/fixtures/currentUser";
+import LottieView from "lottie-react-native";
 import { SCREEN_WIDTH } from "@app/constants/Layout";
 
 const COLORS = {
@@ -16,26 +18,54 @@ const COLORS = {
 
 const SWIPE_RIGHT_WIDTH = 192;
 
-const renderRightAction = (text, color, x, progress, styles, close) => {
+const RenderRightAction = ({ text, nameIcon = "anim_archive", color, x, progress, styles, close }) => {
+  const imageRef = useRef(null);
+  const [isPlayAnimation, setIsPlayAnimation] = useState(false);
   const trans = progress.interpolate({
     inputRange: [0, 1],
     outputRange: [x, 0],
     extrapolateLeft: "clamp",
   });
   const pressHandler = () => {
-    close();
-    Alert.alert(text);
+    // close();
+    // Alert.alert(text);
+    imageRef?.current?.reset();
+    imageRef?.current?.play();
   };
+
+  useEffect(() => {
+    const id = progress.addListener(({ value }) => {
+      if (!isPlayAnimation && value > 0.3) {
+        imageRef?.current?.reset();
+        imageRef?.current?.play();
+        setIsPlayAnimation(true);
+      }
+      if (isPlayAnimation && value < 0.2) {
+        imageRef?.current?.reset();
+        setIsPlayAnimation(false);
+      }
+    });
+    return () => {
+      progress.removeListener(id);
+    };
+  }, [isPlayAnimation, imageRef]);
+
   return (
     <Animated.View style={{ flex: 1, transform: [{ translateX: trans }] }}>
       <RectButton style={[styles.rightAction, { backgroundColor: color }]} onPress={pressHandler}>
         <View style={styles.rightBox}>
-          <Text style={styles.actionText}>{text}</Text>
+          <LottieView ref={imageRef} source={ANIMATION_FILEPATHS[nameIcon]} autoPlay autoSize loop={false} style={{ flex: 1 }} />
+          <View style={{ position: "absolute", bottom: 10 }}>
+            <Text type="footnoteEmphasized" color="white">
+              {text}
+            </Text>
+          </View>
         </View>
       </RectButton>
     </Animated.View>
   );
 };
+
 const renderMoreAction = (text, color, trans, styles, close) => {
   const pressHandler = () => {
     close();
@@ -57,7 +87,6 @@ const RightActionContainer = ({ progress, dragAnimatedValue, close = () => {} })
   const theme = useTheme();
   const styles = createStyles();
 
-
   const LOCATION_LAST_ITEM = SWIPE_RIGHT_WIDTH / 3;
   const trans = dragAnimatedValue.interpolate({
     inputRange: [-250, -249.99, -192, 0],
@@ -66,17 +95,38 @@ const RightActionContainer = ({ progress, dragAnimatedValue, close = () => {} })
   });
 
   useEffect(() => {
-    const id = trans.addListener((v) => console.log(v));
-    return () => {
-      trans.removeListener(id);
-    };
+    return () => {};
   }, []);
 
   return (
     <View style={{ width: SWIPE_RIGHT_WIDTH, flexDirection: "row" }}>
-      {renderRightAction("More", COLORS.gray, SWIPE_RIGHT_WIDTH, progress, styles, close)}
-      {renderRightAction("Flag", COLORS.orange, (SWIPE_RIGHT_WIDTH * 2) / 3, progress, styles, close)}
-      {renderMoreAction("More", COLORS.red, progress, styles, close)}
+      <RenderRightAction
+        text="Unmute"
+        nameIcon="anim_unmute"
+        color={COLORS.orange}
+        x={SWIPE_RIGHT_WIDTH}
+        progress={progress}
+        styles={styles}
+        close={close}
+      />
+      <RenderRightAction
+        text="Delete"
+        nameIcon="anim_delete"
+        color={COLORS.red}
+        x={(SWIPE_RIGHT_WIDTH * 2) / 3}
+        progress={progress}
+        styles={styles}
+        close={close}
+      />
+      <RenderRightAction
+        text="Archive"
+        nameIcon="anim_archive"
+        color={COLORS.gray}
+        x={SWIPE_RIGHT_WIDTH / 3}
+        progress={progress}
+        styles={styles}
+        close={close}
+      />
     </View>
   );
 };
@@ -124,8 +174,9 @@ function ChatListItem({ id, image, chatName, lastMessage, isMute, unreadCount, o
       renderLeftActions={renderLeftActions}
       renderRightActions={renderRightActions}
       friction={1}
+      useNativeAnimations
       enableTrackpadTwoFingerGesture
-      leftThreshold={30}
+      leftThreshold={40}
       rightThreshold={40}
       overshootRight
       overshootLeft>
@@ -150,8 +201,8 @@ function ChatListItem({ id, image, chatName, lastMessage, isMute, unreadCount, o
 
 ChatListItem.propTypes = {};
 ChatListItem.defaultProps = {};
-
 export default memo(ChatListItem);
+
 const createStyles = () =>
   StyleSheet.create({
     container: {
@@ -179,12 +230,6 @@ const createStyles = () =>
       width: 128,
       backgroundColor: "#497AFC",
       justifyContent: "center",
-    },
-    actionText: {
-      color: "white",
-      fontSize: 16,
-      backgroundColor: "transparent",
-      padding: 10,
     },
     rightAction: {
       flex: 1,

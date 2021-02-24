@@ -29,22 +29,36 @@ const COLORS = {
 
 const MIN_POINT = 26;
 const MAX_POINT = 70;
-const MIDDLE_POINT = MIN_POINT + (MAX_POINT - MIN_POINT) * 0.5;
-const QUARTER_POINT = MIN_POINT + (MAX_POINT - MIN_POINT) * 0.25;
 
-function SearchBar({ searchBarRef, backgroundColor, scrollViewRef, placeholder, callbackNode, onFocus, onBlur, onCancel, onChangeText }) {
+function SearchBar({
+  searchBarRef,
+  backgroundColor,
+  scrollViewRef,
+  placeholder,
+  callbackNode,
+  onFocus,
+  onBlur,
+  onCancel,
+  onChangeText,
+  minPoint,
+  maxPoint,
+}) {
+  const MIDDLE_POINT = minPoint + (maxPoint - minPoint) * 0.5;
+  const QUARTER_POINT = minPoint + (maxPoint - minPoint) * 0.25;
+
   // state
   // const searchBarRef = useRef(searchBarForwardRef);
   const [hasFocus, setHasFocus] = useState(false);
   const [text, setText] = useState("");
   const [showCancel, setShowCancel] = useState(false);
   const [cancelButtonWidth, setCancelButtonWidth] = useState(null);
+
   const opacity = callbackNode.interpolate({
-    inputRange: [0, MIN_POINT, QUARTER_POINT, MIDDLE_POINT, MAX_POINT],
+    inputRange: [0, minPoint, QUARTER_POINT, MIDDLE_POINT, maxPoint],
     outputRange: [1, 0.9, 0.3, 0, 0],
   });
   const maxHeight = callbackNode.interpolate({
-    inputRange: [MIN_POINT, MAX_POINT],
+    inputRange: [minPoint, maxPoint],
     outputRange: [40, 0],
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
@@ -81,7 +95,7 @@ function SearchBar({ searchBarRef, backgroundColor, scrollViewRef, placeholder, 
   );
   const handleCollapse = useCallback(() => {
     Animated.timing(callbackNode, {
-      toValue: MAX_POINT,
+      toValue: maxPoint,
       duration: 100,
       easing: Easing.inOut(Easing.ease),
       useNativeDriver: false,
@@ -89,7 +103,7 @@ function SearchBar({ searchBarRef, backgroundColor, scrollViewRef, placeholder, 
   }, [scrollViewRef]);
   const handleExpand = useCallback(() => {
     Animated.timing(callbackNode, {
-      toValue: MIN_POINT,
+      toValue: minPoint,
       duration: 100,
       easing: Easing.inOut(Easing.ease),
       useNativeDriver: false,
@@ -97,8 +111,8 @@ function SearchBar({ searchBarRef, backgroundColor, scrollViewRef, placeholder, 
   }, [scrollViewRef]);
   const handleScrollEndDrag = useCallback(() => {
     if (hasFocus) return null;
-    if (callbackNode._value >= MIDDLE_POINT && callbackNode._value <= MAX_POINT) handleCollapse();
-    if (callbackNode._value >= MIN_POINT && callbackNode._value < MIDDLE_POINT) handleExpand();
+    if (callbackNode._value >= MIDDLE_POINT && callbackNode._value <= maxPoint) handleCollapse();
+    if (callbackNode._value >= minPoint && callbackNode._value < MIDDLE_POINT) handleExpand();
   }, [handleCollapse, handleExpand]);
   const handleOnChangeText = useCallback(
     (txt) => {
@@ -187,6 +201,8 @@ SearchBar.propTypes = {
   onBlur: PropTypes.func,
   onCancel: PropTypes.func,
   backgroundColor: PropTypes.string,
+  minPoint: PropTypes.number,
+  maxPoint: PropTypes.number,
 };
 SearchBar.defaultProps = {
   placeholder: "Search",
@@ -198,6 +214,8 @@ SearchBar.defaultProps = {
   onBlur: () => {},
   onCancel: () => {},
   backgroundColor: "white",
+  minPoint: MIN_POINT,
+  maxPoint: MAX_POINT,
 };
 
 const createStyles = ({ theme, backgroundColor }) => {
